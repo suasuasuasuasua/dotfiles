@@ -45,6 +45,7 @@ else
 fi
 
 # Install default pacakges using homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
 brew install node vim tmux gcc node
 
 # Install vim-plug (vim plugin manager)
