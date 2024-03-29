@@ -30,6 +30,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo '  MacOS detected...'
     # Add homebrew binary path to PATH
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' > ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 
     # Install Oh My Zsh
     echo '  Installing Oh My Zsh...'
@@ -38,6 +39,7 @@ else
     echo '  Linux detected...'
     # Add homebrew binary path to PATH
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' > ~/.bashrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
     # Install Oh My Bash
     echo '  Installing Oh My Bash...'
@@ -45,7 +47,6 @@ else
 fi
 
 # Install default pacakges using homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
 brew install node vim tmux gcc node
 
 # Install vim-plug (vim plugin manager)
