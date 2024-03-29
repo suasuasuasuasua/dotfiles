@@ -3,38 +3,39 @@
 # ------------------------------------------------------------------------------
 # Ensure essential programs are installed
 # ------------------------------------------------------------------------------
-# Ensure that the following programs are installed for homebrew
+# Ensure that the following packages are installed for homebrew
 # build-essential procps curl file git
 MISSING_PROGRAMS=0
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    if ! command -v build-essential &> /dev/null; then
-        echo 'build-essential is not installed. Please install build-essential and try again.'
-        echo '  Linux: apt install build-essential'
+    # Check if these packages are installed on apt
+    if ! dpkg -s build-essential &> /dev/null; then
+        echo 'Please install build-essential and try again.'
+        echo '  apt install build-essential'
         MISSING_PROGRAMS=1
     fi
-    if ! command -v procps &> /dev/null; then
-        echo 'procps is not installed. Please install apt and try again.'
-        echo '  Linux: apt install procps'
+    if ! dpkg -s procps &> /dev/null; then
+        echo 'Please install procps and try again.'
+        echo '  apt install procps'
         MISSING_PROGRAMS=1
     fi
-    if ! command -v file &> /dev/null; then
-        echo 'file is not installed. Please install procps and try again.'
-        echo '  Linux: apt install file'
+    if ! dpkg -s file &> /dev/null; then
+        echo 'Please install file and try again.'
+        echo '  apt install file'
         MISSING_PROGRAMS=1
     fi
 fi
 
 if ! command -v git &> /dev/null; then
     echo 'git is not installed. Please install git and try again.'
-    echo '  Linux: apt install git'
-    echo '  MacOS: xcode-select --install'
+    echo '  linux: apt install git'
+    echo '  macOS: xcode-select --install'
     MISSING_PROGRAMS=1
 fi
 
 if ! command -v curl &> /dev/null; then
     echo 'curl is not installed. Please install curl and try again.'
-    echo '  Linux: apt install curl'
-    echo '  MacOS: xcode-select --install'
+    echo '  linux: apt install curl'
+    echo '  macOS: xcode-select --install'
     MISSING_PROGRAMS=1
 fi
 
@@ -55,7 +56,7 @@ NONINTERACTIVE=1
 
 echo "  Adding homebrew binary path to PATH..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo '  MacOS detected...'
+    echo '  macOS detected...'
     # Install Oh My Zsh
     echo '  Installing Oh My Zsh...'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
@@ -65,7 +66,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
 else
-    echo '  Linux detected...'
+    echo '  linux detected...'
     # Install Oh My Bash
     echo '  Installing Oh My Bash...'
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --unattended
