@@ -88,24 +88,10 @@ else
     eval "$(fzf --bash)"
 fi
 
-# Install vim-plug (vim plugin manager)
-echo '  Installing vim-plug...'
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-# Install the vim plugins
-echo '      Installing vim plugins'
-vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
-
-# Install tpm (tmux plugin manager)
-echo '  Installing tpm...'
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-# Install the tmux plugins
-echo '      Installing tmux plugins...'
-bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-
 # ------------------------------------------------------------------------------
 # Copy all the dotfiles
 # ------------------------------------------------------------------------------
+# vim, tmux
 # Find all the dotfiles but strip the leading ./ from the path
 dotfiles=$(find . -name ".*" -type f | sed 's|^\./||')
 
@@ -116,3 +102,17 @@ for dotfile in $dotfiles; do
     cp $dotfile ~
 done
 
+# Install vim-plug (vim plugin manager)
+echo '  Installing vim-plug...'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# Install the vim plugins
+echo '      Installing vim plugins'
+vim -es -u ~/.vimrc -i NONE -c "PlugInstall" -c "qa"
+
+# Install tpm (tmux plugin manager)
+echo '  Installing tpm...'
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# Install the tmux plugins
+echo '      Installing tmux plugins...'
+bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
