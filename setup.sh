@@ -76,7 +76,7 @@ else
 fi
 
 # Install default pacakges using homebrew
-brew install gcc node vim tmux fzf
+brew install gcc node vim tmux fzf fpp
 
 # Set up fzf key bindings and fuzzy completion
 echo '  Adding FZF to the shell...'
