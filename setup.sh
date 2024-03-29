@@ -1,7 +1,28 @@
 #!/usr/bin/env bash
 
-# Ensure that the following programs are installed in one if-else block
-# git, curl, vim, tmux
+# ------------------------------------------------------------------------------
+# Ensure essential programs are installed
+# ------------------------------------------------------------------------------
+# Ensure that the following programs are installed for homebrew
+# build-essential procps curl file git
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if ! command -v build-essential &> /dev/null; then
+        echo 'build-essential is not installed. Please install build-essential and try again.'
+        echo '  Linux: apt install build-essential'
+        exit 1
+    fi
+    if ! command -v procps &> /dev/null; then
+        echo 'procps is not installed. Please install apt and try again.'
+        echo '  Linux: apt install procps'
+        exit 1
+    fi
+    if ! command -v file &> /dev/null; then
+        echo 'file is not installed. Please install procps and try again.'
+        echo '  Linux: apt install file'
+        exit 1
+    fi
+fi
+
 if ! command -v git &> /dev/null; then
     echo 'git is not installed. Please install git and try again.'
     echo '  Linux: apt install git'
@@ -23,13 +44,14 @@ echo 'Installing plugin managers...'
 
 # Install homebrew (macOS and Linux package manager)
 echo '  Installing homebrew...'
+NONINTERACTIVE=1
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "  Adding homebrew binary path to PATH..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo '  MacOS detected...'
     # Add homebrew binary path to PATH
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' > ~/.zprofile
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     # Install Oh My Zsh
@@ -38,7 +60,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
     echo '  Linux detected...'
     # Add homebrew binary path to PATH
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' > ~/.bashrc
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
     # Install Oh My Bash
@@ -47,7 +69,7 @@ else
 fi
 
 # Install default pacakges using homebrew
-brew install node vim tmux gcc node
+brew install gcc node vim tmux
 
 # Install vim-plug (vim plugin manager)
 echo '  Installing vim-plug...'
