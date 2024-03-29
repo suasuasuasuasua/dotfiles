@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
 
-# ------------------------------------------------------------------------------
-# Copy all the dotfiles
-# ------------------------------------------------------------------------------
-echo 'Copying dotfiles...'
+# Ensure that the following programs are installed in one if-else block
+# git, curl, vim, tmux
+if ! command -v git &> /dev/null; then
+    echo 'git is not installed. Please install git and try again.'
+    echo '  Linux: apt install git'
+    echo '  MacOS: xcode-select --install'
+    exit 1
+fi
 
-# Find all the dotfiles but strip the leading ./ from the path
-dotfiles=$(find . -name ".*" -type f | sed 's|^\./||')
-
-# Copy each dotfile to the home directory
-for dotfile in $dotfiles; do
-    echo "  $dotfile -> ~/$dotfile"
-    cp $dotfile ~
-done
+if ! command -v curl &> /dev/null; then
+    echo 'curl is not installed. Please install curl and try again.'
+    echo '  Linux: apt install curl'
+    echo '  MacOS: xcode-select --install'
+    exit 1
+fi
 
 # ------------------------------------------------------------------------------
 # Install plugin managers
@@ -31,7 +33,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # Install Oh My Zsh
     echo '  Installing Oh My Zsh...'
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 else
     echo '  Linux detected...'
     # Add homebrew binary path to PATH
@@ -39,8 +41,11 @@ else
 
     # Install Oh My Bash
     echo '  Installing Oh My Bash...'
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --unattended
 fi
+
+# Install default pacakges using homebrew
+brew install node vim tmux gcc node
 
 # Install vim-plug (vim plugin manager)
 echo '  Installing vim-plug...'
@@ -56,3 +61,17 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Install the tmux plugins
 echo '      Installing tmux plugins...'
 bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
+# ------------------------------------------------------------------------------
+# Copy all the dotfiles
+# ------------------------------------------------------------------------------
+# Find all the dotfiles but strip the leading ./ from the path
+dotfiles=$(find . -name ".*" -type f | sed 's|^\./||')
+
+# Copy each dotfile to the home directory
+echo 'Copying dotfiles...'
+for dotfile in $dotfiles; do
+    echo "  $dotfile -> ~/$dotfile"
+    cp $dotfile ~
+done
+
