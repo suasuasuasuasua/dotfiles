@@ -51,7 +51,7 @@ echo 'Installing plugin managers...'
 
 # Install homebrew (macOS and Linux package manager)
 echo '  Installing homebrew...'
-NONINTERACTIVE=1
+set -q NONINTERACTIVE
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "  Adding homebrew binary path to PATH..."
@@ -77,7 +77,17 @@ else
 fi
 
 # Install default pacakges using homebrew
-brew install gcc node vim tmux
+brew install gcc node vim tmux fzf
+
+# Set up fzf key bindings and fuzzy completion
+echo '  Adding FZF to the shell...'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo 'eval "$(fzf --zsh)"' >> ~/.zshrc
+    eval "$(fzf --zsh)"
+else
+    echo 'eval "$(fzf --bash)"' >> ~/.bashrc
+    eval "$(fzf --bash)"
+fi
 
 # Install vim-plug (vim plugin manager)
 echo '  Installing vim-plug...'
