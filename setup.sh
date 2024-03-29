@@ -51,8 +51,7 @@ echo 'Installing plugin managers...'
 
 # Install homebrew (macOS and Linux package manager)
 echo '  Installing homebrew...'
-set -q NONINTERACTIVE
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "  Adding homebrew binary path to PATH..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
