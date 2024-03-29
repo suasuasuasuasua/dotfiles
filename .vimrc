@@ -1,17 +1,13 @@
 "Easy escaping in insert mode
 inoremap jk <Esc>
-nnoremap <Leader>e :e ~/.vimrc<CR>
-nnoremap <Leader>s :source $MYVIMRC<CR>
-nnoremap <Leader>h :tabe ~/.cochelp.vim<CR>
 
 "Syntax highlighting and line numbering
 syntax enable
 set number
-
 "Create a column visualization to format and wrap text
 set colorcolumn=80
 set textwidth=80
-set wrap
+set nowrap
 set linebreak
 
 "Set cursor shapes in insert and normal mode
@@ -52,7 +48,7 @@ set smartcase
 set hlsearch
 set incsearch
 "Clear highlighting after search
-nnoremap <silent> <C-k> :nohl<CR><C-l>
+nnoremap <silent> <Leader>l :nohl<CR>
 
 "Show matching brackets and quotes
 set showmatch
@@ -69,9 +65,6 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-"Show the jump list
-nnoremap <silent> <Leader>j :ju<CR>
-
 "Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
                   \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -82,51 +75,85 @@ autocmd BufReadPost *
 "OTHERWISE, go to https://github.com/junegunn/vim-plug for vim-plug installation
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"Plugins
+"Plugins begin
 call plug#begin('~/.vim/plugged')
+
+"Autocomplete and language support
+"""General
+Plug 'github/copilot.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'sheerun/vim-polyglot'
+
 "Show and navigate filesystem
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'francoiscabrol/ranger.vim'
+
 "Git integration
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-"Autocomplete and language support
-Plug 'ackyshake/VimCompletesMe'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sheerun/vim-polyglot'
-Plug 'lervag/vimtex'
-Plug 'latex-lsp/texlab'
+Plug 'tpope/vim-fugitive'
+
+"Tmux
+Plug 'christoomey/vim-tmux-navigator'
+
 "Better status bar
 Plug 'itchyny/lightline.vim'
-"Easy formatting and manipulation
-Plug 'junegunn/vim-easy-align'
+
+"Text Manipulation
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-user'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'Raimondi/delimitMate'
-"Comment easier
-Plug 'tpope/vim-commentary'
-"Repeat commands
+Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-repeat'
+
+"Highlighting
+Plug 'RRethy/vim-illuminate'
+
+"Strip whitespace
+Plug 'ntpeters/vim-better-whitespace'
+
+"Comments
+Plug 'tpope/vim-commentary'
+
+"Indent visuals
+Plug 'yggdroot/indentline'
+
+"Help
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
 "Themes
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'sainnhe/everforest'
-Plug 'romainl/Apprentice'
+"Plug 'sainnhe/everforest'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+
 call plug#end()
 
 "Plugin configurations
-set noshowmode
-let g:lightline = {
-                  \ 'colorscheme': 'everforest'
-                  \ }
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
+
+"Remap the leader key to the space bar
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+"Set the timeout length before for Vim Which Key
+set timeoutlen=400
+
+"Strip the whitespaces
+let g:strip_whitespace_on_save=1
 
 "Toggle the nerd tree file system
 nnoremap <C-t> :NERDTreeToggle<CR>
+"Focus on the NERDTree view
+nnoremap <leader>n :NERDTreeFocus<CR>
+"Make the current file the root of the tree
+nnoremap <C-n> :NERDTree<CR>
+"Double space to find the current file in the tree
+nnoremap <Leader><Leader> :NERDTreeFind<cr>
+
 let g:NERDTreeChDirMode=2
+" Start NERDTree and put the cursor back in the other window.
+"autocmd VimEnter * NERDTree | wincmd p
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 " Close the tab if NERDTree is the only window remaining in it.
@@ -138,13 +165,6 @@ highlight! link SignColumn LineNr
 let g:gitgutter_set_sign_background = 1
 let g:gitgutter_async=0
 
-"Easy align bindings
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-"Unbind Ranger
-let g:ranger_map_keys = 0
-
 "View files with FZF
 let g:fzf_preview_window = ['right,60%', 'ctrl-/']
 nnoremap <silent> <C-f> :Files<CR>
@@ -155,10 +175,11 @@ command! -bang -nargs=* RG
                   \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 nnoremap <silent> <Leader>f :Rg<CR>
 
-" Viewer options: One may configure the viewer either by specifying a built-in
-" viewer method:
+"Viewer options: One may configure the viewer either by specifying a built-in
+"viewer method:
 let g:vimtex_view_method = 'skim'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "COC LSP configurations
 "Use tab for trigger completion with characters ahead and navigate
 "NOTE: There's always complete item selected by default, you may want to enable
@@ -171,12 +192,12 @@ inoremap <silent><expr> <TAB>
                   \ CheckBackspace() ? "\<Tab>" :
                   \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 "Make <CR> to accept selected completion item or notify coc.nvim to format
 "<C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                   \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 function! CheckBackspace() abort
       let col = col('.') - 1
       return !col || getline('.')[col - 1]  =~# '\s'
@@ -184,21 +205,17 @@ endfunction
 
 "Use <c-space> to trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()
-
 "Use `[g` and `]g` to navigate diagnostics
 "Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
 "GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
 "Use K to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
-
 function! ShowDocumentation()
       if CocAction('hasProvider', 'hover')
             call CocActionAsync('doHover')
@@ -211,8 +228,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
-
+nmap cd <Plug>(coc-rename)
 augroup mygroup
       autocmd!
       "Setup formatexpr specified filetype(s)
@@ -225,22 +241,18 @@ augroup end
 "Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
-
 "Remap keys for applying code actions at the cursor position
 nmap <leader>ac  <Plug>(coc-codeaction-cursor)
 "Remap keys for apply code actions affect whole buffer
 nmap <leader>as  <Plug>(coc-codeaction-source)
 "Apply the most preferred quickfix action to fix diagnostic on the current line
 nmap <leader>qf  <Plug>(coc-fix-current)
-
 "Remap keys for applying refactor code actions
 nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
 xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-
 "Run the Code Lens action on the current line
 nmap <leader>cl  <Plug>(coc-codelens-action)
-
 "Map function and class text objects
 "NOTE: Requires 'textDocument.documentSymbol' support from the language server xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
@@ -250,22 +262,10 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
-""Remap <C-f> and <C-b> to scroll float windows/popups
-"if has('nvim-0.4.0') || has('patch-8.2.0750')
-"      nnoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-n>"
-"      nnoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-p>"
-"      inoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-"      inoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-"      vnoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-n>"
-"      vnoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-p>"
-"endif
-
 "Use CTRL-S for selections ranges
 "Requires 'textDocument/selectionRange' support of language server
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
-
 "Add `:Format` command to format current buffer
 command! -nargs=0 Format :call CocActionAsync('format')
 
@@ -297,19 +297,15 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 "Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"Themes
+" Themes
+set noshowmode
+colorscheme catppuccin_latte
+
+let g:lightline = {'colorscheme': 'catppuccin_latte'}
+
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
-highlight Comment cterm=italic gui=italic
 
 set termguicolors
-set background=dark
-let g:everforest_background = 'soft'
-let g:everforest_better_performance = 1
-let g:everforest_disable_italic_comment = 1
-colorscheme everforest
-set t_ut=""
-
-"hi Normal guibg=NONE ctermbg=NONE
-hi EndOfBuffer guibg=NONE ctermbg=NONE
