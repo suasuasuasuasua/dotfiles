@@ -5,21 +5,22 @@
 # ------------------------------------------------------------------------------
 # Ensure that the following programs are installed for homebrew
 # build-essential procps curl file git
+MISSING_PROGRAMS=0
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if ! command -v build-essential &> /dev/null; then
         echo 'build-essential is not installed. Please install build-essential and try again.'
         echo '  Linux: apt install build-essential'
-        exit 1
+        MISSING_PROGRAMS=1
     fi
     if ! command -v procps &> /dev/null; then
         echo 'procps is not installed. Please install apt and try again.'
         echo '  Linux: apt install procps'
-        exit 1
+        MISSING_PROGRAMS=1
     fi
     if ! command -v file &> /dev/null; then
         echo 'file is not installed. Please install procps and try again.'
         echo '  Linux: apt install file'
-        exit 1
+        MISSING_PROGRAMS=1
     fi
 fi
 
@@ -27,13 +28,18 @@ if ! command -v git &> /dev/null; then
     echo 'git is not installed. Please install git and try again.'
     echo '  Linux: apt install git'
     echo '  MacOS: xcode-select --install'
-    exit 1
+    MISSING_PROGRAMS=1
 fi
 
 if ! command -v curl &> /dev/null; then
     echo 'curl is not installed. Please install curl and try again.'
     echo '  Linux: apt install curl'
     echo '  MacOS: xcode-select --install'
+    MISSING_PROGRAMS=1
+fi
+
+# Exit if any of the programs are missing
+if [ $MISSING_PROGRAMS -eq 1 ]; then
     exit 1
 fi
 
