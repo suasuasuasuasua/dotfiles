@@ -203,6 +203,15 @@ function! CheckBackspace() abort
       return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+
+"Scroll through documentation with C-f and C-b
+if has('nvim-0.4.3') || has('patch-8.2.0750')
+          nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+          nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+          inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+          inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+endif
+
 "Use <c-space> to trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()
 "Use `[g` and `]g` to navigate diagnostics
@@ -301,9 +310,9 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Themes
 set noshowmode
-colorscheme catppuccin_latte
+colorscheme catppuccin_mocha
 
-let g:lightline = {'colorscheme': 'catppuccin_latte'}
+let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
