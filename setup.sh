@@ -7,41 +7,10 @@
 # build-essential procps curl file git
 MISSING_PROGRAMS=0
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Check if these packages are installed on apt
-    if ! dpkg -s build-essential &> /dev/null; then
-        echo 'Please install build-essential and try again.'
-        echo '  apt install build-essential'
-        MISSING_PROGRAMS=1
-    fi
-    if ! dpkg -s procps &> /dev/null; then
-        echo 'Please install procps and try again.'
-        echo '  apt install procps'
-        MISSING_PROGRAMS=1
-    fi
-    if ! dpkg -s file &> /dev/null; then
-        echo 'Please install file and try again.'
-        echo '  apt install file'
-        MISSING_PROGRAMS=1
-    fi
-fi
-
-if ! command -v git &> /dev/null; then
-    echo 'git is not installed. Please install git and try again.'
-    echo '  linux: apt install git'
-    echo '  macOS: xcode-select --install'
-    MISSING_PROGRAMS=1
-fi
-
-if ! command -v curl &> /dev/null; then
-    echo 'curl is not installed. Please install curl and try again.'
-    echo '  linux: apt install curl'
-    echo '  macOS: xcode-select --install'
-    MISSING_PROGRAMS=1
-fi
-
-# Exit if any of the programs are missing
-if [ $MISSING_PROGRAMS -eq 1 ]; then
-    exit 1
+    apt update
+    apt install -y build-essential procps curl file git
+else [[ "$OSTYPE" == "darwin"* ]]
+    xcode-select --install
 fi
 
 # ------------------------------------------------------------------------------
