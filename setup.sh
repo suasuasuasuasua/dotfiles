@@ -27,19 +27,8 @@ echo '  Installing Oh My Zsh...'
 yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 
 echo "  Adding homebrew binary path to PATH..."
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo '  macOS detected...'
-
-    # Add homebrew binary path to PATH
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-    echo '  linux detected...'
-
-    # Add homebrew binary path to PATH
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Install default pacakges using homebrew
 brew install gcc node vim tmux fzf fpp
@@ -88,6 +77,6 @@ else
     echo '    Adding config for linux...'
     # xclip zsh
     brew install xclip
-    echo 'alias pbcopy='xclip -selection clipboard'' >> ~/.zshrc
-    echo 'alias pbpaste='xclip -selection clipboard -o'' >> ~/.zshrc
+    echo 'alias pbcopy="xclip -selection clipboard"' >> ~/.zshrc
+    echo 'alias pbpaste="xclip -selection clipboard -o"' >> ~/.zshrc
 fi
