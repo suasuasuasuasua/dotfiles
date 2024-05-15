@@ -6,8 +6,10 @@
 # Ensure that the following packages are installed for homebrew
 # build-essential procps curl file git
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    apt update
-    apt install -y build-essential procps curl file git
+    sudo apt update
+    sudo apt install -y build-essential procps curl file git zsh
+    command -v zsh | sudo tee -a /etc/shells
+    sudo chsh -s "$(command -v zsh)" "${USER}"
 else [[ "$OSTYPE" == "darwin"* ]]
     xcode-select --install
 fi
@@ -33,11 +35,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 else
     echo '  linux detected...'
-
-    # Make sure that zsh is installed and switch to it
-    brew install zsh
-    command -v zsh | sudo tee -a /etc/shells
-    sudo chsh -s "$(command -v zsh)" "${USER}"
 
     # Add homebrew binary path to PATH
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
@@ -86,7 +83,9 @@ echo '  Setting up configurations...'
 echo 'source <(fzf --zsh)' >> ~/.zshrc
 source <(fzf --zsh)
 if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo '    Adding config for macOS...'
 else
+    echo '    Adding config for linux...'
     # xclip zsh
     brew install xclip
     echo 'alias pbcopy='xclip -selection clipboard'' >> ~/.zshrc
