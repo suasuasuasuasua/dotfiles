@@ -21,24 +21,25 @@ echo 'Installing plugin managers...'
 # Install homebrew (macOS and Linux package manager)
 echo '  Installing homebrew...'
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Install Oh My Zsh
+echo '  Installing Oh My Zsh...'
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 
 echo "  Adding homebrew binary path to PATH..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo '  macOS detected...'
-    # Install Oh My Zsh
-    echo '  Installing Oh My Zsh...'
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 
     # Add homebrew binary path to PATH
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
-
 else
     echo '  linux detected...'
-    # Install Oh My Bash
-    echo '  Installing Oh My Bash...'
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --unattended
-    #
+
+    # Make sure that zsh is installed and switch to it
+    brew install zsh
+    command -v zsh | sudo tee -a /etc/shells
+    sudo chsh -s "$(command -v zsh)" "${USER}"
+
     # Add homebrew binary path to PATH
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -47,15 +48,21 @@ fi
 # Install default pacakges using homebrew
 brew install gcc node vim tmux fzf fpp
 
+# Set up mac and linux specific configurations
+echo '  Setting up configurations...'
+#
 # Set up fzf key bindings and fuzzy completion
-echo '  Adding FZF to the shell...'
+echo 'source <(fzf --zsh)' >> ~/.zshrc
+source <(fzf --zsh)
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Set up fzf key bindings and fuzzy completion
     echo 'source <(fzf --zsh)' >> ~/.zshrc
     eval "$(fzf --zsh)"
 else
-    echo 'eval "$(fzf --bash)"' >> ~/.bashrc
-    eval "$(fzf --bash)"
+    # xclip zsh
+    brew install xclip
+    echo 'alias pbcopy='xclip -selection clipboard'' >> ~/.zshrc
+    echo 'alias pbpaste='xclip -selection clipboard -o'' >> ~/.zshrc
 fi
 
 # ------------------------------------------------------------------------------
