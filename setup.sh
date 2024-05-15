@@ -24,7 +24,8 @@ echo '  Installing Oh My Zsh...'
 yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 
 # zsh vi-mode
-zsh -ic "git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode"
+ZSH_CUSTOM=$ZSH/custom
+git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
 
 # Install homebrew (macOS and Linux package manager)
 echo '  Installing homebrew...'
