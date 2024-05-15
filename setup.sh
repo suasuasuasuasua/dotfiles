@@ -5,7 +5,6 @@
 # ------------------------------------------------------------------------------
 # Ensure that the following packages are installed for homebrew
 # build-essential procps curl file git
-MISSING_PROGRAMS=0
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     apt update
     apt install -y build-essential procps curl file git
@@ -48,27 +47,10 @@ fi
 # Install default pacakges using homebrew
 brew install gcc node vim tmux fzf fpp
 
-# Set up mac and linux specific configurations
-echo '  Setting up configurations...'
-#
-# Set up fzf key bindings and fuzzy completion
-echo 'source <(fzf --zsh)' >> ~/.zshrc
-source <(fzf --zsh)
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Set up fzf key bindings and fuzzy completion
-    echo 'source <(fzf --zsh)' >> ~/.zshrc
-    eval "$(fzf --zsh)"
-else
-    # xclip zsh
-    brew install xclip
-    echo 'alias pbcopy='xclip -selection clipboard'' >> ~/.zshrc
-    echo 'alias pbpaste='xclip -selection clipboard -o'' >> ~/.zshrc
-fi
-
 # ------------------------------------------------------------------------------
 # Copy all the dotfiles
 # ------------------------------------------------------------------------------
-# vim, tmux
+# vim, tmux, zsh, etc.
 # Find all the dotfiles but strip the leading ./ from the path
 dotfiles=$(find . -name ".*" -type f | sed 's|^\./||')
 
@@ -93,3 +75,20 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Install the tmux plugins
 echo '      Installing tmux plugins...'
 bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
+# ------------------------------------------------------------------------------
+# Set up dotfile configurations
+# ------------------------------------------------------------------------------
+# Set up mac and linux specific configurations
+echo '  Setting up configurations...'
+#
+# Set up fzf key bindings and fuzzy completion
+echo 'source <(fzf --zsh)' >> ~/.zshrc
+source <(fzf --zsh)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+else
+    # xclip zsh
+    brew install xclip
+    echo 'alias pbcopy='xclip -selection clipboard'' >> ~/.zshrc
+    echo 'alias pbpaste='xclip -selection clipboard -o'' >> ~/.zshrc
+fi
