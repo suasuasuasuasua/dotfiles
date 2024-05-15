@@ -24,7 +24,7 @@ echo '  Installing homebrew...'
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # Install Oh My Zsh
 echo '  Installing Oh My Zsh...'
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 
 echo "  Adding homebrew binary path to PATH..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
