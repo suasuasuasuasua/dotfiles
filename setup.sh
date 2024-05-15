@@ -25,6 +25,7 @@ NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Ho
 # Install Oh My Zsh
 echo '  Installing Oh My Zsh...'
 yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+source ~/.zshrc && omz reload
 
 echo "  Adding homebrew binary path to PATH..."
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zprofile
