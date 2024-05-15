@@ -19,16 +19,17 @@ fi
 # ------------------------------------------------------------------------------
 echo 'Installing plugin managers...'
 
-# Install homebrew (macOS and Linux package manager)
-echo '  Installing homebrew...'
-NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # Install Oh My Zsh
 echo '  Installing Oh My Zsh...'
 yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 
+# Install homebrew (macOS and Linux package manager)
+echo '  Installing homebrew...'
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 # zsh vi-mode
-git clone https://github.com/jeffreytse/zsh-vi-mode \
-  $ZSH_CUSTOM/plugins/zsh-vi-mode
+zsh && git clone https://github.com/jeffreytse/zsh-vi-mode \
+  $ZSH_CUSTOM/plugins/zsh-vi-mode && exit
 
 echo "  Adding homebrew binary path to PATH..."
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zprofile
