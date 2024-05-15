@@ -73,13 +73,12 @@ bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 echo '  Setting up configurations...'
 #
 # Set up fzf key bindings and fuzzy completion
-echo 'source <(fzf --zsh)' >> ~/.zshrc
-source <(fzf --zsh)
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo '    Adding config for macOS...'
 else
     echo '    Adding config for linux...'
-    # xclip zsh
+    
+    # xclip for pbcopy-like copying
     brew install xclip
     echo 'alias pbcopy="xclip -selection clipboard"' >> ~/.zshrc
     echo 'alias pbpaste="xclip -selection clipboard -o"' >> ~/.zshrc
