@@ -25,7 +25,10 @@ NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Ho
 # Install Oh My Zsh
 echo '  Installing Oh My Zsh...'
 yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
-source ~/.zshrc && omz reload
+
+# zsh vi-mode
+git clone https://github.com/jeffreytse/zsh-vi-mode \
+  $ZSH_CUSTOM/plugins/zsh-vi-mode
 
 echo "  Adding homebrew binary path to PATH..."
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zprofile
@@ -81,3 +84,5 @@ else
     echo 'alias pbcopy="xclip -selection clipboard"' >> ~/.zshrc
     echo 'alias pbpaste="xclip -selection clipboard -o"' >> ~/.zshrc
 fi
+
+echo "Finished! Log out and log back in!"
