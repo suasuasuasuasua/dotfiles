@@ -50,7 +50,8 @@ brew install gcc node vim tmux fzf fpp
 # Set up fzf key bindings and fuzzy completion
 echo '  Adding FZF to the shell...'
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo 'eval "$(fzf --zsh)"' >> ~/.zshrc
+    # Set up fzf key bindings and fuzzy completion
+    echo 'source <(fzf --zsh)' >> ~/.zshrc
     eval "$(fzf --zsh)"
 else
     echo 'eval "$(fzf --bash)"' >> ~/.bashrc
