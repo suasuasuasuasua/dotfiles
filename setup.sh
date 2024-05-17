@@ -30,9 +30,10 @@ git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-m
 
 # Install homebrew (macOS and Linux package manager)
 echo '  Installing homebrew...'
+sudo echo 'Need sudo to install homebrew'
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-echo "  Adding homebrew binary path to PATH..."
+echo '  Adding homebrew binary path to PATH...'
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo '  macOS detected...'
     # Add homebrew binary path to PATH
@@ -89,11 +90,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo '    Adding config for macOS...'
 else
     echo '    Adding config for linux...'
-    
+
     # xclip for pbcopy-like copying
     brew install xclip
     echo 'alias pbcopy="xclip -selection clipboard"' >> ~/.zshrc
     echo 'alias pbpaste="xclip -selection clipboard -o"' >> ~/.zshrc
 fi
 
-echo "Finished! Log out and log back in!"
+echo 'Finished! Log out and log back in!'
