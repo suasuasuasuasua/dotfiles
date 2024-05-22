@@ -48,7 +48,7 @@ else
 fi
 
 # Install default pacakges using homebrew
-brew install gcc node vim tmux fzf fpp
+brew install gcc node python3 vim tmux fzf fpp fastfetch
 
 # ------------------------------------------------------------------------------
 # Copy all the dotfiles
@@ -97,4 +97,5 @@ else
     echo 'alias pbpaste="xclip -selection clipboard -o"' >> ~/.zshrc
 fi
 
+fastfetch
 echo 'Finished! Log out and log back in!'
