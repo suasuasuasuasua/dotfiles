@@ -1,6 +1,6 @@
 # dotfiles
 
-My very *very* small dotfiles collection for development.
+My very *very* small dotfiles collection for development. I generally use OS like Debian and Ubuntu.
 
 ## Overview
 
