@@ -8,6 +8,7 @@ My very *very* small dotfiles collection for development.
 
 - sway
 - waybar
+- ly
 
 ### Development
 
@@ -16,3 +17,9 @@ My very *very* small dotfiles collection for development.
 - `vim`
 - vscode (ew I know)
 - docker engine/desktop
+
+### General
+
+- Firefox
+- Nemo
+- Pulse Audio Volume Control
