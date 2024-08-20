@@ -106,9 +106,6 @@ source <(fzf --zsh)
 # Bind c to clear the screen
 alias c='clear'
 
-# LLVM stuff
-test -e /Users/justinhoang/.iterm2_shell_integration.zsh && source /Users/justinhoang/.iterm2_shell_integration.zsh || true
-
 # Zsh vi mode bindings
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
