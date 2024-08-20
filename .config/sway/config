@@ -23,14 +23,14 @@ set $term alacritty
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu fuzzel --font "JetBrains Mono" --dpi-aware auto | xargs swaymsg exec --
-# set $menu wofi --show=drun --prompt="Enter the application name" | swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/justinhoang/Pictures/iceland.png fill
 #
 # Example configuration:
 #
@@ -233,11 +233,19 @@ bar {
     # }
 }
 
-# My configs
+### My Configs
+
+# Visual gaps
 gaps inner 5
 gaps outer 5
 default_border pixel 2
 
+# Font
 font pango:JetBrainsMono Nerd Font 10
+
+# Audio
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 include /etc/sway/config.d/*
