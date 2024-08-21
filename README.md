@@ -1,6 +1,7 @@
 # dotfiles
 
-My very *very* small dotfiles collection for development. I generally use OS like Debian and Ubuntu.
+My very *very* small dotfiles collection for development. I generally use OS
+like Debian and Ubuntu.
 
 ## Overview
 
@@ -9,14 +10,20 @@ My very *very* small dotfiles collection for development. I generally use OS lik
 - sway
 - waybar
 - ly
+- fuzzel
+
+#### Support
+
+- slurp
 
 ### Development
 
 - alacritty
 - `tmux`
 - `vim`
+- virt-manager
 - vscode (ew I know)
-- docker engine/desktop
+- docker engine
 
 ### General
 
