@@ -1,7 +1,9 @@
 # dotfiles
 
 My very *very* small dotfiles collection for development. I generally use OS
-like Debian and Ubuntu.
+like Debian and Ubuntu with Gnome or KDE.
+
+> Currently trying out Arch Linux with Sway WM.
 
 ## Overview
 
