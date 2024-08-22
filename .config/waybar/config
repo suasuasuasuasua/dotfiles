@@ -1,6 +1,5 @@
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
+    "layer": "top", // Waybar at top layer "position": "top", // Waybar position (top|bottom|left|right)
 
     // Choose the order of the modules
     "modules-left": [
@@ -12,14 +11,14 @@
         "custom/music",
     ],
     "modules-right": [
+        "tray",
         "cpu",
         "memory",
         "battery",
-        "tray",
         "pulseaudio",
         "network",
         "clock",
-        "custom/lock",
+        "custom/power",
 	],
 
     /* Left Area */
@@ -60,7 +59,7 @@
     "cpu": {
         "interval": 5,
         /* "format": "  {usage}% ({load})", // Icon: microchip */
-        "format": "  {usage}%", // Icon: microchip
+        "format": " {usage}%", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -69,7 +68,7 @@
 
     "memory": {
         "interval": 5,
-        "format": "  {}%", // Icon: memory
+        "format": " {}%", // Icon: memory
         "states": {
             "warning": 70,
             "critical": 90
@@ -83,7 +82,8 @@
             "critical": 15
         },
         // Connected to AC
-        "format": "  {icon}  {capacity}%", // Icon: bolt
+        /* "format": "  {icon} {capacity}%", // Icon: bolt */
+        "format": "{icon} {capacity}%", // Icon: bolt
         // Not connected to AC
         "format-discharging": "{icon}  {capacity}%",
         "format-icons": [
@@ -122,10 +122,9 @@
         "format": "{:%H:%M}"
     },
 
-    "custom/lock": {
+    "custom/power": {
         "tooltip": false,
-        /* "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown", */
-        "on-click": "sh -c '(sleep 0.5s; swaylock -t)' & disown",
-        "format": "",
-    },
+        "on-click": "wlogout &",
+        "format": ""
+    }
 }

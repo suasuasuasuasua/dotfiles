@@ -2,22 +2,22 @@
 
 @keyframes blink-warning {
     70% {
-        color: @white;
+        color: white;
     }
 
     to {
-        color: @white;
-        background-color: @orange;
+        color: white;
+        background-color: @mauve;
     }
 }
 
 @keyframes blink-critical {
     70% {
-        color: @white;
+        color: white;
     }
 
     to {
-        color: @white;
+        color: white;
         background-color: @red;
     }
 }
@@ -29,7 +29,7 @@
 /* Reset all styles */
 * {
     font-family: JetBrains Mono;
-    font-size: 11px;
+    font-size: 12px;
     border: none;
     border-radius: 0;
     min-height: 0;
@@ -43,6 +43,13 @@
     background-color: @surface0;
     color: @text;
 }
+
+/* window > box { */
+/* 	margin: 1px 50px 8px; */
+/*     background: rgba(0, 0, 0, 0); */
+/*     border-bottom: 3px solid rgba(0, 0, 0, 0); */
+/*     color: white; */
+/* } */
 
 #workspaces {
     border-radius: 1rem;
@@ -65,8 +72,21 @@
 #workspaces button:hover {
     color: @sapphire;
     border-radius: 1rem;
+    box-shadow: inherit;
+    text-shadow: inherit;
 }
 
+#workspaces button.visible {
+    background: @base;
+}
+
+#workspaces button.current_output.visible {
+    background: @mantel;
+}
+
+#workspaces button.current_output.focused {
+    background: @surface2;
+}
 #custom-music,
 #tray,
 #cpu,
@@ -75,7 +95,7 @@
 #pulseaudio,
 #network,
 #clock,
-#custom-lock {
+#custom-power {
     padding: 0.5rem 0.5rem;
     margin: 5px 0;
 }
@@ -88,24 +108,23 @@
 
 /* Custom music */
 #custom-music {
-    font-weight: bold;
     margin: 0 1rem;
+    color: @lavender;
 }
 
 /* Tray */
 #tray {
     background: @surface2;
-    margin-right: 1rem;
-    border-radius: 1rem;
+    margin-right: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 /* CPU */
 #cpu {
-    border-radius: 1rem 0px 0px 1rem;
 }
 
 #cpu.warning {
-    color: @orange;
+    color: @yellow;
 }
 
 #cpu.critical {
@@ -121,7 +140,7 @@
 }
 
 #memory.warning {
-    color: @orange;
+    color: @yellow;
 }
 
 #memory.critical {
@@ -132,12 +151,9 @@
 
 /* Battery */
 #battery {
-    margin-right: 1rem;
-    border-radius: 0px 1rem 1rem 0px;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    color: @blue;
 }
 
 #battery.charging {
@@ -163,7 +179,7 @@
 }
 
 #pulseaudio {
-    color: @white;
+
 }
 
 #pulseaudio.muted {
@@ -182,25 +198,8 @@
 #clock {
 }
 
-#custom-lock {
+#custom-power {
     border-radius: 0px 1rem 1rem 0px;
     margin-right: 1rem;
-    color: @lavender;
 }
 
-#workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
-}
-
-#workspaces button.visible {
-    background: @base;
-}
-
-#workspaces button.current_output.visible {
-    background: @mantel;
-}
-
-#workspaces button.current_output.focused {
-    background: @surface2;
-}
