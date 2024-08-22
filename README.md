@@ -16,12 +16,17 @@ like Debian and Ubuntu.
 
 - Firefox (web browser)
 - Zathura (document browser)
-- Nemo (file browser)
+- Dolphin (GUI file browser)
+- `yazi` (TUI file browser)
+- Filelight (disk examiner)
 - Pulse Audio Volume Control (volume controller)
 
 #### Support
 
+- mako (wayland notification daemon)
 - slurp (wayland region selector)
+- swayidle (wayland idle daemon)
+- swaylock (wayland lockscreen daemon)
 
 ### Development
 

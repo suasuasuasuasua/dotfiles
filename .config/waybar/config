@@ -12,13 +12,14 @@
         "custom/music",
     ],
     "modules-right": [
-        "tray",
         "cpu",
         "memory",
         "battery",
+        "tray",
         "pulseaudio",
         "network",
         "clock",
+        "custom/lock",
 	],
 
     /* Left Area */
@@ -38,24 +39,28 @@
 
     /* Middle Area */
     "custom/music": {
-        "format": "  {}",
+        /* "format": "  {}", */
+        "format": "{}",
         "escape": true,
         "interval": 5,
         "tooltip": false,
+        /* "exec": "playerctl metadata --format='{{ title }} - {{ artist }}'", */
         "exec": "playerctl metadata --format='{{ title }}'",
         "on-click": "playerctl play-pause",
-        "max-length": 50
+        "max-length": 40
     },
 
     /* Right Area */
     "tray": {
-        "icon-size": 21,
-        "spacing": 10
+        "icon-size": 20,
+        "spacing": 10,
+        "show-passive-items": true
     },
 
     "cpu": {
         "interval": 5,
-        "format": "  {usage}% ({load})", // Icon: microchip
+        /* "format": "  {usage}% ({load})", // Icon: microchip */
+        "format": "  {usage}%", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -113,13 +118,14 @@
     "clock": {
         "timezone": "America/Denver",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": " {:%d/%m/%Y}",
-        "format": " {:%H:%M}"
+        "format-alt": "{:%d/%m/%Y}",
+        "format": "{:%H:%M}"
     },
 
     "custom/lock": {
         "tooltip": false,
-        "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown",
+        /* "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown", */
+        "on-click": "sh -c '(sleep 0.5s; swaylock -t)' & disown",
         "format": "",
     },
 }
