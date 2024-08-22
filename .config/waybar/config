@@ -1,46 +1,75 @@
-// =============================================================================
-//
-// Waybar configuration
-//
-// Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
-//
-// =============================================================================
-
 {
-    // -------------------------------------------------------------------------
-    // Global configuration
-    // -------------------------------------------------------------------------
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
 
-    "layer": "top",
-
-    "position": "top",
-
-    // If height property would be not present, it'd be calculated dynamically
-    "height": 30,
-
+    // Choose the order of the modules
     "modules-left": [
         "sway/workspaces",
         "sway/mode",
         "sway/window",
     ],
     "modules-center": [
+        "custom/music",
     ],
     "modules-right": [
         "tray",
         "cpu",
         "memory",
-        // "temperature",
         "battery",
         "pulseaudio",
         "network",
-        "clock#date",
-        "clock#time",
-    ],
+        "clock",
+	],
 
+    /* Left Area */
+    "sway/workspaces": {
+        "all-outputs": false,
+        "disable-scroll": true,
+        "format": " {icon} ",
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
+        "tooltip": false
+    },
+   "sway/window": {
+        "format": " {} ",
+        "max-length": 100
+    },
 
-    // -------------------------------------------------------------------------
-    // Modules
-    // -------------------------------------------------------------------------
+    /* Middle Area */
+    "custom/music": {
+        "format": "  {}",
+        "escape": true,
+        "interval": 5,
+        "tooltip": false,
+        "exec": "playerctl metadata --format='{{ title }}'",
+        "on-click": "playerctl play-pause",
+        "max-length": 50
+    },
+
+    /* Right Area */
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+
+    "cpu": {
+        "interval": 5,
+        "format": "  {usage}% ({load})", // Icon: microchip
+        "states": {
+          "warning": 70,
+          "critical": 90
+        }
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": "  {}%", // Icon: memory
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
 
     "battery": {
         "interval": 10,
@@ -62,106 +91,35 @@
         "tooltip": true
     },
 
-    "clock#time": {
-        "interval": 1,
-        "format": "{:%r}",
-        "tooltip": false
-    },
-
-    "clock#date": {
-      "interval": 10,
-      // "format": "  {:%e %b %Y}", // Icon: calendar-alt
-      "format": "{:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}"
-    },
-
-    "cpu": {
-        "interval": 5,
-        "format": "  {usage}% ({load})", // Icon: microchip
-        "states": {
-          "warning": 70,
-          "critical": 90
-        }
-    },
-
-    "memory": {
-        "interval": 5,
-        "format": "  {}%", // Icon: memory
-        "states": {
-            "warning": 70,
-            "critical": 90
-        }
-    },
-
-    "network": {
-        "interval": 5,
-        // "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wif
-        "format-wifi": "  {essid}", // Icon: wifi
-        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
-        "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}"
-    },
-
-    "sway/mode": {
-        "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-        "tooltip": false
-    },
-
-    "sway/window": {
-        "format": " {} ",
-        "max-length": 60
-    },
-
-    "sway/workspaces": {
-        "all-outputs": false,
-        "disable-scroll": true,
-        "format": "{icon} {name}",
-        "format-icons": {
-            "1:www": "龜", // Icon: firefox-browser
-            "2:mail": "", // Icon: mail
-            "3:editor": "", // Icon: code
-            "4:terminals": "", // Icon: terminal
-            "5:portal": "", // Icon: terminal
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
-    },
-
     "pulseaudio": {
-        // "scroll-step": 1,
-        "format": "{icon}  {volume}%",
-        "format-bluetooth": "{icon}  {volume}%",
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}%",
         "format-muted": "",
         "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", ""]
+            "default": ["", "", " "]
         },
         "on-click": "pavucontrol"
     },
 
-    "temperature": {
-      "critical-threshold": 80,
-      "interval": 5,
-      "format": "{icon}  {temperatureC}°C",
-      "format-icons": [
-          "", // Icon: temperature-empty
-          "", // Icon: temperature-quarter
-          "", // Icon: temperature-half
-          "", // Icon: temperature-three-quarters
-          ""  // Icon: temperature-full
-      ],
-      "tooltip": true
+    "network": {
+        "interval": 5,
+        // "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
+        "format-wifi": "  {essid}", // Icon: wifi
+        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}",  // Icon: ethernet
+        "format-disconnected": "⚠  Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}"
     },
 
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    }
+    "clock": {
+        "timezone": "America/Denver",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": " {:%d/%m/%Y}",
+        "format": " {:%H:%M}"
+    },
 
+    "custom/lock": {
+        "tooltip": false,
+        "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown",
+        "format": "",
+    },
 }
