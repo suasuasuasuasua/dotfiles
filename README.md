@@ -24,12 +24,16 @@ Ubuntu with KDE. **Currently trying out Arch Linux with Sway WM.**
 ### Fonts and Themes
 
 - JetBrains Mono (goated monospace font)
+- Poppins (general font frmo Google)
+- Baekmuk (collection of Korean fonts because I'm a koreaboo)
 - Font Awesome (for glyphs and things)
 - Catppuccin Mocha Lavender (goated pastel theme)
 
 ## General
 
 - Firefox (web browser)
+  - vimium (vim-like navigation)
+  - adguard (hide the ads and block the trackers)
 - Spotify (music player)
   - Spicetify (*spiced* up)
 - Discord (socializing app)
@@ -44,7 +48,7 @@ Ubuntu with KDE. **Currently trying out Arch Linux with Sway WM.**
 - Pulse Audio Volume Control (volume controller)
 - Timeshift (backup manager)
 - NetworkManager (network management daemon)
-    - `nmcli` and `nmtui`
+  - `nmcli` and `nmtui`
 
 ### CLI
 
@@ -56,6 +60,7 @@ Ubuntu with KDE. **Currently trying out Arch Linux with Sway WM.**
 - `imv` (mage viewer)
 - `mpv` (media player)
 - `wf-recorder` (tui screen recorder)
+  - `pipewire` and `gst-plugin-pipewire` as dependencies
 - `wiki-tui` (wikipedia text user interface)
 
 ## Development
