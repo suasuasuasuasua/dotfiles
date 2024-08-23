@@ -1,50 +1,78 @@
 # dotfiles
 
-My very *very* small dotfiles collection for development. I generally use OS
-like Debian and Ubuntu with Gnome or KDE.
-
-> Currently trying out Arch Linux with Sway WM.
+My small dotfiles collection for development. I generally use OS like Debian and
+Ubuntu with KDE. **Currently trying out Arch Linux with Sway WM.**
 
 ## Desktop Environment
 
-- sway (window manager)
+- kde plasma (traditional DE when I'm lazy)
+
+## Window Management
+
+- sway (tiling window manager -- loving it so far!)
 - waybar (wayland status bar)
 - ly (display manager)
 - fuzzel (application launcher)
 
 ### Support
 
-- mako (wayland notification daemon)
-- slurp (wayland region selector)
-- swayidle (wayland idle daemon)
-- swaylock (wayland lockscreen daemon)
+- `mako` (wayland notification daemon)
+- `slurp` (wayland region selector)
+- `swayidle` (wayland idle daemon)
+- `swaylock` (wayland lockscreen daemon)
+
+### Fonts and Themes
+
+- JetBrains Mono (goated monospace font)
+- Font Awesome (for glyphs and things)
+- Catppuccin Mocha Lavender (goated pastel theme)
 
 ## General
 
 - Firefox (web browser)
+- Spotify (music player)
+  - Spicetify (*spiced* up)
+- Discord (socializing app)
+- Thunderbird (email client)
 - Zathura (document browser)
-- Dolphin (GUI file browser)
+  - Install `zathura-pdf-mupdf` to view PDFs
+
+### Computer Management
+
+- Nemo (GUI file browser)
 - Filelight (disk examiner)
 - Pulse Audio Volume Control (volume controller)
 - Timeshift (backup manager)
+- NetworkManager (network management daemon)
+    - `nmcli` and `nmtui`
 
 ### CLI
 
 - `zsh` (shell)
-- `nmcli` and `nmtui` (network management)
+  - oh my zsh (pimp out the zsh prompts and functionality)
+- `fastfetch` (system information rundown)
+- `btop` (tui system monitor)
 - `yazi` (TUI file browser)
+- `imv` (mage viewer)
+- `mpv` (media player)
+- `wf-recorder` (tui screen recorder)
+- `wiki-tui` (wikipedia text user interface)
 
 ## Development
 
-- alacritty (terminal emulator)
 - `tmux` (terminal multiplexer)
 - virt-manager (virtual machine manager)
 - docker engine (containerization)
 
+### Terminal Emulators
+
+- alacritty (fast and has copy mode but doesn't support CLI image viewing)
+- kitty (fast and supports CLI image viewing but doesn't have copy mode)
+- foot (lightweight but doesn't have copy mode)
+
 ### Text Editors
 
-- `vim` 
+- `vim`
 - `nvim` (trying to migrate!)
-- vscode 
+- vscode (goated text editor turned IDE)
 - zed (trying as an alternative!)
-
