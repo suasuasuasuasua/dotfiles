@@ -14,9 +14,9 @@
         "tray",
         "cpu",
         "memory",
-        "battery",
-        "pulseaudio",
         "network",
+        "pulseaudio",
+        "battery",
         "clock",
         "custom/power",
 	],
@@ -75,25 +75,13 @@
         }
     },
 
-    "battery": {
-        "interval": 10,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        // Connected to AC
-        /* "format": "  {icon} {capacity}%", // Icon: bolt */
-        "format": "{icon} {capacity}%", // Icon: bolt
-        // Not connected to AC
-        "format-discharging": "{icon}  {capacity}%",
-        "format-icons": [
-            "", // Icon: battery-full
-            "", // Icon: battery-three-quarters
-            "", // Icon: battery-half
-            "", // Icon: battery-quarter
-            ""  // Icon: battery-empty
-        ],
-        "tooltip": true
+    "network": {
+        "interval": 5,
+        // "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
+        "format-wifi": " {essid}", // Icon: wifi
+        "format-ethernet": " {ifname}: {ipaddr}/{cidr}",  // Icon: ethernet
+        "format-disconnected": "⚠Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}"
     },
 
     "pulseaudio": {
@@ -106,13 +94,25 @@
         "on-click": "pavucontrol"
     },
 
-    "network": {
-        "interval": 5,
-        // "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
-        "format-wifi": "  {essid}", // Icon: wifi
-        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}",  // Icon: ethernet
-        "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}"
+    "battery": {
+        "interval": 10,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        // Connected to AC
+        /* "format": "  {icon} {capacity}%", // Icon: bolt */
+        "format": "{icon} {capacity}%", // Icon: bolt
+        // Not connected to AC
+        "format-discharging": "{icon} {capacity}%",
+        "format-icons": [
+            "", // Icon: battery-full
+            "", // Icon: battery-three-quarters
+            "", // Icon: battery-half
+            "", // Icon: battery-quarter
+            ""  // Icon: battery-empty
+        ],
+        "tooltip": true
     },
 
     "clock": {
