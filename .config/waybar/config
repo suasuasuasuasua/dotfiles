@@ -17,7 +17,8 @@
         "network",
         "pulseaudio",
         "battery",
-        "clock",
+        "clock#date",
+        "clock#time",
         "custom/power",
 	],
 
@@ -115,8 +116,17 @@
         "tooltip": true
     },
 
-    "clock": {
+    "clock#date": {
+      "timezone": "America/Denver",
+      "locale": "en_US.UTF-8",
+      "interval": 10,
+      "format": "{:%e %b %Y}",
+      "tooltip-format": "{:%e %B %Y}",
+    },
+
+    "clock#time": {
         "timezone": "America/Denver",
+        "locale": "en_US.UTF-8",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%d/%m/%Y}",
         "format": "{:%H:%M}"

@@ -87,6 +87,7 @@
 #workspaces button.current_output.focused {
     background: @surface2;
 }
+
 #custom-music,
 #tray,
 #cpu,
@@ -96,7 +97,7 @@
 #battery,
 #clock,
 #custom-power {
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 0.5em;
     margin: 5px 0;
 }
 
@@ -114,8 +115,7 @@
 }
 
 /* CPU */
-#cpu {
-}
+#cpu {}
 
 #cpu.warning {
     color: @yellow;
@@ -152,9 +152,7 @@
     color: @orange;
 }
 
-#pulseaudio {
-
-}
+#pulseaudio {}
 
 #pulseaudio.muted {
     color: @red;
@@ -189,11 +187,11 @@
     animation-duration: 2s;
 }
 
-#clock {
+#clock.time {
+    padding-right: 1rem;
 }
 
 #custom-power {
     border-radius: 0px 1rem 1rem 0px;
     margin-right: 1rem;
 }
-
