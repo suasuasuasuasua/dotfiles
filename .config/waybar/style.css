@@ -172,7 +172,7 @@
 }
 
 #battery.warning {
-    color: @orange;
+    color: @yellow;
 }
 
 #battery.critical {
