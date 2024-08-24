@@ -20,6 +20,9 @@ Ubuntu with KDE. **Currently trying out Arch Linux with Sway WM.**
 - `slurp` (wayland region selector)
 - `swayidle` (wayland idle daemon)
 - `swaylock` (wayland lockscreen daemon)
+- `pamixer` (pulse audio volume mixer)
+- `wob` (wayland overlay bar)
+- `libinput-gestures` (support trackpad gestures)
 
 ### Fonts and Themes
 
@@ -62,12 +65,15 @@ Ubuntu with KDE. **Currently trying out Arch Linux with Sway WM.**
 - `wf-recorder` (tui screen recorder)
   - `pipewire` and `gst-plugin-pipewire` as dependencies
 - `wiki-tui` (wikipedia text user interface)
+- `diff-so-fancy` (pretty `git` diffs)
 
 ## Development
 
 - `tmux` (terminal multiplexer)
 - virt-manager (virtual machine manager)
 - docker engine (containerization)
+- `glow` (markdown notes management)
+- `soft-serve` (self hosted git server)
 
 ### Terminal Emulators
 
@@ -78,6 +84,11 @@ Ubuntu with KDE. **Currently trying out Arch Linux with Sway WM.**
 ### Text Editors
 
 - `vim`
+  - using VimPlug as the package manager
+  - see the `.vimrc` for a list of relatively minimal extensions
 - `nvim` (trying to migrate!)
+  - `tree-sitter-cli` (an important dependency for syntax highlighting)
+  - using `lazy.nvim` as the package manager and mason as the LSP manager
+  - also a bunch of other extensions defined in [kickstart.git](https://www.github.com/suasuasuasuasua/nvim)
 - vscode (goated text editor turned IDE)
 - zed (trying as an alternative!)
