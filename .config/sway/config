@@ -241,14 +241,17 @@ default_border pixel 2
 # Font
 font pango:JetBrainsMono Nerd Font 10
 
-# Audio
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# # Audio
+# systemctl --user enable wob.socket --now
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+
+bindsym XF86AudioRaiseVolume exec pamixer -i 1 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pamixer -d 1 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMute exec pamixer --toggle-mute # no graphical output here
 
 # Brightness
-bindsym --locked XF86MonBrightnessUp exec brightnessctl s +5%
-bindsym --locked XF86MonBrightnessDown exec brightnessctl s 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl s +5% && echo $(( $(brightnessctl g)*100/$(brightnessctl m) )) > $WOBSOCK
+bindsym --locked XF86MonBrightnessDown exec brightnessctl s 5%- && echo $(( $(brightnessctl g)*100/$(brightnessctl m) )) > $WOBSOCK
 
 #
 # Screen capture
@@ -274,8 +277,9 @@ bindsym $mod+Ctrl+$left workspace prev
 bindsym $mod+Ctrl+$right workspace next
 
 # TODO: this doesn't actually work??
-# # Lock the computer
-# bindsym XF86ScreenSaver exec "$term"
+# Lock the computer
+bindsym XF86ScreenSaver exec $term
+# bindsym $mod+Alt+l exec swaylock
 
 # # Something
 # bindsym --locked XF86LaunchA exec swaylock
