@@ -31,6 +31,13 @@ apt install stow
 nix-shell -p stow
 ```
 
+To install the dotfiles under some directory, simply call it with the `-t` flag
+for the target directory.
+
+```bash
+stow . -t $HOME
+```
+
 To ignore a certain set of files, use the `-i`. For example, if I am already
 managing my `zsh`, `btop`, and `tmux` with my home-manager (`nix` btw)
 configuration, then I don't need these configurations. Or, if you want to
