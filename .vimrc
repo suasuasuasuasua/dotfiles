@@ -89,10 +89,25 @@ set termguicolors
 
 "Optional plugins (highly recommended)
 "These are generally available in package managers.
-"
 "```
 "Discover plugins
 "dnf search vim
+"```
+"
+"To see what the runtime path for plugin discovery is. I recommend using `tree`
+"to find these files.
+"```
+":set runtimepath
+"```
+"To disable certain paths, 
+"```
+":set runtimepath-=~/.vim/bundle/vimacs
+"```
+"
+"or find the 'enable' line and manually 'disable' individual plugins. note, it
+"is set to 1 not 0 (weird).
+"```
+"let g:loaded_ctrlp = 1
 "```
 "
 "vim-ale
