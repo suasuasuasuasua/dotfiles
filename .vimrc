@@ -1,12 +1,17 @@
 syntax enable
 
-set autochdir
+"set autochdir
 set autoread
 set background=dark
 set belloff+=ctrlg
 set colorcolumn=80
 set encoding=utf-8
 set expandtab
+set foldcolumn=1
+set foldenable
+set foldlevel=99
+set foldlevelstart=-1
+set foldmethod=indent
 set hlsearch
 set ignorecase
 set incsearch
@@ -27,6 +32,8 @@ set shiftwidth=4
 set showmatch
 set signcolumn=yes
 set smartcase
+set splitbelow
+set splitright
 set t_vb=
 set tabstop=4
 set termguicolors
@@ -93,30 +100,4 @@ colorscheme catppuccin
 "
 "for optional packages, use :packadd to include them
 "
-"vim-ale
-":AleX to interact with LSP
-"
-"vim-commentary
-":Commentary to comment out lines of code
-"gcc motion
-"
-"vim-ctrlp
-":CtrlPX to pull up the fuzzy finder
-"ctrl-p shortcut
-"ctrl-{jk} to navigate the list
-"ctrl-{np} to cycle the searches
-"
-"vim-fugitive
-":GitX commands to interact with git
-"
-"vim-gitgutter
-":GitGutterX commands to interact with the gutter (left of numbers)
-"
-"vim-go
-":GoX commands to interact with go project
-"
-"vim-nerdtree
-":NERDTreeX commands to interact with tree browser
-"
-"vim-powerline
-"Adds a prettier statusline
+"add plugin configuration under .vim/after/plugin/

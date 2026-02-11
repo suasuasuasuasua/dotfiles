@@ -7,6 +7,7 @@ https://github.com/junegunn/gv.vim
 https://github.com/mbbill/undotree
 https://github.com/preservim/nerdtree
 https://github.com/preservim/vim-indent-guides
+https://github.com/ryanoasis/vim-devicons
 https://github.com/tpope/vim-commentary
 https://github.com/tpope/vim-fugitive
 https://github.com/tpope/vim-repeat
