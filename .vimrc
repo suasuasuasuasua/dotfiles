@@ -86,6 +86,13 @@ colorscheme catppuccin
 "let g:loaded_ctrlp = 1
 "```
 "
+"alternatively, create folders under ~/.vim/pack
+"mkdir -p ~/.vim/pack/{color,syntax,plugins}/{opt/start}
+"clone in repositories under the opt (for optional) and start (for required)
+"git -C https://github.com/tpope/vim-commentary clone ~/.vim/pack/plugins/start
+"
+"for optional packages, use :packadd to include them
+"
 "vim-ale
 ":AleX to interact with LSP
 "
