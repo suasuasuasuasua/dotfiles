@@ -1,0 +1,3 @@
+fd-find
+fzf
+rg
