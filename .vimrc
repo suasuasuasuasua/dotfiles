@@ -1,10 +1,16 @@
 syntax enable
 
 "set autochdir
+set autoindent
 set autoread
 set background=dark
-set belloff+=ctrlg
+set backspace=indent,eol,start
+set belloff=all
+set breakindent
 set colorcolumn=80
+set confirm
+set cursorline
+set display=lastline
 set encoding=utf-8
 set expandtab
 set foldcolumn=1
@@ -12,15 +18,21 @@ set foldenable
 set foldlevel=99
 set foldlevelstart=-1
 set foldmethod=indent
+set history=10000
 set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
 set linebreak
+set list
+set listchars=tab:>\ ,trail:-,nbsp:+
 set mat=1
+set mouse=a
 set nobackup
 set noerrorbells
+set nojoinspaces
 set noshowmode
+set nostartofline
 set noswapfile
 set novisualbell
 set nowrap
@@ -29,16 +41,20 @@ set number
 set ruler
 set scrolloff=5
 set shiftwidth=4
+set showcmd
 set showmatch
 set signcolumn=yes
 set smartcase
+set smarttab
 set splitbelow
 set splitright
+set switchbuf=uselast
 set t_vb=
 set tabstop=4
 set termguicolors
 set textwidth=80
 set updatetime=300
+set wildmenu
 
 let &t_EI = "\e[2 q"
 let &t_SI = "\e[6 q"
@@ -68,7 +84,7 @@ autocmd BufReadPost *
                   \   exe "normal! g`\"" |
                   \ endif
 
-colorscheme catppuccin 
+"colorscheme catppuccin
 
 "Optional plugins (highly recommended)
 "These are generally available in package managers.
