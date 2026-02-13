@@ -1,5 +1,6 @@
 https://github.com/airblade/vim-gitgutter
 https://github.com/christoomey/vim-tmux-navigator
+https://github.com/direnv/direnv.vim
 https://github.com/fatih/vim-go
 https://github.com/junegunn/fzf
 https://github.com/junegunn/fzf.vim
@@ -9,6 +10,7 @@ https://github.com/preservim/nerdtree
 https://github.com/preservim/vim-indent-guides
 https://github.com/ryanoasis/vim-devicons
 https://github.com/tpope/vim-commentary
+https://github.com/tpope/vim-dispatch
 https://github.com/tpope/vim-fugitive
 https://github.com/tpope/vim-repeat
 https://github.com/tpope/vim-sensible
