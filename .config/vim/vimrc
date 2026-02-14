@@ -55,6 +55,7 @@ set tabstop=4
 set termguicolors
 set textwidth=80
 set timeoutlen=500
+set undofile
 set updatetime=300
 set wildmenu
 
