@@ -8,5 +8,6 @@ if exists('g:loaded_fzf_vim')
   nnoremap <silent> <Leader>sg :Rg<CR>
   nnoremap <silent> <Leader>sh :Helptags<CR>
   nnoremap <silent> <Leader>sk :Maps<CR>
+  nnoremap <silent> <Leader>sn :Files $HOME/.config/vim/<CR>
   nnoremap <silent> <Leader>st :Tags<CR>
 endif

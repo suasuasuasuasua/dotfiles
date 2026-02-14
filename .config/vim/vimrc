@@ -1,5 +1,6 @@
 syntax enable
 
+"set noshowmode
 "set autochdir
 set autoindent
 set autoread
@@ -31,13 +32,13 @@ set mouse=a
 set nobackup
 set noerrorbells
 set nojoinspaces
-set noshowmode
 set nostartofline
 set noswapfile
 set novisualbell
 set nowrap
 set nowritebackup
 set number
+set omnifunc=syntaxcomplete#Complete
 set ruler
 set scrolloff=5
 set shiftwidth=4
@@ -68,8 +69,7 @@ inoremap Jk <Esc>
 inoremap jK <Esc>
 inoremap jk <Esc>
 nnoremap <silent> <Leader>l :nohl<CR>
-nnoremap <silent> <Leader>sn :find ~/.vimrc<CR>
-nnoremap <silent> <Leader>so :source ~/.vimrc<CR>
+nnoremap <Leader>so :source $HOME/.config/vim/vimrc<CR>
 
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
@@ -84,7 +84,7 @@ autocmd BufReadPost *
                   \   exe "normal! g`\"" |
                   \ endif
 
-"colorscheme catppuccin
+source $HOME/.config/vim/plugins.vim
 
 "Optional plugins (highly recommended)
 "These are generally available in package managers.
