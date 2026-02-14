@@ -1,5 +1,24 @@
 # Vim
 
+## Compiling
+
+Go to the [GitHub](https://github.com/vim/vim) and clone it locally.
+
+```bash
+cd vim
+./configure # optional
+make -j
+sudo make install
+```
+
+If you need a specific flag like the Python interpreter, you may need the
+development package.
+
+```bash
+dnf install python3-devel
+./configure --enable-python3interp
+```
+
 ## Plugins
 
 ### LSP
