@@ -68,8 +68,7 @@ inoremap Jk <Esc>
 inoremap jK <Esc>
 inoremap jk <Esc>
 nnoremap <silent> <Leader>l :nohl<CR>
-nnoremap <silent> <Leader>sn :find ~/.vimrc<CR>
-nnoremap <silent> <Leader>so :source ~/.vimrc<CR>
+nnoremap <Leader>so :source $HOME/.config/vim/vimrc<CR>
 
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
@@ -84,7 +83,7 @@ autocmd BufReadPost *
                   \   exe "normal! g`\"" |
                   \ endif
 
-"colorscheme catppuccin
+colorscheme koehler
 
 "Optional plugins (highly recommended)
 "These are generally available in package managers.
