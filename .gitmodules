@@ -61,3 +61,18 @@
 [submodule ".config/vim/pack/colors/opt/tokyonight.nvim"]
 	path = .config/vim/pack/colors/opt/tokyonight.nvim
 	url = https://github.com/folke/tokyonight.nvim
+[submodule ".config/vim/pack/plugin/opt/coc.nvim"]
+	path = .config/vim/pack/plugin/opt/coc.nvim
+	url = https://github.com/neoclide/coc.nvim
+[submodule ".config/vim/pack/plugin/opt/ultisnips"]
+	path = .config/vim/pack/plugin/opt/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule ".config/vim/pack/plugin/opt/vim-snippets"]
+	path = .config/vim/pack/plugin/opt/vim-snippets
+	url = https://github.com/honza/vim-snippets
+[submodule ".config/vim/pack/plugin/start/vim-which-key"]
+	path = .config/vim/pack/plugin/start/vim-which-key
+	url = https://github.com/liuchengxu/vim-which-key
+[submodule ".config/vim/pack/plugin/start/vim-sleuth"]
+	path = .config/vim/pack/plugin/start/vim-sleuth
+	url = https://github.com/tpope/vim-sleuth

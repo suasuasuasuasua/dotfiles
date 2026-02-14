@@ -1,7 +1,7 @@
 syntax enable
 
-"set noshowmode
 "set autochdir
+"set noshowmode
 set autoindent
 set autoread
 set background=dark
@@ -54,6 +54,7 @@ set t_vb=
 set tabstop=4
 set termguicolors
 set textwidth=80
+set timeoutlen=500
 set updatetime=300
 set wildmenu
 
@@ -62,7 +63,7 @@ let &t_SI = "\e[6 q"
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 let mapleader = " "
-let maplocalleader = " "
+let maplocalleader = ","
 
 inoremap JK <Esc>
 inoremap Jk <Esc>
@@ -84,6 +85,7 @@ autocmd BufReadPost *
                   \   exe "normal! g`\"" |
                   \ endif
 
+source $HOME/.config/vim/colors.vim
 source $HOME/.config/vim/plugins.vim
 
 "Optional plugins (highly recommended)
