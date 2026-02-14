@@ -1,8 +1,5 @@
-packadd! tokyonight.nvim/extras/vim
-colorscheme tokyonight
-"colorscheme koehler
-
 packadd! coc.nvim
+packadd! lightline.vim
 packadd! markdown-preview.nvim
 packadd! nerdtree
 packadd! ultisnips
