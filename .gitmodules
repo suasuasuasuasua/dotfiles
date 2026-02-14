@@ -76,3 +76,6 @@
 [submodule ".config/vim/pack/plugin/start/vim-sleuth"]
 	path = .config/vim/pack/plugin/start/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth
+[submodule ".config/vim/pack/plugin/start/auto-pairs"]
+	path = .config/vim/pack/plugin/start/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs
