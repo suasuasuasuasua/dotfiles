@@ -115,3 +115,6 @@
 [submodule ".config/vim/pack/plugin/start/targets.vim"]
 	path = .config/vim/pack/plugin/start/targets.vim
 	url = https://github.com/wellle/targets.vim
+[submodule ".config/vim/pack/colors/opt/tokyonight.nvim"]
+	path = .config/vim/pack/colors/opt/tokyonight.nvim
+	url = https://github.com/folke/tokyonight.nvim

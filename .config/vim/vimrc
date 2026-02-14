@@ -83,7 +83,9 @@ autocmd BufReadPost *
                   \   exe "normal! g`\"" |
                   \ endif
 
-colorscheme koehler
+packadd! tokyonight.nvim/extras/vim
+colorscheme tokyonight
+"colorscheme koehler
 
 "Optional plugins (highly recommended)
 "These are generally available in package managers.
