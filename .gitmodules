@@ -79,3 +79,6 @@
 [submodule ".config/vim/pack/plugin/start/auto-pairs"]
 	path = .config/vim/pack/plugin/start/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
+[submodule ".config/vim/pack/plugin/start/markdown-preview.nvim"]
+	path = .config/vim/pack/plugin/opt/markdown-preview.nvim
+	url = https://github.com/iamcco/markdown-preview.nvim

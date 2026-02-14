@@ -3,6 +3,7 @@ colorscheme tokyonight
 "colorscheme koehler
 
 packadd! coc.nvim
+packadd! markdown-preview.nvim
 packadd! nerdtree
 packadd! ultisnips
 packadd! vim-devicons
