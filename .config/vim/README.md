@@ -17,16 +17,24 @@ directory.
 :CocList extensions
 ```
 
-- @yaegassy/coc-pylsp
-- coc-clangd
-- coc-go
-- coc-json
-- coc-markdownlint
-- coc-sh
-- coc-tsserver
+- `@yaegassy/coc-pylsp`
+- `coc-clangd`
+- `coc-go`
+- `coc-json`
+- `coc-markdownlint`
+- `coc-sh`
+- `coc-tsserver`
 
 - https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 - https://github.com/neoclide/coc.nvim/wiki/Language-servers
+
+You can search a marketplace using the following command.
+
+```vim
+:CocInstall coc-marketplace
+```
+
+- https://github.com/fannheyward/coc-marketplace
 
 ### Snippets
 
@@ -34,7 +42,6 @@ To get snippets working, we can use `coc.nvim`. Install the `coc-snippets`
 extension for `coc`
 
 ```vim
-
 :CocInstall coc-snippets
 ```
 
