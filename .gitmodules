@@ -82,9 +82,18 @@
 [submodule ".config/vim/pack/plugin/start/markdown-preview.nvim"]
 	path = .config/vim/pack/plugin/opt/markdown-preview.nvim
 	url = https://github.com/iamcco/markdown-preview.nvim
+[submodule ".config/vim/pack/plugin/start/rainbow_parentheses.vim"]
+	path = .config/vim/pack/plugin/start/rainbow_parentheses.vim
+	url = https://github.com/kien/rainbow_parentheses.vim
 [submodule ".config/vim/pack/plugin/opt/lightline.vim"]
 	path = .config/vim/pack/plugin/opt/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
+[submodule ".config/vim/pack/plugin/start/vim-trailing-whitespace"]
+	path = .config/vim/pack/plugin/start/vim-trailing-whitespace
+	url = https://github.com/bronson/vim-trailing-whitespace
+[submodule ".config/vim/pack/plugin/start/vim-unimpaired"]
+	path = .config/vim/pack/plugin/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired
 [submodule ".config/vim/pack/colors/opt/Apprentice"]
 	path = .config/vim/pack/colors/opt/Apprentice
 	url = https://github.com/romainl/Apprentice
