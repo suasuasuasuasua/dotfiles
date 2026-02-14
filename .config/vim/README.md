@@ -42,7 +42,7 @@ To get snippets working, we can use `coc.nvim`. Install the `coc-snippets`
 extension for `coc`
 
 ```vim
-:CocInstall coc-snippets
+:CocInstall coc-snippets coc-ultisnips
 ```
 
 - https://github.com/neoclide/coc-snippets
