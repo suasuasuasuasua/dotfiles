@@ -1,7 +1,6 @@
 syntax enable
 
 "set autochdir
-"set noshowmode
 set autoindent
 set autoread
 set background=dark
@@ -32,6 +31,7 @@ set mouse=a
 set nobackup
 set noerrorbells
 set nojoinspaces
+set noshowmode
 set nostartofline
 set noswapfile
 set novisualbell
@@ -55,6 +55,7 @@ set tabstop=4
 set termguicolors
 set textwidth=80
 set timeoutlen=500
+set undodir=$HOME/.local/state/vim/undo
 set undofile
 set updatetime=300
 set wildmenu
