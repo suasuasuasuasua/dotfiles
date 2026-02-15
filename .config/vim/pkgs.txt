@@ -1,3 +1,8 @@
+ctags
 fd-find
 fzf
+git
+node
+python3
 rg
+vim
