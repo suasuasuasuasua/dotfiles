@@ -1,4 +1,5 @@
 packadd! coc.nvim
+packadd! helptoc
 packadd! lightline.vim
 packadd! markdown-preview.nvim
 packadd! nerdtree
