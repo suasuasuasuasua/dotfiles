@@ -11,7 +11,7 @@
 	path = .config/vim/pack/plugin/start/direnv.vim
 	url = https://github.com/suasuasuasuasua/direnv.vim
 [submodule ".config/vim/pack/plugin/start/vim-go"]
-	path = .config/vim/pack/plugin/opt/vim-go
+	path = .config/vim/pack/syntax/opt/vim-go
 	url = https://github.com/fatih/vim-go
 [submodule ".config/vim/pack/plugin/start/fzf"]
 	path = .config/vim/pack/plugin/start/fzf
@@ -100,3 +100,6 @@
 [submodule ".config/vim/pack/colors/opt/everforest"]
 	path = .config/vim/pack/colors/opt/everforest
 	url = https://github.com/sainnhe/everforest
+[submodule ".config/vim/pack/syntax/opt/vim-nix"]
+	path = .config/vim/pack/syntax/opt/vim-nix
+	url = https://github.com/LnL7/vim-nix

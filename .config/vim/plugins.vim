@@ -6,4 +6,5 @@ packadd! nerdtree
 packadd! ultisnips
 packadd! vim-devicons
 packadd! vim-go
+packadd! vim-nix
 packadd! vim-snippets
