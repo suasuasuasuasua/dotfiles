@@ -1,5 +1,12 @@
-packadd! coc.nvim
+"builtin
+" packadd! comment " 9.1.0375
+packadd! editorconfig
 packadd! helptoc
+packadd! hlyank
+packadd! nohlsearch
+
+"custom
+packadd! coc.nvim
 packadd! lightline.vim
 packadd! markdown-preview.nvim
 packadd! nerdtree
