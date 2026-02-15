@@ -8,6 +8,7 @@ set backspace=indent,eol,start
 set belloff=all
 set breakindent
 set colorcolumn=80
+set completeopt+=fuzzy
 set confirm
 set cursorline
 set display=lastline
@@ -59,6 +60,12 @@ set undodir=$HOME/.local/state/vim/undo
 set undofile
 set updatetime=300
 set wildmenu
+set wildoptions+=fuzzy
+
+" 8. Command-line autocompletion                         *cmdline-autocompletion*
+autocmd CmdlineChanged [:\/\?] call wildtrigger()
+set wildmode=noselect:lastused,full
+set wildoptions=pum
 
 let &t_EI = "\e[2 q"
 let &t_SI = "\e[6 q"
