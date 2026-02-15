@@ -9,7 +9,7 @@
 	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule ".config/vim/pack/plugin/start/direnv.vim"]
 	path = .config/vim/pack/plugin/start/direnv.vim
-	url = https://github.com/direnv/direnv.vim
+	url = https://github.com/suasuasuasuasua/direnv.vim
 [submodule ".config/vim/pack/plugin/start/vim-go"]
 	path = .config/vim/pack/plugin/opt/vim-go
 	url = https://github.com/fatih/vim-go
