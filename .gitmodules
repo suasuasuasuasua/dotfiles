@@ -1,105 +1,105 @@
 [submodule ".config/nvim"]
-	path = .config/nvim
+	path = nvim/.config/nvim
 	url = git@github.com:suasuasuasuasua/nvim
 [submodule ".config/vim/pack/plugin/start/vim-gitgutter"]
-	path = .config/vim/pack/plugin/start/vim-gitgutter
+	path = vim/.config/vim/pack/plugin/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
 [submodule ".config/vim/pack/plugin/start/vim-tmux-navigator"]
-	path = .config/vim/pack/plugin/start/vim-tmux-navigator
+	path = vim/.config/vim/pack/plugin/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule ".config/vim/pack/plugin/start/direnv.vim"]
-	path = .config/vim/pack/plugin/start/direnv.vim
+	path = vim/.config/vim/pack/plugin/start/direnv.vim
 	url = https://github.com/suasuasuasuasua/direnv.vim
 [submodule ".config/vim/pack/plugin/start/vim-go"]
-	path = .config/vim/pack/syntax/opt/vim-go
+	path = vim/.config/vim/pack/syntax/opt/vim-go
 	url = https://github.com/fatih/vim-go
 [submodule ".config/vim/pack/plugin/start/fzf"]
-	path = .config/vim/pack/plugin/start/fzf
+	path = vim/.config/vim/pack/plugin/start/fzf
 	url = https://github.com/junegunn/fzf
 [submodule ".config/vim/pack/plugin/start/fzf.vim"]
-	path = .config/vim/pack/plugin/start/fzf.vim
+	path = vim/.config/vim/pack/plugin/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
 [submodule ".config/vim/pack/plugin/start/gv.vim"]
 	path = .config/vim/pack/plugin/start/gv.vim
 	url = https://github.com/junegunn/gv.vim
 [submodule ".config/vim/pack/plugin/start/undotree"]
-	path = .config/vim/pack/plugin/start/undotree
+	path = vim/.config/vim/pack/plugin/start/undotree
 	url = https://github.com/mbbill/undotree
 [submodule ".config/vim/pack/plugin/start/nerdtree"]
-	path = .config/vim/pack/plugin/opt/nerdtree
+	path = vim/.config/vim/pack/plugin/opt/nerdtree
 	url = https://github.com/preservim/nerdtree
 [submodule ".config/vim/pack/plugin/start/vim-indent-guides"]
-	path = .config/vim/pack/plugin/start/vim-indent-guides
+	path = vim/.config/vim/pack/plugin/start/vim-indent-guides
 	url = https://github.com/preservim/vim-indent-guides
 [submodule ".config/vim/pack/plugin/start/vim-devicons"]
-	path = .config/vim/pack/plugin/opt/vim-devicons
+	path = vim/.config/vim/pack/plugin/opt/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
 [submodule ".config/vim/pack/plugin/start/vim-commentary"]
-	path = .config/vim/pack/plugin/start/vim-commentary
+	path = vim/.config/vim/pack/plugin/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule ".config/vim/pack/plugin/start/vim-dispatch"]
-	path = .config/vim/pack/plugin/start/vim-dispatch
+	path = vim/.config/vim/pack/plugin/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch
 [submodule ".config/vim/pack/plugin/start/vim-fugitive"]
-	path = .config/vim/pack/plugin/start/vim-fugitive
+	path = vim/.config/vim/pack/plugin/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
 [submodule ".config/vim/pack/plugin/start/vim-repeat"]
-	path = .config/vim/pack/plugin/start/vim-repeat
+	path = vim/.config/vim/pack/plugin/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat
 [submodule ".config/vim/pack/plugin/start/vim-sensible"]
-	path = .config/vim/pack/plugin/start/vim-sensible
+	path = vim/.config/vim/pack/plugin/start/vim-sensible
 	url = https://github.com/tpope/vim-sensible
 [submodule ".config/vim/pack/plugin/start/vim-surround"]
-	path = .config/vim/pack/plugin/start/vim-surround
+	path = vim/.config/vim/pack/plugin/start/vim-surround
 	url = https://github.com/tpope/vim-surround
 [submodule ".config/vim/pack/plugin/start/vim-vinegar"]
-	path = .config/vim/pack/plugin/start/vim-vinegar
+	path = vim/.config/vim/pack/plugin/start/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar
 [submodule ".config/vim/pack/plugin/start/targets.vim"]
-	path = .config/vim/pack/plugin/start/targets.vim
+	path = vim/.config/vim/pack/plugin/start/targets.vim
 	url = https://github.com/wellle/targets.vim
 [submodule ".config/vim/pack/colors/opt/tokyonight.nvim"]
-	path = .config/vim/pack/colors/opt/tokyonight.nvim
+	path = vim/.config/vim/pack/colors/opt/tokyonight.nvim
 	url = https://github.com/folke/tokyonight.nvim
 [submodule ".config/vim/pack/plugin/opt/coc.nvim"]
-	path = .config/vim/pack/plugin/opt/coc.nvim
+	path = vim/.config/vim/pack/plugin/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim
 [submodule ".config/vim/pack/plugin/opt/ultisnips"]
-	path = .config/vim/pack/plugin/opt/ultisnips
+	path = vim/.config/vim/pack/plugin/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips
 [submodule ".config/vim/pack/plugin/opt/vim-snippets"]
-	path = .config/vim/pack/plugin/opt/vim-snippets
+	path = vim/.config/vim/pack/plugin/opt/vim-snippets
 	url = https://github.com/honza/vim-snippets
 [submodule ".config/vim/pack/plugin/start/vim-which-key"]
-	path = .config/vim/pack/plugin/start/vim-which-key
+	path = vim/.config/vim/pack/plugin/start/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key
 [submodule ".config/vim/pack/plugin/start/vim-sleuth"]
-	path = .config/vim/pack/plugin/start/vim-sleuth
+	path = vim/.config/vim/pack/plugin/start/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth
 [submodule ".config/vim/pack/plugin/start/auto-pairs"]
-	path = .config/vim/pack/plugin/start/auto-pairs
+	path = vim/.config/vim/pack/plugin/start/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
 [submodule ".config/vim/pack/plugin/start/markdown-preview.nvim"]
-	path = .config/vim/pack/plugin/opt/markdown-preview.nvim
+	path = vim/.config/vim/pack/plugin/opt/markdown-preview.nvim
 	url = https://github.com/iamcco/markdown-preview.nvim
 [submodule ".config/vim/pack/plugin/start/rainbow_parentheses.vim"]
-	path = .config/vim/pack/plugin/start/rainbow_parentheses.vim
+	path = vim/.config/vim/pack/plugin/start/rainbow_parentheses.vim
 	url = https://github.com/kien/rainbow_parentheses.vim
 [submodule ".config/vim/pack/plugin/opt/lightline.vim"]
-	path = .config/vim/pack/plugin/opt/lightline.vim
+	path = vim/.config/vim/pack/plugin/opt/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
 [submodule ".config/vim/pack/plugin/start/vim-trailing-whitespace"]
-	path = .config/vim/pack/plugin/start/vim-trailing-whitespace
+	path = vim/.config/vim/pack/plugin/start/vim-trailing-whitespace
 	url = https://github.com/bronson/vim-trailing-whitespace
 [submodule ".config/vim/pack/plugin/start/vim-unimpaired"]
-	path = .config/vim/pack/plugin/start/vim-unimpaired
+	path = vim/.config/vim/pack/plugin/start/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired
 [submodule ".config/vim/pack/colors/opt/Apprentice"]
-	path = .config/vim/pack/colors/opt/Apprentice
+	path = vim/.config/vim/pack/colors/opt/Apprentice
 	url = https://github.com/romainl/Apprentice
 [submodule ".config/vim/pack/colors/opt/everforest"]
-	path = .config/vim/pack/colors/opt/everforest
+	path = vim/.config/vim/pack/colors/opt/everforest
 	url = https://github.com/sainnhe/everforest
 [submodule ".config/vim/pack/syntax/opt/vim-nix"]
-	path = .config/vim/pack/syntax/opt/vim-nix
+	path = vim/.config/vim/pack/syntax/opt/vim-nix
 	url = https://github.com/LnL7/vim-nix
