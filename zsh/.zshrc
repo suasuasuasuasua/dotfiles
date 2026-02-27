@@ -17,3 +17,11 @@ zstyle :compinstall filename '/home/justinhoang/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+PS1='%n@%m:%/$ '
+
+# plugins
+source $HOME/.config/zsh/git.plugin.zsh
+
+# other
+source <(fzf --zsh)
