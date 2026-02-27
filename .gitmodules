@@ -1,6 +1,6 @@
 [submodule ".config/nvim"]
 	path = nvim/.config/nvim
-	url = git@github.com:suasuasuasuasua/nvim
+	url = https://github.com/suasuasuasuasua/nvim
 [submodule ".config/vim/pack/plugin/start/vim-gitgutter"]
 	path = vim/.config/vim/pack/plugin/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
