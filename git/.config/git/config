@@ -3,9 +3,12 @@
 [user]
 	name = Justin Hoang
 	email = justinhoang@sua.dev
+	signingkey = justinhoang@sua.dev
 [init]
 	defaultBranch = main
 [pull]
 	rebase = false
 [push]
 	autoSetupRemote = true
+[commit]
+	gpgsign = true
