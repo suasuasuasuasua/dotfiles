@@ -17,6 +17,24 @@ collection of [nix files](https://github.com/suasuasuasuasua/nixos-config).
 
 ## Tips
 
+### Updating
+
+Some of the programs are configured with third party dependencies which need to
+be pulled with `git`.
+
+```bash
+# initialize the submodules
+git submodule init
+
+# pull all of the submodules
+git submodule update
+
+# pull a specific submodule
+git submodule update vim/...
+```
+
+### Linking Dotfiles
+
 To easily add these configurations to your home directory, use
 [`stow`](https://www.gnu.org/software/stow/) from GNU. `stow` is called a
 _symlink farm manager_.
