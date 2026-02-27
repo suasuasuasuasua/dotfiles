@@ -5,10 +5,15 @@ collection of [nix files](https://github.com/suasuasuasuasua/nixos-config).
 
 ## Programs
 
+- bash
 - foot
+- git
+- gnupg
+- lazygit
 - neovim
 - tmux
 - vim
+- zsh
 
 ## Tips
 
