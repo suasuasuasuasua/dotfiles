@@ -26,6 +26,9 @@ source "$HOME/.config/zsh/git.plugin.zsh"
 # alias
 source "$HOME/.config/zsh/alias.zsh"
 
+# paths
+export PATH="$HOME/.cargo/bin":$PATH
+
 # other
 source <(fzf --zsh)
 eval "$(direnv hook zsh)"
