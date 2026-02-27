@@ -1,0 +1,15 @@
+git:
+  # Array of pagers
+  # pagers:
+  #   - pager: delta --dark --paging=never --side-by-side --line-numbers
+  #     colorArg: always
+  commit:
+    # If true, pass '--signoff' flag when committing
+    signOff: true
+
+  # If true, do not spawn a separate process when using GPG
+  overrideGpg: true
+
+# If true, display a confirmation when subprocess terminates. This allows you to
+# view the output of the subprocess before returning to Lazygit.
+promptToReturnFromSubprocess: false
