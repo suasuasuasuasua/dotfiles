@@ -1,0 +1,11 @@
+[core]
+	editor = nvim
+[user]
+	name = Justin Hoang
+	email = justinhoang@sua.dev
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[push]
+	autoSetupRemote = true
