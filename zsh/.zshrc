@@ -21,7 +21,11 @@ compinit
 PS1='%n@%m:%/$ '
 
 # plugins
-source $HOME/.config/zsh/git.plugin.zsh
+source "$HOME/.config/zsh/git.plugin.zsh"
+
+# alias
+source "$HOME/.config/zsh/alias.zsh"
 
 # other
 source <(fzf --zsh)
+eval "$(direnv hook zsh)"
