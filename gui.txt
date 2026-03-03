@@ -1,0 +1,8 @@
+calibre
+firefox
+foot
+gimp
+libreoffice
+localsend
+obs
+vscode
