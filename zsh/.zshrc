@@ -20,7 +20,7 @@ compinit
 # Suggestion from Ubuntu 24.04 (/etc/zsh/)
 autoload -Uz promptinit
 promptinit
-prompt adam1
+prompt redhat # prompt -l
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -60,8 +60,6 @@ GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
 GIT_PS1_SHOWUNTRACKEDFILES="true" # % indicates untracked
 GIT_PS1_SHOWUPSTREAM="verbose" # <, >, <>, = for upstream state
 RPROMPT=$'$(__git_ps1 "%s")'
-
-PS1='%n@%m:%/$ '
 
 # alias
 source "$HOME/.config/zsh/alias.zsh"
