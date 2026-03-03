@@ -18,21 +18,22 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# PS1
+# (TODO: use git/contrib/ folder if available)
+# 
+# git clone https://github.com/git/git
+# cp contrib/completion/... .
+#
+# show git hints
 setopt prompt_subst
-
 source "$HOME/.config/zsh/git-prompt.sh"
 GIT_PS1_SHOWCOLORHINTS="yes" # adds colors to prompt
 GIT_PS1_SHOWCONFLICTSTATE="yes" # |CONFLICT indicates merge conflicts
 GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
 GIT_PS1_SHOWUNTRACKEDFILES="true" # % indicates untracked
 GIT_PS1_SHOWUPSTREAM="verbose" # <, >, <>, = for upstream state
-
-PS1='%n@%m:%/$ '
 RPROMPT=$'$(__git_ps1 "%s")'
 
-# completion
-fpath=("$HOME/.config/zsh" $fpath)
+PS1='%n@%m:%/$ '
 
 # alias
 source "$HOME/.config/zsh/alias.zsh"
