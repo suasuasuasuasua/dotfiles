@@ -40,6 +40,7 @@ source "$HOME/.config/zsh/git.plugin.zsh"
 
 # paths
 export PATH="$HOME/.cargo/bin":$PATH
+export PATH="$HOME/go/bin":$PATH
 
 # other
 source <(fzf --zsh)
