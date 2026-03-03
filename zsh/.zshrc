@@ -18,14 +18,19 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# (TODO: use git/contrib/ folder if available)
-# 
-# git clone https://github.com/git/git
-# cp contrib/completion/... .
-#
 # show git hints
+# check paths in order
+if [[ -e "/usr/share/doc/git/contrib/completion/git-prompt.sh" ]]; then
+  source "/usr/share/doc/git/contrib/completion/git-prompt.sh"
+elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
+  source "/usr/share/git-core/contrib/completion/git-prompt.sh"
+elif [[ -e "/usr/lib/git-core/git-sh-prompt" ]]; then
+  source "/usr/lib/git-core/git-sh-prompt"
+elif [[ -e "$HOME/.config/zsh/git-prompt.sh" ]]; then
+  source "$HOME/.config/zsh/git-prompt.sh"
+fi
+
 setopt prompt_subst
-source "$HOME/.config/zsh/git-prompt.sh"
 GIT_PS1_SHOWCOLORHINTS="yes" # adds colors to prompt
 GIT_PS1_SHOWCONFLICTSTATE="yes" # |CONFLICT indicates merge conflicts
 GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
