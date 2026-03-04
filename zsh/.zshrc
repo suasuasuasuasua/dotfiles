@@ -68,6 +68,7 @@ do
 
   if $found then break fi
 done
+unset base found stem
 
 # add venv PS1 tag
 show_virtual_env() {
