@@ -82,8 +82,16 @@ source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/git.plugin.zsh"
 
 # paths
-export PATH="$HOME/.cargo/bin":$PATH
-export PATH="$HOME/go/bin":$PATH
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+if ! [[ "$PATH" =~ "$HOME/.cargo/bin" ]]; then
+    PATH="$HOME/.cargo/bin:$PATH"
+fi
+if ! [[ "$PATH" =~ "$HOME/go/bin" ]]; then
+    PATH="$HOME/go/bin:$PATH"
+fi
+export PATH
 
 # other
 source <(fzf --zsh)
