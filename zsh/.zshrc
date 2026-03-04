@@ -43,22 +43,30 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Define the list of paths to search for git-prompt.sh
 setopt prompt_subst
-for p in "/usr/share/doc/git/contrib/completion" \
+for base in "/usr/share/doc/git/contrib/completion" \
   "/usr/share/git-core/contrib/completion" \
-  "/usr/lib/git-core"
+  "/usr/lib/git-core";
 do
-  if [ -e "$p/git-prompt.sh" ]; then
-    source "$p/git-prompt.sh"
+  found=false
 
-    GIT_PS1_SHOWCOLORHINTS="yes" # adds colors to prompt
-    GIT_PS1_SHOWCONFLICTSTATE="yes" # |CONFLICT indicates merge conflicts
-    GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
-    GIT_PS1_SHOWUNTRACKEDFILES="true" # % indicates untracked
-    GIT_PS1_SHOWUPSTREAM="verbose" # <, >, <>, = for upstream state
-    RPROMPT=$'$(__git_ps1 "%s")'
+  for stem in "git-prompt.sh" "git-sh-prompt"
+  do
+    if [ -e "$base/$stem" ]; then
+      source "$base/$stem"
 
-    break
-  fi
+      GIT_PS1_SHOWCOLORHINTS="yes" # adds colors to prompt
+      GIT_PS1_SHOWCONFLICTSTATE="yes" # |CONFLICT indicates merge conflicts
+      GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
+      GIT_PS1_SHOWUNTRACKEDFILES="true" # % indicates untracked
+      GIT_PS1_SHOWUPSTREAM="verbose" # <, >, <>, = for upstream state
+      RPROMPT=$'$(__git_ps1 "%s")'
+
+      found=true
+      break
+    fi
+  done
+
+  if $found then break fi
 done
 
 # add venv PS1 tag
