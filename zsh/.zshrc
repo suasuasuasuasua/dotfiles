@@ -41,25 +41,33 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # End of lines added by compinstall
 
-# show git hints
-# check paths in order
-if [[ -e "/usr/share/doc/git/contrib/completion/git-prompt.sh" ]]; then
-  source "/usr/share/doc/git/contrib/completion/git-prompt.sh"
-elif [[ -e "/usr/share/git-core/contrib/completion/git-prompt.sh" ]]; then
-  source "/usr/share/git-core/contrib/completion/git-prompt.sh"
-elif [[ -e "/usr/lib/git-core/git-sh-prompt" ]]; then
-  source "/usr/lib/git-core/git-sh-prompt"
-elif [[ -e "$HOME/.config/zsh/git-prompt.sh" ]]; then
-  source "$HOME/.config/zsh/git-prompt.sh"
-fi
-
+# Define the list of paths to search for git-prompt.sh
 setopt prompt_subst
-GIT_PS1_SHOWCOLORHINTS="yes" # adds colors to prompt
-GIT_PS1_SHOWCONFLICTSTATE="yes" # |CONFLICT indicates merge conflicts
-GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
-GIT_PS1_SHOWUNTRACKEDFILES="true" # % indicates untracked
-GIT_PS1_SHOWUPSTREAM="verbose" # <, >, <>, = for upstream state
-RPROMPT=$'$(__git_ps1 "%s")'
+for p in "/usr/share/doc/git/contrib/completion" \
+  "/usr/share/git-core/contrib/completion" \
+  "/usr/lib/git-core"
+do
+  if [ -e "$p/git-prompt.sh" ]; then
+    source "$p/git-prompt.sh"
+
+    GIT_PS1_SHOWCOLORHINTS="yes" # adds colors to prompt
+    GIT_PS1_SHOWCONFLICTSTATE="yes" # |CONFLICT indicates merge conflicts
+    GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
+    GIT_PS1_SHOWUNTRACKEDFILES="true" # % indicates untracked
+    GIT_PS1_SHOWUPSTREAM="verbose" # <, >, <>, = for upstream state
+    RPROMPT=$'$(__git_ps1 "%s")'
+
+    break
+  fi
+done
+
+# add venv PS1 tag
+show_virtual_env() {
+  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+    echo "($(basename $VIRTUAL_ENV))"
+  fi
+}
+PS1='$(show_virtual_env)'$PS1
 
 # alias
 source "$HOME/.config/zsh/alias.zsh"
