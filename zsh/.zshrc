@@ -94,6 +94,9 @@ if ! [[ "$PATH" =~ "$HOME/go/bin" ]]; then
 fi
 export PATH
 
-# other
+# other env variables
+export EDITOR=nvim
+
+# misc
 source <(fzf --zsh)
 eval "$(direnv hook zsh)"
