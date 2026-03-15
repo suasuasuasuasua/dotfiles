@@ -41,6 +41,11 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # End of lines added by compinstall
 
+# add autosuggestions if found
+if [ -e "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+  source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
 # Define the list of paths to search for git-prompt.sh
 setopt prompt_subst
 for base in "/usr/share/doc/git/contrib/completion" \
