@@ -41,6 +41,9 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # End of lines added by compinstall
 
+setopt hist_ignore_all_dups
+setopt hist_find_no_dups
+
 # add autosuggestions if found
 if [ -e "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
   source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
