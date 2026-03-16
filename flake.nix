@@ -23,6 +23,49 @@
         "aarch64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      # Shared treefmt config (Nix module — treefmt-nix does not read treefmt.toml)
+      treefmtConfig = {
+        projectRootFile = "flake.nix";
+
+        # Formatters
+        programs.shfmt = {
+          enable = true;
+          indent_size = 2;
+        };
+        programs.stylua.enable = true;
+        programs.nixfmt-rfc-style.enable = true;
+        programs.prettier.enable = true;
+
+        # Restrict shfmt to bash only — zsh syntax is incompatible with shfmt
+        settings.formatter.shfmt.includes = [
+          "*.sh"
+          "*.bash"
+          "**/.bashrc"
+        ];
+
+        # Exclude submodule directories from all formatters
+        settings.formatter.shfmt.excludes = [
+          "vim/.config/vim/pack/**"
+          "tmux/.config/tmux/plugins/**"
+          "nvim/.config/nvim/**"
+        ];
+        settings.formatter.stylua.excludes = [
+          "vim/.config/vim/pack/**"
+          "tmux/.config/tmux/plugins/**"
+          "nvim/.config/nvim/**"
+        ];
+        settings.formatter.nixfmt-rfc-style.excludes = [
+          "vim/.config/vim/pack/**"
+          "tmux/.config/tmux/plugins/**"
+          "nvim/.config/nvim/**"
+        ];
+        settings.formatter.prettier.excludes = [
+          "vim/.config/vim/pack/**"
+          "tmux/.config/tmux/plugins/**"
+          "nvim/.config/nvim/**"
+        ];
+      };
     in
     {
       # `nix fmt` uses treefmt
@@ -30,9 +73,8 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.toml;
         in
-        treefmtEval.config.build.wrapper
+        (treefmt-nix.lib.evalModule pkgs treefmtConfig).config.build.wrapper
       );
 
       # `nix develop` drops into a shell with all formatters available
@@ -40,16 +82,11 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.toml;
         in
         {
           default = pkgs.mkShell {
             packages = [
-              treefmtEval.config.build.wrapper
-              pkgs.shfmt
-              pkgs.stylua
-              pkgs.nixfmt-rfc-style
-              pkgs.nodePackages.prettier
+              (treefmt-nix.lib.evalModule pkgs treefmtConfig).config.build.wrapper
             ];
           };
         }
