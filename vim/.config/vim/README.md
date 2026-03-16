@@ -23,7 +23,7 @@ dnf install python3-devel
 
 ### LSP
 
-`coc.nvim` is a decent completion engine for `vim`. 
+`coc.nvim` is a decent completion engine for `vim`.
 
 It requires `nodejs` and a manual step of `npm ci` inside of the `coc.nvim`
 directory.

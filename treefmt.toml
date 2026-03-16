@@ -8,16 +8,15 @@ excludes = [
   "nvim/.config/nvim/**",
 ]
 
-# Shell scripts — bash, zsh, and .sh files
+# Shell scripts — bash and .sh files only
+# .zsh files use zsh-specific syntax that shfmt cannot parse
 [formatter.shfmt]
 command = "shfmt"
 options = ["-w", "-i", "2"]
 includes = [
   "*.sh",
   "*.bash",
-  "*.zsh",
   "**/.bashrc",
-  "**/.zshrc",
 ]
 
 # Lua files (neovim configs, etc.)
