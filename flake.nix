@@ -24,48 +24,53 @@
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      # Shared treefmt config (Nix module — treefmt-nix does not read treefmt.toml)
-      treefmtConfig = {
-        projectRootFile = "flake.nix";
+      # Shared treefmt config as a module function so pkgs is in scope
+      treefmtConfig =
+        { pkgs, ... }:
+        {
+          projectRootFile = "flake.nix";
 
-        # Formatters
-        programs.shfmt = {
-          enable = true;
-          indent_size = 2;
+          # Formatters
+          programs.shfmt = {
+            enable = true;
+            indent_size = 2;
+          };
+          programs.stylua.enable = true;
+          programs.nixfmt = {
+            enable = true;
+            package = pkgs.nixfmt-rfc-style;
+          };
+          programs.prettier.enable = true;
+
+          # Restrict shfmt to bash only — zsh syntax is incompatible with shfmt
+          settings.formatter.shfmt.includes = [
+            "*.sh"
+            "*.bash"
+            "**/.bashrc"
+          ];
+
+          # Exclude submodule directories from all formatters
+          settings.formatter.shfmt.excludes = [
+            "vim/.config/vim/pack/**"
+            "tmux/.config/tmux/plugins/**"
+            "nvim/.config/nvim/**"
+          ];
+          settings.formatter.stylua.excludes = [
+            "vim/.config/vim/pack/**"
+            "tmux/.config/tmux/plugins/**"
+            "nvim/.config/nvim/**"
+          ];
+          settings.formatter.nixfmt.excludes = [
+            "vim/.config/vim/pack/**"
+            "tmux/.config/tmux/plugins/**"
+            "nvim/.config/nvim/**"
+          ];
+          settings.formatter.prettier.excludes = [
+            "vim/.config/vim/pack/**"
+            "tmux/.config/tmux/plugins/**"
+            "nvim/.config/nvim/**"
+          ];
         };
-        programs.stylua.enable = true;
-        programs.nixfmt-rfc-style.enable = true;
-        programs.prettier.enable = true;
-
-        # Restrict shfmt to bash only — zsh syntax is incompatible with shfmt
-        settings.formatter.shfmt.includes = [
-          "*.sh"
-          "*.bash"
-          "**/.bashrc"
-        ];
-
-        # Exclude submodule directories from all formatters
-        settings.formatter.shfmt.excludes = [
-          "vim/.config/vim/pack/**"
-          "tmux/.config/tmux/plugins/**"
-          "nvim/.config/nvim/**"
-        ];
-        settings.formatter.stylua.excludes = [
-          "vim/.config/vim/pack/**"
-          "tmux/.config/tmux/plugins/**"
-          "nvim/.config/nvim/**"
-        ];
-        settings.formatter.nixfmt-rfc-style.excludes = [
-          "vim/.config/vim/pack/**"
-          "tmux/.config/tmux/plugins/**"
-          "nvim/.config/nvim/**"
-        ];
-        settings.formatter.prettier.excludes = [
-          "vim/.config/vim/pack/**"
-          "tmux/.config/tmux/plugins/**"
-          "nvim/.config/nvim/**"
-        ];
-      };
     in
     {
       # `nix fmt` uses treefmt
