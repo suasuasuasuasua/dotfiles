@@ -14,9 +14,11 @@ excludes = [
 command = "shfmt"
 options = ["-w", "-i", "2"]
 includes = [
-  "*.sh",
-  "*.bash",
   "**/.bashrc",
+  "*.bash",
+  "*.sh",
+  # "**/.zshrc",
+  # "*.zsh",
 ]
 
 # Lua files (neovim configs, etc.)

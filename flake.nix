@@ -27,6 +27,13 @@
       # Shared treefmt config as a module function so pkgs is in scope
       treefmtConfig =
         { pkgs, ... }:
+        let
+          excludedSubmodulePaths = [
+            "vim/.config/vim/pack/**"
+            "tmux/.config/tmux/plugins/**"
+            "nvim/.config/nvim/**"
+          ];
+        in
         {
           projectRootFile = "flake.nix";
 
@@ -44,32 +51,18 @@
 
           # Restrict shfmt to bash only — zsh syntax is incompatible with shfmt
           settings.formatter.shfmt.includes = [
-            "*.sh"
-            "*.bash"
             "**/.bashrc"
+            "*.bash"
+            "*.sh"
+            # "**/.zshrc"
+            # "*.zsh"
           ];
 
           # Exclude submodule directories from all formatters
-          settings.formatter.shfmt.excludes = [
-            "vim/.config/vim/pack/**"
-            "tmux/.config/tmux/plugins/**"
-            "nvim/.config/nvim/**"
-          ];
-          settings.formatter.stylua.excludes = [
-            "vim/.config/vim/pack/**"
-            "tmux/.config/tmux/plugins/**"
-            "nvim/.config/nvim/**"
-          ];
-          settings.formatter.nixfmt.excludes = [
-            "vim/.config/vim/pack/**"
-            "tmux/.config/tmux/plugins/**"
-            "nvim/.config/nvim/**"
-          ];
-          settings.formatter.prettier.excludes = [
-            "vim/.config/vim/pack/**"
-            "tmux/.config/tmux/plugins/**"
-            "nvim/.config/nvim/**"
-          ];
+          settings.formatter.shfmt.excludes = excludedSubmodulePaths;
+          settings.formatter.stylua.excludes = excludedSubmodulePaths;
+          settings.formatter.nixfmt.excludes = excludedSubmodulePaths;
+          settings.formatter.prettier.excludes = excludedSubmodulePaths;
         };
     in
     {
@@ -89,10 +82,8 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
         {
-          default = pkgs.mkShell {
-            packages = [
-              (treefmt-nix.lib.evalModule pkgs treefmtConfig).config.build.wrapper
-            ];
+          default = import ./shell.nix {
+            inherit pkgs;
           };
         }
       );
