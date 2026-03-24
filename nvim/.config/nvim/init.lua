@@ -36,12 +36,18 @@ vim.o.wrap = false
 vim.opt.completeopt = { "menuone", "popup", "noinsert" }
 vim.opt.listchars = { tab = '> ', trail = '-', nbsp = '+' }
 
-vim.cmd.filetype("plugin indent on")
-
 require 'autocmd'
 require 'keymaps'
 require 'lsp'
-require 'plugins'
+require 'plugins.colorscheme'
+require 'plugins.misc'
+require 'plugins.ui'
+require 'plugins.editor'
+require 'plugins.completion'
+require 'plugins.git'
+require 'plugins.navigation'
+require 'plugins.treesitter'
+require 'plugins.formatting'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
