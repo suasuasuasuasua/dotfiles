@@ -36,8 +36,6 @@ vim.o.wrap = false
 vim.opt.completeopt = { "menuone", "popup", "noinsert" }
 vim.opt.listchars = { tab = '> ', trail = '-', nbsp = '+' }
 
-vim.cmd.filetype("plugin indent on")
-
 require 'autocmd'
 require 'keymaps'
 require 'lsp'
