@@ -76,10 +76,10 @@ require('which-key').setup {
 
   -- Document existing key chains
   spec = {
-    { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
+    { '<leader>s', group = '[S]earch',    mode = { 'n', 'v' } },
     { '<leader>t', group = '[T]oggle' },
-    { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
-    { 'gr', group = 'LSP Actions', mode = { 'n' } },
+    { '<leader>h', group = 'Git [H]unk',  mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
+    { 'gr',        group = 'LSP Actions', mode = { 'n' } },
   },
 }
 
@@ -119,8 +119,10 @@ require('gitsigns').setup {
 
     -- Actions
     -- visual mode
-    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [s]tage hunk' })
-    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [r]eset hunk' })
+    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+      { desc = 'git [s]tage hunk' })
+    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+      { desc = 'git [r]eset hunk' })
     -- normal mode
     map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
     map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
@@ -221,7 +223,8 @@ vim.keymap.set(
 )
 
 -- Shortcut for searching your Neovim configuration files
-vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
+vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config' } end,
+  { desc = '[S]earch [N]eovim files' })
 
 require('blink.cmp').setup {
   keymap = {
@@ -290,7 +293,8 @@ vim.api.nvim_create_autocmd('FileType', {
 
 require('lualine').setup()
 
-vim.keymap.set('', '<leader>f', function() require('conform').format { async = true, lsp_format = 'fallback' } end, { desc = '[F]ormat buffer' })
+vim.keymap.set('', '<leader>f', function() require('conform').format { async = true, lsp_format = 'fallback' } end,
+  { desc = '[F]ormat buffer' })
 require('conform').setup {
   notify_on_error = false,
   format_on_save = function(bufnr)
@@ -317,5 +321,8 @@ require('conform').setup {
   },
 }
 
-require('mason').setup()
 require('fidget').setup()
+require('ibl').setup()
+require('luasnip').setup()
+require('mason').setup()
+require('neogen').setup()
