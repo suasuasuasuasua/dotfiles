@@ -256,6 +256,9 @@ require('blink.cmp').setup {
   signature = { enabled = true },
 }
 
+require('luasnip').setup()
+require('luasnip.loaders.from_vscode').lazy_load()
+
 require('tokyonight').setup {
   styles = {
     comments = { italic = false }, -- Disable italics in comments
@@ -323,6 +326,5 @@ require('conform').setup {
 
 require('fidget').setup()
 require('ibl').setup()
-require('luasnip').setup()
 require('mason').setup()
 require('neogen').setup()
