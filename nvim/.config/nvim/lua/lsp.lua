@@ -2,6 +2,7 @@ vim.lsp.enable {
   'clangd',
   'gopls',
   'lua_ls',
+  'nil_ls',
   'pylsp',
 }
 
