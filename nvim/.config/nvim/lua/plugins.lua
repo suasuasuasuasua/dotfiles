@@ -20,9 +20,7 @@ vim.pack.add {
   'https://github.com/stevearc/conform.nvim',
 }
 
-require('ufo').setup {
-  provider_selector = function(bufnr, filetype, buftype) return { 'treesitter', 'indent' } end,
-}
+require('guess-indent').setup {}
 
 require('nvim-tmux-navigation').setup {
   disable_when_zoomed = true, -- defaults to false
@@ -34,6 +32,25 @@ require('nvim-tmux-navigation').setup {
     last_active = '<C-\\>',
     next = '<C-Space>',
   },
+}
+
+require('neogen').setup()
+
+require('todo-comments').setup {
+  signs = false,
+}
+
+require('tokyonight').setup {
+  styles = {
+    comments = { italic = false }, -- Disable italics in comments
+  },
+}
+vim.cmd.colorscheme 'tokyonight-night'
+
+require('fidget').setup()
+
+require('ufo').setup {
+  provider_selector = function(bufnr, filetype, buftype) return { 'treesitter', 'indent' } end,
 }
 
 require('gitsigns').setup {
@@ -72,10 +89,8 @@ require('gitsigns').setup {
 
     -- Actions
     -- visual mode
-    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-      { desc = 'git [s]tage hunk' })
-    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-      { desc = 'git [r]eset hunk' })
+    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [s]tage hunk' })
+    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [r]eset hunk' })
     -- normal mode
     map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
     map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
@@ -92,88 +107,21 @@ require('gitsigns').setup {
   end,
 }
 
-require('guess-indent').setup {}
-
-require('tokyonight').setup {
-  styles = {
-    comments = { italic = false }, -- Disable italics in comments
-  },
-}
-vim.cmd.colorscheme 'tokyonight-night'
-
-require('todo-comments').setup {
-  signs = false,
-}
-
-local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
-require('nvim-treesitter').install(parsers)
-vim.api.nvim_create_autocmd('FileType', {
-  callback = function(args)
-    local buf, filetype = args.buf, args.match
-
-    local language = vim.treesitter.language.get_lang(filetype)
-    if not language then return end
-
-    -- check if parser exists and load it
-    if not vim.treesitter.language.add(language) then return end
-    -- enables syntax highlighting and other treesitter features
-    vim.treesitter.start(buf, language)
-
-    -- enables treesitter based folds
-    -- for more info on folds see `:help folds`
-    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    vim.wo.foldmethod = 'expr'
-
-    -- enables treesitter based indentation
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
-})
-
-vim.keymap.set('', '<leader>f', function() require('conform').format { async = true, lsp_format = 'fallback' } end,
-  { desc = '[F]ormat buffer' })
-require('conform').setup {
-  notify_on_error = false,
-  format_on_save = function(bufnr)
-    -- Disable "format_on_save lsp_fallback" for languages that don't
-    -- have a well standardized coding style. You can add additional
-    -- languages here or re-enable it for the disabled ones.
-    local disable_filetypes = { c = true, cpp = true }
-    if disable_filetypes[vim.bo[bufnr].filetype] then
-      return nil
-    else
-      return {
-        timeout_ms = 500,
-        lsp_format = 'fallback',
-      }
-    end
-  end,
-  formatters_by_ft = {
-    lua = { 'stylua' },
-    -- Conform can also run multiple formatters sequentially
-    -- python = { "isort", "black" },
-    --
-    -- You can use 'stop_after_first' to run the first available formatter from the list
-    -- javascript = { "prettierd", "prettier", stop_after_first = true },
-  },
-}
-
-require('fidget').setup()
 require('mason').setup()
-require('neogen').setup()
 
 -- mini ecosystem setup
 -- https://nvim-mini.org/mini.nvim/
 require('mini.ai').setup()
-local miniclue = require('mini.clue')
+local miniclue = require 'mini.clue'
 miniclue.setup {
   triggers = {
     -- Leader triggers
     { mode = { 'n', 'x' }, keys = '<Leader>' },
     -- `[` and `]` keys
-    { mode = 'n',          keys = '[' },
-    { mode = 'n',          keys = ']' },
+    { mode = 'n', keys = '[' },
+    { mode = 'n', keys = ']' },
     -- Built-in completion
-    { mode = 'i',          keys = '<C-x>' },
+    { mode = 'i', keys = '<C-x>' },
     -- `g` key
     { mode = { 'n', 'x' }, keys = 'g' },
     -- Marks
@@ -183,7 +131,7 @@ miniclue.setup {
     { mode = { 'n', 'x' }, keys = '"' },
     { mode = { 'i', 'c' }, keys = '<C-r>' },
     -- Window commands
-    { mode = 'n',          keys = '<C-w>' },
+    { mode = 'n', keys = '<C-w>' },
     -- `z` key
     { mode = { 'n', 'x' }, keys = 'z' },
   },
@@ -214,9 +162,9 @@ require('mini.completion').setup {
 }
 require('mini.files').setup {
   -- prevents bug with git difftool -d with nvim.difftool
-  options = { use_as_default_explorer = false, },
+  options = { use_as_default_explorer = false },
 }
-local indentscope = require('mini.indentscope')
+local indentscope = require 'mini.indentscope'
 indentscope.setup {
   draw = {
     delay = 10,
@@ -225,7 +173,7 @@ indentscope.setup {
 }
 require('mini.icons').setup()
 require('mini.pairs').setup()
-local pick = require('mini.pick')
+local pick = require 'mini.pick'
 require('mini.extra').setup()
 pick.setup()
 --
@@ -234,7 +182,7 @@ pick.registry.registry = function()
   local items = vim.tbl_keys(pick.registry)
   table.sort(items)
   local source = { items = items, name = 'Registry', choose = function() end }
-  local chosen_picker_name = pick.start({ source = source })
+  local chosen_picker_name = pick.start { source = source }
   if chosen_picker_name == nil then return end
   return pick.registry[chosen_picker_name]()
 end
@@ -249,8 +197,7 @@ end
 local builtin = pick.registry
 vim.keymap.set('n', '<leader>sh', builtin.help, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-vim.keymap.set('n', '<leader>sf', function() builtin.files { cwd = vim.fn.getcwd() } end,
-  { desc = '[S]earch [N]eovim files' })
+vim.keymap.set('n', '<leader>sf', function() builtin.files { cwd = vim.fn.getcwd() } end, { desc = '[S]earch [N]eovim files' })
 vim.keymap.set('n', '<leader>ss', builtin.registry, { desc = '[S]earch [S]elect Registry' })
 vim.keymap.set('n', '<leader>sg', builtin.grep_live, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', builtin.diagnostic, { desc = '[S]earch [D]iagnostics' })
@@ -258,8 +205,7 @@ vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' }
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>sn', function() builtin.files { cwd = vim.fn.stdpath 'config' } end,
-  { desc = '[S]earch [N]eovim files' })
+vim.keymap.set('n', '<leader>sn', function() builtin.files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
 
 -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.lsp
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -267,30 +213,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
     local buf = event.buf
     -- Find references for the word under your cursor.
-    vim.keymap.set('n', 'grr', function() builtin.lsp { scope = 'references' } end,
-      { buffer = buf, desc = '[G]oto [R]eferences' })
+    vim.keymap.set('n', 'grr', function() builtin.lsp { scope = 'references' } end, { buffer = buf, desc = '[G]oto [R]eferences' })
     -- Jump to the implementation of the word under your cursor.
     -- Useful when your language has ways of declaring types without an actual implementation.
-    vim.keymap.set('n', 'gri', function() builtin.lsp { scope = 'implementation' } end,
-      { buffer = buf, desc = '[G]oto [I]mplementation' })
+    vim.keymap.set('n', 'gri', function() builtin.lsp { scope = 'implementation' } end, { buffer = buf, desc = '[G]oto [I]mplementation' })
     -- Jump to the definition of the word under your cursor.
     -- This is where a variable was first declared, or where a function is defined, etc.
     -- To jump back, press <C-t>.
-    vim.keymap.set('n', 'grd', function() builtin.lsp { scope = 'definition' } end,
-      { buffer = buf, desc = '[G]oto [D]efinition' })
+    vim.keymap.set('n', 'grd', function() builtin.lsp { scope = 'definition' } end, { buffer = buf, desc = '[G]oto [D]efinition' })
     -- Fuzzy find all the symbols in your current document.
     -- Symbols are things like variables, functions, types, etc.
-    vim.keymap.set('n', 'gO', function() builtin.lsp { scope = 'document_symbol' } end,
-      { buffer = buf, desc = 'Open Document Symbols' })
+    vim.keymap.set('n', 'gO', function() builtin.lsp { scope = 'document_symbol' } end, { buffer = buf, desc = 'Open Document Symbols' })
     -- Fuzzy find all the symbols in your current workspace.
     -- Similar to document symbols, except searches over your entire project.
-    vim.keymap.set('n', 'gW', function() builtin.lsp { scope = 'workspace_symbol' } end,
-      { buffer = buf, desc = 'Open Workspace Symbols' })
+    vim.keymap.set('n', 'gW', function() builtin.lsp { scope = 'workspace_symbol' } end, { buffer = buf, desc = 'Open Workspace Symbols' })
     -- Jump to the type of the word under your cursor.
     -- Useful when you're not sure what type a variable is and you want to see
     -- the definition of its *type*, not where it was *defined*.
-    vim.keymap.set('n', 'grt', function() builtin.lsp { scope = 'type_definition' } end,
-      { buffer = buf, desc = '[G]oto [T]ype Definition' })
+    vim.keymap.set('n', 'grt', function() builtin.lsp { scope = 'type_definition' } end, { buffer = buf, desc = '[G]oto [T]ype Definition' })
   end,
 })
 
@@ -298,12 +238,12 @@ require('mini.surround').setup {
   -- https://nvim-mini.org/mini.nvim/doc/mini-surround.html#minisurround.config-setupsimilartotpopevim-surround
   -- Module mappings. Use `''` (empty string) to disable one.
   mappings = {
-    add = 'ys',       -- Add surrounding in Normal and Visual modes
-    delete = 'ds',    -- Delete surrounding
-    find = '',        -- Find surrounding (to the right)
-    find_left = '',   -- Find surrounding (to the left)
-    highlight = '',   -- Highlight surrounding
-    replace = 'cs',   -- Replace surrounding
+    add = 'ys', -- Add surrounding in Normal and Visual modes
+    delete = 'ds', -- Delete surrounding
+    find = '', -- Find surrounding (to the right)
+    find_left = '', -- Find surrounding (to the left)
+    highlight = '', -- Highlight surrounding
+    replace = 'cs', -- Replace surrounding
 
     suffix_last = '', -- Suffix to search with "prev" method
     suffix_next = '', -- Suffix to search with "next" method
@@ -331,6 +271,57 @@ require('mini.snippets').setup {
 }
 require('mini.statusline').setup()
 
+local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+require('nvim-treesitter').install(parsers)
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    local buf, filetype = args.buf, args.match
+
+    local language = vim.treesitter.language.get_lang(filetype)
+    if not language then return end
+
+    -- check if parser exists and load it
+    if not vim.treesitter.language.add(language) then return end
+    -- enables syntax highlighting and other treesitter features
+    vim.treesitter.start(buf, language)
+
+    -- enables treesitter based folds
+    -- for more info on folds see `:help folds`
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo.foldmethod = 'expr'
+
+    -- enables treesitter based indentation
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+
+vim.keymap.set('', '<leader>f', function() require('conform').format { async = true, lsp_format = 'fallback' } end, { desc = '[F]ormat buffer' })
+require('conform').setup {
+  notify_on_error = false,
+  format_on_save = function(bufnr)
+    -- Disable "format_on_save lsp_fallback" for languages that don't
+    -- have a well standardized coding style. You can add additional
+    -- languages here or re-enable it for the disabled ones.
+    local disable_filetypes = { c = true, cpp = true }
+    if disable_filetypes[vim.bo[bufnr].filetype] then
+      return nil
+    else
+      return {
+        timeout_ms = 500,
+        lsp_format = 'fallback',
+      }
+    end
+  end,
+  formatters_by_ft = {
+    lua = { 'stylua' },
+    -- Conform can also run multiple formatters sequentially
+    -- python = { "isort", "black" },
+    --
+    -- You can use 'stop_after_first' to run the first available formatter from the list
+    -- javascript = { "prettierd", "prettier", stop_after_first = true },
+  },
+}
+
 -- builtins
-vim.cmd('packadd nvim.difftool')
-vim.cmd('packadd nvim.undotree')
+vim.cmd 'packadd nvim.difftool'
+vim.cmd 'packadd nvim.undotree'
