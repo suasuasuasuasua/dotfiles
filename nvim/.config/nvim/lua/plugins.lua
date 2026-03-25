@@ -8,26 +8,19 @@ vim.pack.add {
   'https://github.com/direnv/direnv.vim',
   'https://github.com/folke/todo-comments.nvim',
   'https://github.com/folke/tokyonight.nvim',
-  'https://github.com/folke/which-key.nvim',
   'https://github.com/j-hui/fidget.nvim',
   'https://github.com/kevinhwang91/nvim-ufo',
   'https://github.com/kevinhwang91/promise-async',
-  'https://github.com/kylechui/nvim-surround',
   'https://github.com/lewis6991/gitsigns.nvim',
-  'https://github.com/lukas-reineke/indent-blankline.nvim',
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/nvim-lua/plenary.nvim',
-  'https://github.com/nvim-lualine/lualine.nvim',
   'https://github.com/nvim-telescope/telescope-fzf-native.nvim',
   'https://github.com/nvim-telescope/telescope-ui-select.nvim',
   'https://github.com/nvim-telescope/telescope.nvim',
-  'https://github.com/nvim-tree/nvim-web-devicons',
   'https://github.com/nvim-treesitter/nvim-treesitter',
   'https://github.com/rafamadriz/friendly-snippets',
-  'https://github.com/sindrets/diffview.nvim',
   'https://github.com/stevearc/conform.nvim',
-  'https://github.com/stevearc/oil.nvim',
-  'https://github.com/windwp/nvim-autopairs',
+  'https://github.com/nvim-mini/mini.nvim',
   {
     src = 'https://github.com/L3MON4D3/LuaSnip',
     version = vim.version.range '2.0.0 - 3.0.0',
@@ -35,21 +28,6 @@ vim.pack.add {
   {
     src = 'https://github.com/Saghen/blink.cmp',
     version = vim.version.range '1.0.0 - 2.0.0',
-  },
-}
-
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-require('oil').setup {
-  keymaps = {
-    ['<C-l>'] = 'actions.select',
-    ['<C-h>'] = { 'actions.parent', mode = 'n' },
-    ['<C-x>'] = { 'actions.select', opts = { horizontal = true } },
-    ['<C-s>'] = false,
-    ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
-    ['<C-r>'] = { 'actions.refresh' },
-    ['y.'] = { 'actions.copy_entry_path' },
-    ['<C-d>'] = { 'actions.preview_scroll_down' },
-    ['<C-u>'] = { 'actions.preview_scroll_up' },
   },
 }
 
@@ -66,20 +44,6 @@ require('nvim-tmux-navigation').setup {
     right = '<C-l>',
     last_active = '<C-\\>',
     next = '<C-Space>',
-  },
-}
-
-require('which-key').setup {
-  -- delay between pressing a key and opening which-key (milliseconds)
-  delay = 0,
-  icons = { mappings = vim.g.have_nerd_font },
-
-  -- Document existing key chains
-  spec = {
-    { '<leader>s', group = '[S]earch',    mode = { 'n', 'v' } },
-    { '<leader>t', group = '[T]oggle' },
-    { '<leader>h', group = 'Git [H]unk',  mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
-    { 'gr',        group = 'LSP Actions', mode = { 'n' } },
   },
 }
 
@@ -294,8 +258,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-require('lualine').setup()
-
 vim.keymap.set('', '<leader>f', function() require('conform').format { async = true, lsp_format = 'fallback' } end,
   { desc = '[F]ormat buffer' })
 require('conform').setup {
@@ -325,6 +287,96 @@ require('conform').setup {
 }
 
 require('fidget').setup()
-require('ibl').setup()
 require('mason').setup()
 require('neogen').setup()
+
+-- mini ecosystem setup
+-- https://nvim-mini.org/mini.nvim/
+require('mini.ai').setup()
+local miniclue = require('mini.clue')
+miniclue.setup {
+  triggers = {
+    -- Leader triggers
+    { mode = { 'n', 'x' }, keys = '<Leader>' },
+    -- `[` and `]` keys
+    { mode = 'n',          keys = '[' },
+    { mode = 'n',          keys = ']' },
+    -- Built-in completion
+    { mode = 'i',          keys = '<C-x>' },
+    -- `g` key
+    { mode = { 'n', 'x' }, keys = 'g' },
+    -- Marks
+    { mode = { 'n', 'x' }, keys = "'" },
+    { mode = { 'n', 'x' }, keys = '`' },
+    -- Registers
+    { mode = { 'n', 'x' }, keys = '"' },
+    { mode = { 'i', 'c' }, keys = '<C-r>' },
+    -- Window commands
+    { mode = 'n',          keys = '<C-w>' },
+    -- `z` key
+    { mode = { 'n', 'x' }, keys = 'z' },
+  },
+
+  clues = {
+    -- Enhance this by adding descriptions for <Leader> mapping groups
+    miniclue.gen_clues.square_brackets(),
+    miniclue.gen_clues.builtin_completion(),
+    miniclue.gen_clues.g(),
+    miniclue.gen_clues.marks(),
+    miniclue.gen_clues.registers(),
+    miniclue.gen_clues.windows(),
+    miniclue.gen_clues.z(),
+  },
+
+  window = {
+    -- Delay before showing clue window
+    delay = 10,
+
+    -- Keys to scroll inside the clue window
+    scroll_down = '<C-d>',
+    scroll_up = '<C-u>',
+  },
+}
+require('mini.cmdline').setup()
+require('mini.files').setup()
+local indentscope = require('mini.indentscope')
+indentscope.setup {
+  draw = {
+    delay = 10,
+    animation = indentscope.gen_animation.none(),
+  },
+}
+require('mini.icons').setup()
+require('mini.pairs').setup()
+require('mini.surround').setup {
+  -- https://nvim-mini.org/mini.nvim/doc/mini-surround.html#minisurround.config-setupsimilartotpopevim-surround
+  -- Module mappings. Use `''` (empty string) to disable one.
+  mappings = {
+    add = 'ys',       -- Add surrounding in Normal and Visual modes
+    delete = 'ds',    -- Delete surrounding
+    find = '',        -- Find surrounding (to the right)
+    find_left = '',   -- Find surrounding (to the left)
+    highlight = '',   -- Highlight surrounding
+    replace = 'cs',   -- Replace surrounding
+
+    suffix_last = '', -- Suffix to search with "prev" method
+    suffix_next = '', -- Suffix to search with "next" method
+  },
+  search_method = 'cover_or_next',
+}
+
+-- Remap adding surrounding to Visual mode selection
+vim.keymap.del('x', 'ys')
+vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
+
+-- Make special mapping for "add surrounding for line"
+vim.keymap.set('n', 'yss', 'ys_', { remap = true })
+
+vim.keymap.set('n', '-', [[:<C-u>lua MiniFiles.open()<CR>]], { desc = 'Open parent directory' })
+
+require('mini.trailspace').setup()
+require('mini.statusline').setup()
+
+-- builtins
+vim.cmd('packadd nvim.difftool')
+vim.cmd('packadd nvim.undotree')
