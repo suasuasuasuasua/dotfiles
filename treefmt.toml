@@ -1,0 +1,43 @@
+[global]
+excludes = [
+  # vim plugin submodules
+  "vim/.config/vim/pack/**",
+  # tmux plugin submodules
+  "tmux/.config/tmux/plugins/**",
+  # nvim submodule
+  "nvim/.config/nvim/**",
+]
+
+# Shell scripts — bash and .sh files only
+# .zsh files use zsh-specific syntax that shfmt cannot parse
+[formatter.shfmt]
+command = "shfmt"
+options = ["-w", "-i", "2"]
+includes = [
+  "**/.bashrc",
+  "*.bash",
+  "*.sh",
+  # "**/.zshrc",
+  # "*.zsh",
+]
+
+# Lua files (neovim configs, etc.)
+[formatter.stylua]
+command = "stylua"
+includes = ["*.lua"]
+
+# Nix files
+[formatter.nixfmt]
+command = "nixfmt"
+includes = ["*.nix"]
+
+# YAML, Markdown, JSON
+[formatter.prettier]
+command = "prettier"
+options = ["--write"]
+includes = [
+  "*.yml",
+  "*.yaml",
+  "*.md",
+  "*.json",
+]
