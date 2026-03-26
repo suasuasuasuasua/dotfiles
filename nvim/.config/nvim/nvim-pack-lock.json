@@ -17,7 +17,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "0a80125bace82d82847d40bc2c38a22d62c6dc2d",
+      "rev": "a462f416e2ce4744531c6256252dee99a7d34a83",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/NMAC427/guess-indent.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "a979821a975897b88493843301950c456a725982",
+      "rev": "38499e0bda64bc0f3ec6e7f03f8e13dd11c0fa00",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -45,11 +45,11 @@
       "src": "https://github.com/danymat/neogen"
     },
     "neogit": {
-      "rev": "d3890fc3cdf0859845a86b2be306bba01458df1a",
+      "rev": "64b1a01a9fc3d3ee8b2368230563bedf3eb66e54",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-lspconfig": {
-      "rev": "46204c8fdaa36a9aa3768780450e4bc7a210025f",
+      "rev": "1a6d69206749a646ef28bfb39460610b14baff40",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tmux-navigation": {
