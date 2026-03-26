@@ -15,3 +15,6 @@ vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('i', 'jK', '<Esc>')
 vim.keymap.set('i', 'Jk', '<Esc>')
 vim.keymap.set('i', 'JK', '<Esc>')
+
+-- make
+vim.keymap.set('n', '<Leader>mm', '<Cmd>make<CR>')
