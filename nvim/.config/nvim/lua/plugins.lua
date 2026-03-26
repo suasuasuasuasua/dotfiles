@@ -172,6 +172,7 @@ indentscope.setup {
   },
 }
 require('mini.icons').setup()
+require('mini.notify').setup()
 require('mini.pairs').setup()
 local pick = require 'mini.pick'
 require('mini.extra').setup()
