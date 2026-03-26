@@ -33,7 +33,8 @@ end
 local function symbol_info(bufnr, client)
   local method_name = 'textDocument/symbolInfo'
   ---@diagnostic disable-next-line:param-type-mismatch
-  if not client or not client:supports_method(method_name) then return vim.notify('Clangd client not found', vim.log.levels.ERROR) end
+  if not client or not client:supports_method(method_name) then return vim.notify('Clangd client not found',
+      vim.log.levels.ERROR) end
   local win = vim.api.nvim_get_current_win()
   local params = vim.lsp.util.make_position_params(win, client.offset_encoding)
   ---@diagnostic disable-next-line:param-type-mismatch
@@ -94,6 +95,7 @@ return {
       { desc = 'Switch between source/header' }
     )
 
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspClangdShowSymbolInfo', function() symbol_info(bufnr, client) end, { desc = 'Show symbol info' })
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspClangdShowSymbolInfo', function() symbol_info(bufnr, client) end,
+      { desc = 'Show symbol info' })
   end,
 }
