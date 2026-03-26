@@ -270,6 +270,7 @@ require('mini.snippets').setup {
     gen_loader.from_lang(),
   },
 }
+MiniSnippets.start_lsp_server()
 require('mini.statusline').setup()
 
 local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
