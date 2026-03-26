@@ -1,4 +1,5 @@
 require 'plugins.builtin'
+require 'plugins.diffview'
 require 'plugins.conform'
 require 'plugins.direnv'
 require 'plugins.fidget'
