@@ -1,5 +1,5 @@
 -- disable highlight
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Disable search highlights' })
 
 -- open diagnostic list
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -17,4 +17,4 @@ vim.keymap.set('i', 'Jk', '<Esc>')
 vim.keymap.set('i', 'JK', '<Esc>')
 
 -- make
-vim.keymap.set('n', '<Leader>mm', '<Cmd>make<CR>')
+vim.keymap.set('n', '<Leader>mm', '<Cmd>make<CR>', { desc = '[M]ake the project' })
