@@ -89,8 +89,10 @@ require('gitsigns').setup {
 
     -- Actions
     -- visual mode
-    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [s]tage hunk' })
-    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [r]eset hunk' })
+    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+      { desc = 'git [s]tage hunk' })
+    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+      { desc = 'git [r]eset hunk' })
     -- normal mode
     map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
     map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
@@ -118,10 +120,10 @@ miniclue.setup {
     -- Leader triggers
     { mode = { 'n', 'x' }, keys = '<Leader>' },
     -- `[` and `]` keys
-    { mode = 'n', keys = '[' },
-    { mode = 'n', keys = ']' },
+    { mode = 'n',          keys = '[' },
+    { mode = 'n',          keys = ']' },
     -- Built-in completion
-    { mode = 'i', keys = '<C-x>' },
+    { mode = 'i',          keys = '<C-x>' },
     -- `g` key
     { mode = { 'n', 'x' }, keys = 'g' },
     -- Marks
@@ -131,7 +133,7 @@ miniclue.setup {
     { mode = { 'n', 'x' }, keys = '"' },
     { mode = { 'i', 'c' }, keys = '<C-r>' },
     -- Window commands
-    { mode = 'n', keys = '<C-w>' },
+    { mode = 'n',          keys = '<C-w>' },
     -- `z` key
     { mode = { 'n', 'x' }, keys = 'z' },
   },
@@ -172,8 +174,12 @@ indentscope.setup {
   },
 }
 require('mini.icons').setup()
+MiniIcons.mock_nvim_web_devicons()
+MiniIcons.tweak_lsp_kind()
 require('mini.notify').setup()
-require('mini.pairs').setup()
+require('mini.pairs').setup {
+  modes = { command = true }
+}
 local pick = require 'mini.pick'
 require('mini.extra').setup()
 pick.setup()
@@ -198,7 +204,8 @@ end
 local builtin = pick.registry
 vim.keymap.set('n', '<leader>sh', builtin.help, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-vim.keymap.set('n', '<leader>sf', function() builtin.files { cwd = vim.fn.getcwd() } end, { desc = '[S]earch [N]eovim files' })
+vim.keymap.set('n', '<leader>sf', function() builtin.files { cwd = vim.fn.getcwd() } end,
+  { desc = '[S]earch [N]eovim files' })
 vim.keymap.set('n', '<leader>ss', builtin.registry, { desc = '[S]earch [S]elect Registry' })
 vim.keymap.set('n', '<leader>sg', builtin.grep_live, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', builtin.diagnostic, { desc = '[S]earch [D]iagnostics' })
@@ -206,7 +213,8 @@ vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' }
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>sn', function() builtin.files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
+vim.keymap.set('n', '<leader>sn', function() builtin.files { cwd = vim.fn.stdpath 'config' } end,
+  { desc = '[S]earch [N]eovim files' })
 vim.keymap.set('n', '<leader>s:', function() builtin.history { scope = ':' } end, { desc = '[S]earch [N]eovim commands' })
 vim.keymap.set('n', '<leader>s/', function() builtin.history { scope = '/' } end, { desc = '[S]earch [N]eovim search' })
 
@@ -215,12 +223,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('minipick-lsp-attach', { clear = true }),
   callback = function(event)
     local buf = event.buf
-    vim.keymap.set('n', 'grr', function() builtin.lsp { scope = 'references' } end, { buffer = buf, desc = '[G]oto [R]eferences' })
-    vim.keymap.set('n', 'gri', function() builtin.lsp { scope = 'implementation' } end, { buffer = buf, desc = '[G]oto [I]mplementation' })
-    vim.keymap.set('n', 'grd', function() builtin.lsp { scope = 'definition' } end, { buffer = buf, desc = '[G]oto [D]efinition' })
-    vim.keymap.set('n', 'gO', function() builtin.lsp { scope = 'document_symbol' } end, { buffer = buf, desc = 'Open Document Symbols' })
-    vim.keymap.set('n', 'gW', function() builtin.lsp { scope = 'workspace_symbol' } end, { buffer = buf, desc = 'Open Workspace Symbols' })
-    vim.keymap.set('n', 'grt', function() builtin.lsp { scope = 'type_definition' } end, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+    vim.keymap.set('n', 'grr', function() builtin.lsp { scope = 'references' } end,
+      { buffer = buf, desc = '[G]oto [R]eferences' })
+    vim.keymap.set('n', 'gri', function() builtin.lsp { scope = 'implementation' } end,
+      { buffer = buf, desc = '[G]oto [I]mplementation' })
+    vim.keymap.set('n', 'grd', function() builtin.lsp { scope = 'definition' } end,
+      { buffer = buf, desc = '[G]oto [D]efinition' })
+    vim.keymap.set('n', 'gO', function() builtin.lsp { scope = 'document_symbol' } end,
+      { buffer = buf, desc = 'Open Document Symbols' })
+    vim.keymap.set('n', 'gW', function() builtin.lsp { scope = 'workspace_symbol' } end,
+      { buffer = buf, desc = 'Open Workspace Symbols' })
+    vim.keymap.set('n', 'grt', function() builtin.lsp { scope = 'type_definition' } end,
+      { buffer = buf, desc = '[G]oto [T]ype Definition' })
   end,
 })
 
@@ -228,12 +242,12 @@ require('mini.surround').setup {
   -- https://nvim-mini.org/mini.nvim/doc/mini-surround.html#minisurround.config-setupsimilartotpopevim-surround
   -- Module mappings. Use `''` (empty string) to disable one.
   mappings = {
-    add = 'ys', -- Add surrounding in Normal and Visual modes
-    delete = 'ds', -- Delete surrounding
-    find = '', -- Find surrounding (to the right)
-    find_left = '', -- Find surrounding (to the left)
-    highlight = '', -- Highlight surrounding
-    replace = 'cs', -- Replace surrounding
+    add = 'ys',       -- Add surrounding in Normal and Visual modes
+    delete = 'ds',    -- Delete surrounding
+    find = '',        -- Find surrounding (to the right)
+    find_left = '',   -- Find surrounding (to the left)
+    highlight = '',   -- Highlight surrounding
+    replace = 'cs',   -- Replace surrounding
 
     suffix_last = '', -- Suffix to search with "prev" method
     suffix_next = '', -- Suffix to search with "next" method
@@ -286,7 +300,8 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.keymap.set('', '<leader>f', function() require('conform').format { async = true, lsp_format = 'fallback' } end, { desc = '[F]ormat buffer' })
+vim.keymap.set('', '<leader>f', function() require('conform').format { async = true, lsp_format = 'fallback' } end,
+  { desc = '[F]ormat buffer' })
 require('conform').setup {
   notify_on_error = false,
   format_on_save = function(bufnr)
