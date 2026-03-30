@@ -8,9 +8,9 @@
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
     },
-    "direnv.vim": {
-      "rev": "ab2a7e08dd630060cd81d7946739ac7442a4f269",
-      "src": "https://github.com/direnv/direnv.vim"
+    "direnv.nvim": {
+      "rev": "564146278b3d5fe4ffa389cd103bab20f9b515d6",
+      "src": "https://github.com/NotAShelf/direnv.nvim"
     },
     "fidget.nvim": {
       "rev": "7fa433a83118a70fe24c1ce88d5f0bd3453c0970",
