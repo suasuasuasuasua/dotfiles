@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "baleia.nvim": {
+      "rev": "32617940adb2eea56e85a64883a19961ceac9641",
+      "src": "https://github.com/m00qek/baleia.nvim"
+    },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"
