@@ -4,7 +4,7 @@
 # zsh-newuser-install -f
 
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt autocd nomatch
