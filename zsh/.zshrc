@@ -60,7 +60,9 @@ fi
 setopt prompt_subst
 for base in "/usr/share/doc/git/contrib/completion" \
   "/usr/share/git-core/contrib/completion" \
-  "/usr/lib/git-core";
+  "/usr/lib/git-core" \
+  "/Library/Developer/CommandLineTools/usr/share/git-core" \
+  "/System/Volumes/Data/Library/Developer/CommandLineTools/usr/share/git-core";
 do
   found=false
 
