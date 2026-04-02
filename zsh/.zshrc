@@ -52,9 +52,14 @@ setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 
 # add autosuggestions if found
-if [ -e "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-  source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-fi
+for base in "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" \
+  "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+do
+  if [ -e "$base" ]; then
+    source "$base"
+    break
+  fi
+done
 
 # Define the list of paths to search for git-prompt.sh
 setopt prompt_subst
