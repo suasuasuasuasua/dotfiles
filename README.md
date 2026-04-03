@@ -69,9 +69,3 @@ repository
 stow -t $HOME -D vim tmux # and so on
 ```
 
-### Helpful Scripts
-
-On a Fedora system,
-
-- `dnf repoquery --userinstalled` lists the packages that the user asked for
-- `dnf list --installed` lists _all_ packages that are installed on the system

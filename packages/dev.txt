@@ -1,0 +1,7 @@
+clang
+cmake
+gcc
+gcc-c++
+gdb
+gh
+git
