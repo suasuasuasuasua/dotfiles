@@ -12,6 +12,8 @@ brew "pinentry-mac"
 brew "ripgrep"
 # Safe, concurrent, practical language
 brew "rust"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
 # Terminal multiplexer
 brew "tmux"
 # Parser generator tool
@@ -20,5 +22,11 @@ brew "tree-sitter-cli"
 brew "vim"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # Tools to protect your emails and files
 cask "gpg-suite"
+# Tool to reverse the direction of scrolling
+cask "scroll-reverser"
+# Virtual machines UI using QEMU
+cask "utm"
