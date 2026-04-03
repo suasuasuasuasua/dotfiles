@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+try_paths=(
+  "venv"
+  ".venv"
+)
+
+found=false
+for try_path in $try_paths
+do
+  if [ -e "$try_path/bin/activate" ]; then
+    source "$try_path/bin/activate"
+    found=true
+  fi
+done
+
+if ! $found; then
+  echo "No virtual environment path found in '$try_paths'"
+fi

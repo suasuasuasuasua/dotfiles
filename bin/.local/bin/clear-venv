@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+if ! command -v pip &> /dev/null; then
+  echo "pip was not found in the PATH"
+  exit 1
+fi
+
+# remove all packages including ones installed locally or from a repository
+pip freeze | cut -d "@" -f1 | xargs pip uninstall -y
