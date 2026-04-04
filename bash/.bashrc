@@ -6,7 +6,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+if ! [[ $PATH =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
   PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
@@ -25,7 +25,7 @@ fi
 unset rc
 
 show_virtual_env() {
-  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+  if [[ -n $VIRTUAL_ENV && -n $DIRENV_DIR ]]; then
     echo "($(basename $VIRTUAL_ENV))"
   fi
 }
