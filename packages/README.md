@@ -1,5 +1,24 @@
 # Packages
 
+## brew
+
+[brew](https://brew.sh) is a cross platform package manager primarily
+targetting MacOS, but it is compatible with Linux.
+
+```sh
+# dumps to Brewfile-cask
+brew bundle dump --force --describe --cask --file Brewfile-cask
+
+# dumps to Brewfile
+brew bundle dump --force --describe --formula
+
+# to installed
+brew bundle install
+
+# or from the cask file
+brew bundle install --fask Brewfile-cask
+```
+
 ## cargo
 
 [cargo](https://crates.io/) is the Rust package manger.
