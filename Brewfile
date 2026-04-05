@@ -1,3 +1,5 @@
+# Cross-platform make
+brew "cmake"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Command-line fuzzy finder written in Go
