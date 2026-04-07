@@ -12,6 +12,7 @@ vim.o.confirm         = true
 vim.o.cursorline      = true
 vim.o.cursorlineopt   = 'screenline,number'
 vim.o.expandtab       = true
+vim.o.exrc            = true
 vim.o.foldcolumn      = '1'
 vim.o.foldenable      = true
 vim.o.foldlevel       = 99
