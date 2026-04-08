@@ -1,3 +1,18 @@
+-- Persistent folding: save and restore fold state across sessions
+vim.api.nvim_create_autocmd('BufWinLeave', {
+  desc = 'Save fold state when leaving a buffer',
+  callback = function()
+    if vim.bo.buftype == '' then pcall(vim.cmd.mkview) end
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  desc = 'Restore fold state when entering a buffer',
+  callback = function()
+    if vim.bo.buftype == '' then pcall(vim.cmd.loadview) end
+  end,
+})
+
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
