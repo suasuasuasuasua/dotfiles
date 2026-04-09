@@ -1,4 +1,5 @@
 vim.pack.add {
+  'https://github.com/jay-babu/mason-nvim-dap.nvim',
   'https://github.com/mfussenegger/nvim-dap',
   'https://github.com/nvim-neotest/nvim-nio',
   'https://github.com/rcarriga/nvim-dap-ui',
@@ -6,6 +7,16 @@ vim.pack.add {
 
 local dap = require 'dap'
 local dapui = require 'dapui'
+
+-- Bridge Mason-installed debug adapters into nvim-dap automatically.
+-- Install adapters with :MasonInstall <name>, e.g.:
+--   :MasonInstall codelldb   (C / C++ / Rust via GDB/LLDB)
+--   :MasonInstall debugpy    (Python)
+--   :MasonInstall delve      (Go)
+--   :MasonInstall js-debug-adapter  (JavaScript / TypeScript)
+require('mason-nvim-dap').setup {
+  automatic_installation = true,
+}
 
 dapui.setup()
 
