@@ -1,5 +1,6 @@
 require 'plugins.builtin'
 require 'plugins.conform'
+require 'plugins.dap'
 require 'plugins.diffview'
 require 'plugins.direnv'
 require 'plugins.gitsigns'
