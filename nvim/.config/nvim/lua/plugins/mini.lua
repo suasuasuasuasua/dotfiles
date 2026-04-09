@@ -164,5 +164,4 @@ require('mini.snippets').setup {
     gen_loader.from_lang(),
   },
 }
-MiniSnippets.start_lsp_server()
 require('mini.statusline').setup()
