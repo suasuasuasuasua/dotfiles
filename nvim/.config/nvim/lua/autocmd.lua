@@ -1,15 +1,24 @@
--- Persistent folding: save and restore fold state across sessions
-vim.api.nvim_create_autocmd('BufWinLeave', {
+-- Persistent folding: save and restore fold state across sessions.
+-- Uses a per-buffer flag so loadview only runs once per buffer (on first
+-- entry), avoiding repeated disk reads on every window switch.
+vim.api.nvim_create_autocmd({ 'BufWinLeave', 'BufWritePost', 'WinLeave' }, {
   desc = 'Save fold state when leaving a buffer',
-  callback = function()
-    if vim.bo.buftype == '' then pcall(vim.cmd.mkview) end
+  callback = function(args)
+    if vim.b[args.buf].view_activated then pcall(vim.cmd.mkview) end
   end,
 })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
-  desc = 'Restore fold state when entering a buffer',
-  callback = function()
-    if vim.bo.buftype == '' then pcall(vim.cmd.loadview) end
+  desc = 'Restore fold state the first time a buffer is entered',
+  callback = function(args)
+    if not vim.b[args.buf].view_activated then
+      local buftype = vim.bo[args.buf].buftype
+      local filetype = vim.bo[args.buf].filetype
+      if buftype == '' and filetype ~= '' then
+        vim.b[args.buf].view_activated = true
+        pcall(vim.cmd.loadview)
+      end
+    end
   end,
 })
 
