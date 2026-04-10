@@ -19,6 +19,7 @@ vim.o.foldlevel       = 99
 vim.o.foldlevelstart  = 99
 vim.o.foldnestmax     = 10
 vim.o.foldtext        = ''
+vim.o.viewoptions     = 'folds,cursor,curdir,slash,unix'
 vim.o.formatlistpat   = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 vim.o.formatoptions   = 'rqnl1j'
 vim.o.ignorecase      = true
