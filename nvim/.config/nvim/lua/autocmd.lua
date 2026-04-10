@@ -33,6 +33,10 @@ vim.api.nvim_create_user_command('UpdatePlugins', function()
   vim.pack.update()
 end, { desc = 'Update all plugins' })
 
+vim.api.nvim_create_user_command('UpdatePluginsOffline', function()
+  vim.pack.update(nil, { offline = true })
+end, { desc = 'Update all plugins' })
+
 -- Delete unused plugins
 vim.api.nvim_create_user_command('RemoveUnusedPlugins', function()
   local inactive_plugins = vim.iter(vim.pack.get())
