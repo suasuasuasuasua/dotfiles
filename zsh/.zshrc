@@ -120,5 +120,9 @@ export PATH
 export EDITOR=nvim
 
 # misc
-source <(fzf --zsh)
-eval "$(direnv hook zsh)"
+if command -v fzf &>/dev/null; then
+  source <(fzf --zsh)
+fi
+if command -v direnv &>/dev/null; then
+  eval "$(direnv hook zsh)"
+fi
