@@ -6,7 +6,7 @@
     },
     "diffview.nvim": {
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
-      "src": "https://github.com/sindrets/diffview.nvim"
+      "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
     "direnv.nvim": {
       "rev": "564146278b3d5fe4ffa389cd103bab20f9b515d6",
