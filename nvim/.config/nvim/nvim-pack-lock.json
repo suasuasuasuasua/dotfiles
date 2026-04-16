@@ -56,10 +56,6 @@
       "rev": "c588db330592fa477a70d2fee6ba20a57194bdc3",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
-    "nvim-origami": {
-      "rev": "67c15fd14037778644371487fc68855b530ccd7d",
-      "src": "https://github.com/chrisgrieser/nvim-origami"
-    },
     "nvim-tmux-navigation": {
       "rev": "4898c98702954439233fdaf764c39636681e2861",
       "src": "https://github.com/alexghergh/nvim-tmux-navigation"
