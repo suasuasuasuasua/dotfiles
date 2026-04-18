@@ -1,12 +1,24 @@
+# Memory training application
+cask "anki"
 # Terminal-based AI coding assistant
 cask "claude-code"
 # Tools to protect your emails and files
 cask "gpg-suite"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Enables an integrated web browser in iTerm2
+cask "itermbrowserplugin"
+# Offline AI chat tool
+cask "jan"
 # Minecraft launcher
 cask "prismlauncher"
 # Tool to reverse the direction of scrolling
 cask "scroll-reverser"
+# Screenshot measurement and annotation tool
+cask "shottr"
+# Music streaming service
+cask "spotify"
+# Video game digital distribution service
+cask "steam"
 # Virtual machines UI using QEMU
 cask "utm"
