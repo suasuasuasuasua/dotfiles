@@ -81,7 +81,39 @@ do
       GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
       GIT_PS1_SHOWUNTRACKEDFILES="true" # % indicates untracked
       GIT_PS1_SHOWUPSTREAM="verbose" # <, >, <>, = for upstream state
-      RPROMPT=$'$(__git_ps1 "%s")'
+
+      # Run __git_ps1 asynchronously so it doesn't block the prompt.
+      # When the background process finishes, zle -F fires the handler
+      # which stores the result and redraws the prompt via reset-prompt.
+      typeset -g _git_prompt_string=""
+      typeset -g _git_prompt_fd=-1
+
+      _async_git_prompt_handler() {
+        local fd=$1
+        {
+          IFS= read -r -u $fd _git_prompt_string
+        } always {
+          zle -F $fd
+          exec {fd}>&-
+          _git_prompt_fd=-1
+        }
+        zle reset-prompt
+      }
+
+      _async_git_prompt_precmd() {
+        if (( _git_prompt_fd >= 0 )); then
+          zle -F $_git_prompt_fd 2>/dev/null
+          exec {_git_prompt_fd}>&-
+          _git_prompt_fd=-1
+        fi
+        _git_prompt_string=""
+        exec {_git_prompt_fd}< <(__git_ps1 "%s"; echo)
+        zle -F $_git_prompt_fd _async_git_prompt_handler
+      }
+
+      autoload -Uz add-zsh-hook
+      add-zsh-hook precmd _async_git_prompt_precmd
+      RPROMPT='${_git_prompt_string}'
 
       found=true
       break
