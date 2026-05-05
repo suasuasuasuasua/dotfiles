@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "canola.nvim": {
+      "rev": "3fb9d28492ad7a24cd3e0e69e0d2808ed9aaf826",
+      "src": "https://github.com/barrettruth/canola.nvim"
+    },
     "conform.nvim": {
       "rev": "dca1a190aa85f9065979ef35802fb77131911106",
       "src": "https://github.com/stevearc/conform.nvim"
@@ -67,10 +71,6 @@
     "nvim-ufo": {
       "rev": "ab3eb124062422d276fae49e0dd63b3ad1062cfc",
       "src": "https://github.com/kevinhwang91/nvim-ufo"
-    },
-    "oil.nvim": {
-      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
-      "src": "https://github.com/stevearc/oil.nvim"
     },
     "overseer.nvim": {
       "rev": "a2194447f4c5a1baf95139c5c7b539fa7b0d012f",
