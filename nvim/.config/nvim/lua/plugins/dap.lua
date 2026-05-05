@@ -78,6 +78,16 @@ require('dap-go').setup {
 require("dap-python").setup()
 
 dap.configurations = {
+  python = {
+    {
+      name = "Python Debugger: Current File",
+      type = "debugpy",
+      request = "launch",
+      program = "${file}",
+      args = {},
+      console = "integratedTerminal"
+    },
+  },
   cpp = {
     {
       name = "(gdb) Launch",
@@ -107,6 +117,33 @@ dap.configurations = {
       },
     },
     {
+      name = "(lldb) Launch",
+      type = "codelldb",
+      request = "launch",
+      program = function()
+        local result = nil
+        require("mini.pick").start {
+          source = {
+            name = "Select executable",
+            cwd = vim.fn.getcwd(),
+            items = vim.fn.systemlist({ "fd", "--type", "x", "--no-ignore", "--absolute-path" }),
+            choose = function(item)
+              result = item
+            end,
+          },
+        }
+        return result
+      end,
+      args = {},
+      cwd = "${fileDirname}",
+      environment = {},
+      externalConsole = false,
+      MIMode = "lldb",
+      setupCommands = {
+        { text = "set follow-fork-mode child", ignoreFailures = true },
+      },
+    },
+    {
       name = "Attach to Python (GDB)",
       type = "cppdbg",
       request = "attach",
@@ -121,4 +158,3 @@ dap.configurations = {
     }
   }
 }
-
