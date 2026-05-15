@@ -77,6 +77,15 @@ require('dap-go').setup {
 
 require("dap-python").setup()
 
+dap.adapters.codelldb = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = vim.fn.expand('~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb'),
+    args = { '--port', '${port}' },
+  },
+}
+
 dap.configurations = {
   python = {
     {
@@ -136,12 +145,7 @@ dap.configurations = {
       end,
       args = {},
       cwd = "${fileDirname}",
-      environment = {},
-      externalConsole = false,
-      MIMode = "lldb",
-      setupCommands = {
-        { text = "set follow-fork-mode child", ignoreFailures = true },
-      },
+      stopOnEntry = false,
     },
     {
       name = "Attach to Python (GDB)",
