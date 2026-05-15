@@ -64,8 +64,8 @@ require('oil').setup {
     ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
     ['<C-r>'] = { 'actions.refresh' },
     ['y.'] = { 'actions.copy_entry_path' },
-    ['<C-d>'] = { 'actions.preview_scroll_down' },
-    ['<C-u>'] = { 'actions.preview_scroll_up' },
+    ['<C-f>'] = { 'actions.preview_scroll_down' },
+    ['<C-b>'] = { 'actions.preview_scroll_up' },
     ["gd"] = {
       desc = "Toggle file detail view",
       callback = function()
