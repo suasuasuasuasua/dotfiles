@@ -1,0 +1,9 @@
+i3
+i3status
+i3lock
+alacritty
+dex
+xss-lock
+network-manager-applet
+dmenu
+pipewire-utils

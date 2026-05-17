@@ -1,0 +1,9 @@
+sway
+swaylock
+swayidle
+i3status
+alacritty
+dex
+network-manager-applet
+wofi
+pipewire-utils
