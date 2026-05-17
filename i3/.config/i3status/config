@@ -1,0 +1,24 @@
+general {
+    colors = true
+    interval = 5
+}
+
+order += "volume master"
+order += "battery all"
+order += "tztime local"
+
+volume master {
+    format = "VOL %volume"
+    format_muted = "MUTED (%volume)"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+battery all {
+    format = "%status %percentage %remaining"
+}
+
+tztime local {
+    format = "%Y-%m-%d %H:%M:%S"
+}

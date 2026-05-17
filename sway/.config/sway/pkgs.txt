@@ -1,7 +1,7 @@
 sway
 swaylock
 swayidle
-i3status
+waybar
 alacritty
 dex
 network-manager-applet
