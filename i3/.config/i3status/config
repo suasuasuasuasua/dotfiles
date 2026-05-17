@@ -1,24 +1,57 @@
 general {
     colors = true
-    interval = 5
+    interval = 2
 }
 
-order += "volume master"
+order += "disk /"
+order += "cpu_usage"
+order += "memory"
 order += "battery all"
+order += "path_exists tailscale"
+order += "wireless _first_"
+order += "ethernet _first_"
 order += "tztime local"
 
-volume master {
-    format = "VOL %volume"
-    format_muted = "MUTED (%volume)"
-    device = "default"
-    mixer = "Master"
-    mixer_idx = 0
+tztime local {
+    format = "%Y-%m-%d %H:%M"
+}
+
+disk "/" {
+    format = "%free (%avail)/ %total"
+}
+
+cpu_usage {
+    format = "CPU %usage"
+}
+
+memory {
+    format = "MEM %used"
+    threshold_degraded = "10%"
+    format_degraded = "MEM LOW: %free"
 }
 
 battery all {
-    format = "%status %percentage %remaining"
+    format = "%status %percentage %remaining %emptytime"
+    format_down = "No battery"
+    status_chr = "⚡ CHR"
+    status_bat = "🔋 BAT"
+    status_unk = "? UNK"
+    status_full = "☻ FULL"
+    status_idle = "☻ IDLE"
+    path = "/sys/class/power_supply/BAT%d/uevent"
+    low_threshold = 10
 }
 
-tztime local {
-    format = "%Y-%m-%d %H:%M:%S"
+path_exists tailscale {
+        path = "/proc/sys/net/ipv4/conf/tailscale0"
+}
+
+wireless _first_ {
+    format_up = "W: %essid (%quality) %ip"
+    format_down = "W: down"
+}
+
+ethernet _first_ {
+     format_up = "E: %ip (%speed)"
+     format_down = "E: down"
 }

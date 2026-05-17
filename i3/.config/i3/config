@@ -1,6 +1,4 @@
 # i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod1
 
@@ -8,7 +6,8 @@ font pango:Iosevka Nerd Font 14
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet --indicator
+exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 1
 
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -20,13 +19,12 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu
+# start app launcher
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
@@ -40,11 +38,6 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-# split
-# TODO: conflict with others
-# bindsym $mod+% split h
-# bindsym $mod+" split v
 
 # fullscreen
 bindsym $mod+f fullscreen toggle
@@ -118,6 +111,5 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-      status_command i3status
+    status_command i3status
 }
-
