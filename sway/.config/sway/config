@@ -112,3 +112,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 exec_always waybar
+
+input type:touchpad {
+    tap enabled
+}
