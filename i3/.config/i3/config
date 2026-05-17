@@ -2,7 +2,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+set $mod Mod1
 
 font pango:Iosevka Nerd Font 14
 
@@ -42,8 +42,9 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # split
-bindsym $mod+% split h
-bindsym $mod+" split v
+# TODO: conflict with others
+# bindsym $mod+% split h
+# bindsym $mod+" split v
 
 # fullscreen
 bindsym $mod+f fullscreen toggle
@@ -56,6 +57,9 @@ bindsym $mod+e layout toggle split
 # floating
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
+
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
 
 # focus parent
 bindsym $mod+a focus parent
