@@ -1,4 +1,4 @@
-if vim.f.executable('rg') == 1 then
+if vim.fn.executable('rg') == 1 then
   vim.o.grepprg = "rg --vimgrep --smart-case"
 end
 
