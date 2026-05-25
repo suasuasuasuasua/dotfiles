@@ -1,0 +1,9 @@
+sway
+swaylock
+swayidle
+waybar
+alacritty
+dex
+network-manager-applet
+wofi
+pipewire-utils
