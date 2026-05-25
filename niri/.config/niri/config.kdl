@@ -12,9 +12,9 @@ input {
 }
 
 // Set scale for HiDPI — run `niri msg outputs` to find your output name
-// output "eDP-1" {
-//     scale 1.5
-// }
+output "eDP-1" {
+    scale 1.5
+}
 
 layout {
     gaps 8
@@ -35,6 +35,10 @@ layout {
 
     border {
         off
+        width 4
+        active-color "#ffc87f"
+        inactive-color "#505050"
+        urgent-color "#9b0000"
     }
 }
 
@@ -44,12 +48,16 @@ spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f" "before-sleep" "s
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 binds {
+    // shows a list of important hotkeys.
+    Alt+Shift+Slash { show-hotkey-overlay; }
+
     // Terminal
-    Alt+Return { spawn "alacritty"; }
+    Alt+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Alt+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
-    // App launcher
-    Alt+D { spawn "wofi" "--show" "drun"; }
-
+    // Open/close the Overview: a zoomed-out view of workspaces and windows.
+    Alt+O repeat=false { toggle-overview; }
     // Kill window
     Alt+Shift+Q { close-window; }
 
@@ -96,14 +104,24 @@ binds {
     Alt+Shift+9 { move-window-to-workspace 9; }
 
     // niri control
-    Alt+Shift+C { reload-config; }
     Alt+Shift+E { quit; }
 
+    // stack tabs
+    Alt+W { toggle-column-tabbed-display; }
+
     // Volume
-    XF86AudioRaiseVolume { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+10%"; }
-    XF86AudioLowerVolume { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-10%"; }
-    XF86AudioMute        { spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"; }
-    XF86AudioMicMute     { spawn "pactl" "set-source-mute" "@DEFAULT_SOURCE@" "toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+10%"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-10%"; }
+    XF86AudioMute        allow-when-locked=true { spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "pactl" "set-source-mute" "@DEFAULT_SOURCE@" "toggle"; }
+
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     // Screenshots
     Print       { screenshot; }
