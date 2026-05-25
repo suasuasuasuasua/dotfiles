@@ -1,0 +1,112 @@
+// niri config
+
+input {
+    keyboard {
+        xkb { }
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+// Set scale for HiDPI — run `niri msg outputs` to find your output name
+// output "eDP-1" {
+//     scale 1.5
+// }
+
+layout {
+    gaps 8
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        width 2
+        active-color "#7aa2f7"
+        inactive-color "#565f89"
+    }
+
+    border {
+        off
+    }
+}
+
+spawn-at-startup "nm-applet" "--indicator"
+spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f" "before-sleep" "swaylock -f"
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+binds {
+    // Terminal
+    Alt+Return { spawn "alacritty"; }
+
+    // App launcher
+    Alt+D { spawn "wofi" "--show" "drun"; }
+
+    // Kill window
+    Alt+Shift+Q { close-window; }
+
+    // Focus
+    Alt+H { focus-column-left; }
+    Alt+L { focus-column-right; }
+    Alt+J { focus-window-down; }
+    Alt+K { focus-window-up; }
+
+    // Move windows
+    Alt+Shift+H { move-column-left; }
+    Alt+Shift+L { move-column-right; }
+    Alt+Shift+J { move-window-down; }
+    Alt+Shift+K { move-window-up; }
+
+    // Column width
+    Alt+R { switch-preset-column-width; }
+    Alt+F { maximize-column; }
+    Alt+Shift+F { fullscreen-window; }
+
+    // Group windows into a column (niri's equivalent of splits)
+    Alt+B { consume-window-into-column; }
+    Alt+V { expel-window-from-column; }
+
+    // Workspaces
+    Alt+1 { focus-workspace 1; }
+    Alt+2 { focus-workspace 2; }
+    Alt+3 { focus-workspace 3; }
+    Alt+4 { focus-workspace 4; }
+    Alt+5 { focus-workspace 5; }
+    Alt+6 { focus-workspace 6; }
+    Alt+7 { focus-workspace 7; }
+    Alt+8 { focus-workspace 8; }
+    Alt+9 { focus-workspace 9; }
+
+    Alt+Shift+1 { move-window-to-workspace 1; }
+    Alt+Shift+2 { move-window-to-workspace 2; }
+    Alt+Shift+3 { move-window-to-workspace 3; }
+    Alt+Shift+4 { move-window-to-workspace 4; }
+    Alt+Shift+5 { move-window-to-workspace 5; }
+    Alt+Shift+6 { move-window-to-workspace 6; }
+    Alt+Shift+7 { move-window-to-workspace 7; }
+    Alt+Shift+8 { move-window-to-workspace 8; }
+    Alt+Shift+9 { move-window-to-workspace 9; }
+
+    // niri control
+    Alt+Shift+C { reload-config; }
+    Alt+Shift+E { quit; }
+
+    // Volume
+    XF86AudioRaiseVolume { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+10%"; }
+    XF86AudioLowerVolume { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-10%"; }
+    XF86AudioMute        { spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"; }
+    XF86AudioMicMute     { spawn "pactl" "set-source-mute" "@DEFAULT_SOURCE@" "toggle"; }
+
+    // Screenshots
+    Print       { screenshot; }
+    Shift+Print { screenshot-screen; }
+    Alt+Print   { screenshot-window; }
+}
