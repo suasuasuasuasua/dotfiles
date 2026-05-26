@@ -3,12 +3,17 @@
 input {
     keyboard {
         xkb { }
+        numlock
     }
 
     touchpad {
         tap
         natural-scroll
     }
+
+    mouse { }
+
+    trackpoint { }
 }
 
 // Set scale for HiDPI — run `niri msg outputs` to find your output name
@@ -18,6 +23,7 @@ output "eDP-1" {
 
 layout {
     gaps 8
+    center-focused-column "never"
 
     preset-column-widths {
         proportion 0.33333
@@ -40,12 +46,28 @@ layout {
         inactive-color "#505050"
         urgent-color "#9b0000"
     }
+
+    shadow { }
+
+    struts { }
 }
 
 spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f" "before-sleep" "swaylock -f"
 
+// prefer-no-csd
+
+hotkey-overlay { }
+
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+animations { }
+
+// Firefox picture-in-picture as floating
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
 
 binds {
     // shows a list of important hotkeys.
@@ -53,14 +75,14 @@ binds {
 
     // Terminal
     Alt+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    // Alt+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Spotlight
     Alt+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
 
-    // Open/close the Overview: a zoomed-out view of workspaces and windows.
+    // Open/close the Overview
     Alt+O repeat=false { toggle-overview; }
+
     // Kill window
     Alt+Shift+Q { close-window; }
 
@@ -79,11 +101,25 @@ binds {
     // Column width
     Alt+R { switch-preset-column-width; }
     Alt+F { maximize-column; }
+    Alt+M { maximize-window-to-edges; }
     Alt+Shift+F { fullscreen-window; }
+    Alt+C { center-column; }
+    Alt+Minus { set-column-width "-10%"; }
+    Alt+Equal { set-column-width "+10%"; }
+
+    // Window height
+    Alt+Shift+Minus { set-window-height "-10%"; }
+    Alt+Shift+Equal { set-window-height "+10%"; }
 
     // Group windows into a column (niri's equivalent of splits)
     Alt+B { consume-window-into-column; }
     Alt+V { expel-window-from-column; }
+
+    // Floating
+    Alt+Shift+V { toggle-window-floating; }
+
+    // stack tabs
+    Alt+W { toggle-column-tabbed-display; }
 
     // Workspaces
     Alt+1 { focus-workspace 1; }
@@ -96,6 +132,9 @@ binds {
     Alt+8 { focus-workspace 8; }
     Alt+9 { focus-workspace 9; }
 
+    Alt+U { focus-workspace-down; }
+    Alt+I { focus-workspace-up; }
+
     Alt+Shift+1 { move-window-to-workspace 1; }
     Alt+Shift+2 { move-window-to-workspace 2; }
     Alt+Shift+3 { move-window-to-workspace 3; }
@@ -106,11 +145,21 @@ binds {
     Alt+Shift+8 { move-window-to-workspace 8; }
     Alt+Shift+9 { move-window-to-workspace 9; }
 
+    Alt+Ctrl+1 { move-column-to-workspace 1; }
+    Alt+Ctrl+2 { move-column-to-workspace 2; }
+    Alt+Ctrl+3 { move-column-to-workspace 3; }
+    Alt+Ctrl+4 { move-column-to-workspace 4; }
+    Alt+Ctrl+5 { move-column-to-workspace 5; }
+    Alt+Ctrl+6 { move-column-to-workspace 6; }
+    Alt+Ctrl+7 { move-column-to-workspace 7; }
+    Alt+Ctrl+8 { move-column-to-workspace 8; }
+    Alt+Ctrl+9 { move-column-to-workspace 9; }
+
     // niri control
     Alt+Shift+E { quit; }
-
-    // stack tabs
-    Alt+W { toggle-column-tabbed-display; }
+    Ctrl+Alt+Delete { quit; }
+    Alt+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Alt+Shift+P { power-off-monitors; }
 
     // Volume
     XF86AudioRaiseVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+10%"; }
