@@ -56,6 +56,9 @@ binds {
     Alt+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
+    // Spotlight
+    Alt+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     Alt+O repeat=false { toggle-overview; }
     // Kill window
