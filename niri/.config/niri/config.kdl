@@ -52,7 +52,7 @@ binds {
     Alt+Shift+Slash { show-hotkey-overlay; }
 
     // Terminal
-    Alt+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Alt+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Alt+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
