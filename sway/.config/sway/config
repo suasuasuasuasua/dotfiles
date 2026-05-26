@@ -124,3 +124,5 @@ output * bg /usr/share/backgrounds/gnome/amber-d.jxl fill
 bar {
     swaybar_command waybar
 }
+
+include ~/.config/sway/local.conf
