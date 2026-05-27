@@ -4,6 +4,8 @@ set $mod Mod1
 
 font pango:Iosevka Nerd Font 10
 
+gaps inner 5
+
 exec dex --autostart --environment sway
 exec swayidle -w \
     timeout 300 'swaylock -f' \
