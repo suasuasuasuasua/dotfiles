@@ -1,3 +1,6 @@
+filetype plugin indent on
+syntax enable
+
 "set autochdir
 set autoindent
 set autoread
@@ -68,26 +71,13 @@ set undofile
 set viewdir=$HOME/.local/state/vim/view
 set updatetime=250
 set virtualedit=block
+set path=.,,
 set wildmenu
 if has('patch-9.0.0670') | set wildoptions+=fuzzy | endif
 
-filetype plugin indent on
-syntax enable
-
 " 8. Command-line autocompletion                         *cmdline-autocompletion*
 if exists('*wildtrigger')
-  let s:wt_timer = -1
-  function! s:WildtriggerDebounced() abort
-    if s:wt_timer != -1
-      call timer_stop(s:wt_timer)
-    endif
-    let s:wt_timer = timer_start(150, {-> wildtrigger()})
-  endfunction
-  augroup wildtrigger_debounce
-    autocmd!
-    autocmd CmdlineChanged [:\/\?] call s:WildtriggerDebounced()
-    autocmd CmdlineLeave * if s:wt_timer != -1 | call timer_stop(s:wt_timer) | let s:wt_timer = -1 | endif
-  augroup END
+  autocmd CmdlineChanged [:\/\?] call wildtrigger()
   set wildmode=noselect:lastused,full
   set wildoptions+=pum
 endif
@@ -109,6 +99,7 @@ let s:exclude_dirs = [
   \ '.direnv',
   \ 'pack',
   \ 'view',
+  \ 'venv',
   \ ]
 
 if executable('rg')
