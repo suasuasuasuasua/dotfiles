@@ -1,32 +1,32 @@
 [submodule "vim/vim-gitgutter"]
-	path = vim/.config/vim/pack/plugin/start/vim-gitgutter
+	path = vim/.config/vim/pack/plugin/opt/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
 [submodule "vim/vim-tmux-navigator"]
-	path = vim/.config/vim/pack/plugin/start/vim-tmux-navigator
+	path = vim/.config/vim/pack/plugin/opt/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule "vim/direnv.vim"]
-	path = vim/.config/vim/pack/plugin/start/direnv.vim
+	path = vim/.config/vim/pack/plugin/opt/direnv.vim
 	url = https://github.com/suasuasuasuasua/direnv.vim
 [submodule "vim/vim-go"]
 	path = vim/.config/vim/pack/syntax/opt/vim-go
 	url = https://github.com/fatih/vim-go
 [submodule "vim/fzf"]
-	path = vim/.config/vim/pack/plugin/start/fzf
+	path = vim/.config/vim/pack/plugin/opt/fzf
 	url = https://github.com/junegunn/fzf
 [submodule "vim/fzf.vim"]
-	path = vim/.config/vim/pack/plugin/start/fzf.vim
+	path = vim/.config/vim/pack/plugin/opt/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
 [submodule "vim/gv.vim"]
 	path = .config/vim/pack/plugin/start/gv.vim
 	url = https://github.com/junegunn/gv.vim
 [submodule "vim/undotree"]
-	path = vim/.config/vim/pack/plugin/start/undotree
+	path = vim/.config/vim/pack/plugin/opt/undotree
 	url = https://github.com/mbbill/undotree
 [submodule "vim/nerdtree"]
 	path = vim/.config/vim/pack/plugin/opt/nerdtree
 	url = https://github.com/preservim/nerdtree
 [submodule "vim/vim-indent-guides"]
-	path = vim/.config/vim/pack/plugin/start/vim-indent-guides
+	path = vim/.config/vim/pack/plugin/opt/vim-indent-guides
 	url = https://github.com/preservim/vim-indent-guides
 [submodule "vim/vim-devicons"]
 	path = vim/.config/vim/pack/plugin/opt/vim-devicons
@@ -35,25 +35,25 @@
 	path = vim/.config/vim/pack/plugin/opt/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule "vim/vim-dispatch"]
-	path = vim/.config/vim/pack/plugin/start/vim-dispatch
+	path = vim/.config/vim/pack/plugin/opt/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch
 [submodule "vim/vim-fugitive"]
-	path = vim/.config/vim/pack/plugin/start/vim-fugitive
+	path = vim/.config/vim/pack/plugin/opt/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
 [submodule "vim/vim-repeat"]
-	path = vim/.config/vim/pack/plugin/start/vim-repeat
+	path = vim/.config/vim/pack/plugin/opt/vim-repeat
 	url = https://github.com/tpope/vim-repeat
 [submodule "vim/vim-sensible"]
-	path = vim/.config/vim/pack/plugin/start/vim-sensible
+	path = vim/.config/vim/pack/plugin/opt/vim-sensible
 	url = https://github.com/tpope/vim-sensible
 [submodule "vim/vim-surround"]
-	path = vim/.config/vim/pack/plugin/start/vim-surround
+	path = vim/.config/vim/pack/plugin/opt/vim-surround
 	url = https://github.com/tpope/vim-surround
 [submodule "vim/vim-vinegar"]
-	path = vim/.config/vim/pack/plugin/start/vim-vinegar
+	path = vim/.config/vim/pack/plugin/opt/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar
 [submodule "vim/targets.vim"]
-	path = vim/.config/vim/pack/plugin/start/targets.vim
+	path = vim/.config/vim/pack/plugin/opt/targets.vim
 	url = https://github.com/wellle/targets.vim
 [submodule "vim/tokyonight.nvim"]
 	path = vim/.config/vim/pack/colors/opt/tokyonight.nvim
@@ -68,28 +68,28 @@
 	path = vim/.config/vim/pack/plugin/opt/vim-snippets
 	url = https://github.com/honza/vim-snippets
 [submodule "vim/vim-which-key"]
-	path = vim/.config/vim/pack/plugin/start/vim-which-key
+	path = vim/.config/vim/pack/plugin/opt/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key
 [submodule "vim/vim-sleuth"]
-	path = vim/.config/vim/pack/plugin/start/vim-sleuth
+	path = vim/.config/vim/pack/plugin/opt/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth
 [submodule "vim/auto-pairs"]
-	path = vim/.config/vim/pack/plugin/start/auto-pairs
+	path = vim/.config/vim/pack/plugin/opt/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
 [submodule "vim/markdown-preview.nvim"]
 	path = vim/.config/vim/pack/plugin/opt/markdown-preview.nvim
 	url = https://github.com/iamcco/markdown-preview.nvim
 [submodule "vim/rainbow_parentheses.vim"]
-	path = vim/.config/vim/pack/plugin/start/rainbow_parentheses.vim
+	path = vim/.config/vim/pack/plugin/opt/rainbow_parentheses.vim
 	url = https://github.com/kien/rainbow_parentheses.vim
 [submodule "vim/lightline.vim"]
 	path = vim/.config/vim/pack/plugin/opt/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
 [submodule "vim/vim-trailing-whitespace"]
-	path = vim/.config/vim/pack/plugin/start/vim-trailing-whitespace
+	path = vim/.config/vim/pack/plugin/opt/vim-trailing-whitespace
 	url = https://github.com/bronson/vim-trailing-whitespace
 [submodule "vim/vim-unimpaired"]
-	path = vim/.config/vim/pack/plugin/start/vim-unimpaired
+	path = vim/.config/vim/pack/plugin/opt/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired
 [submodule "vim/Apprentice"]
 	path = vim/.config/vim/pack/colors/opt/Apprentice
@@ -127,3 +127,6 @@
 [submodule "tmux/tmux-sensible"]
 	path = tmux/.config/tmux/plugins/tmux-sensible
 	url = https://github.com/tmux-plugins/tmux-sensible
+[submodule "vim/.config/vim/pack/plugin/opt/vimspector"]
+	path = vim/.config/vim/pack/plugin/opt/vimspector
+	url = https://github.com/puremourning/vimspector
