@@ -70,7 +70,14 @@ if has('patch-9.0.0670') | set wildoptions+=fuzzy | endif
 
 " 8. Command-line autocompletion                         *cmdline-autocompletion*
 if exists('*wildtrigger')
-  autocmd CmdlineChanged [:\/\?] call wildtrigger()
+  let s:wt_timer = -1
+  function! s:WildtriggerDebounced() abort
+    if s:wt_timer != -1
+      call timer_stop(s:wt_timer)
+    endif
+    let s:wt_timer = timer_start(150, {-> wildtrigger()})
+  endfunction
+  autocmd CmdlineChanged [:\/\?] call s:WildtriggerDebounced()
   set wildmode=noselect:lastused,full
   set wildoptions+=pum
 endif
@@ -97,7 +104,6 @@ else
   set grepformat=%f:%l:%m
 endif
 
-set exrc
 set wildignore+=*.o,*.pyc,*/.git/*,*/node_modules/*,*/dist/*,*/build/*
 set path=.
 
