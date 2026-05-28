@@ -4,11 +4,11 @@ if has('patch-9.1.0375')
 else
   packadd! vim-commentary
 endif
-packadd! editorconfig
-packadd! helptoc
-packadd! hlyank
-packadd! nohlsearch
-packadd! termdebug
+if has('patch-9.0.1799') | packadd! editorconfig | endif
+silent! packadd! helptoc
+silent! packadd! hlyank
+silent! packadd! nohlsearch
+if has('patch-8.1.0360') | packadd! termdebug | endif
 
 "custom
 let s:node_version = system('node --version 2>/dev/null')

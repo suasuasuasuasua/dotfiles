@@ -8,7 +8,7 @@ set backspace=indent,eol,start
 set belloff=all
 set breakindent
 set colorcolumn=80
-set completeopt+=fuzzy
+if has('patch-9.0.0000') | set completeopt+=fuzzy | endif
 set confirm
 set cursorline
 set display=lastline
@@ -17,12 +17,14 @@ set expandtab
 set foldcolumn=1
 set foldenable
 set foldlevel=99
-set foldlevelstart=-1
+set foldlevelstart=99
 set foldmethod=indent
+set formatoptions=rqnl1j
 set history=10000
 set hlsearch
 set ignorecase
 set incsearch
+set infercase
 set laststatus=2
 set linebreak
 set list
@@ -40,8 +42,10 @@ set nowrap
 set nowritebackup
 set number
 set omnifunc=syntaxcomplete#Complete
-set ruler
-set scrolloff=5
+set pumheight=10
+set noruler
+set scrolloff=10
+set shiftround
 set shiftwidth=4
 set showcmd
 set showmatch
@@ -55,18 +59,20 @@ set t_vb=
 set tabstop=4
 set termguicolors
 set textwidth=80
-set timeoutlen=500
+set timeoutlen=300
 set undodir=$HOME/.local/state/vim/undo
 set undofile
-set updatetime=300
+set viewdir=$HOME/.local/state/vim/view
+set updatetime=250
+set virtualedit=block
 set wildmenu
-set wildoptions+=fuzzy
+if has('patch-9.0.0670') | set wildoptions+=fuzzy | endif
 
 " 8. Command-line autocompletion                         *cmdline-autocompletion*
 if exists('*wildtrigger')
   autocmd CmdlineChanged [:\/\?] call wildtrigger()
   set wildmode=noselect:lastused,full
-  set wildoptions=pum
+  set wildoptions+=pum
 endif
 
 let &t_EI = "\e[2 q"
@@ -81,6 +87,7 @@ inoremap Jk <Esc>
 inoremap jK <Esc>
 inoremap jk <Esc>
 nnoremap <silent> <Leader>l :nohl<CR>
+nnoremap <Leader>mm :make<CR>
 nnoremap <Leader>so :source $HOME/.config/vim/vimrc<CR>
 
 nmap <silent> <c-k> :wincmd k<CR>
@@ -95,6 +102,14 @@ autocmd BufReadPost *
                   \ if line("'\"") > 0 && line("'\"") <= line("$") |
                   \   exe "normal! g`\"" |
                   \ endif
+
+autocmd FocusGained,BufEnter * checktime
+
+autocmd BufWinLeave,BufWritePost,WinLeave *
+                  \ if get(b:, 'view_activated') | silent! mkview | endif
+autocmd BufWinEnter *
+                  \ if !get(b:, 'view_activated') && &buftype == '' && &filetype != '' |
+                  \   let b:view_activated = 1 | silent! loadview | endif
 
 source $HOME/.config/vim/colors.vim
 source $HOME/.config/vim/plugins.vim
