@@ -12,33 +12,33 @@ if has('patch-8.1.0360') | packadd! termdebug | endif
 
 "pack/plugin/opt/
 packadd! auto-pairs
-packadd! fzf
-packadd! fzf.vim
+" packadd! fzf
+" packadd! fzf.vim
 packadd! lightline.vim
-packadd! markdown-preview.nvim
-packadd! nerdtree
-packadd! rainbow_parentheses.vim
+" packadd! markdown-preview.nvim
+" packadd! nerdtree
+" packadd! rainbow_parentheses.vim
 packadd! targets.vim
-packadd! ultisnips
-packadd! undotree
-packadd! vim-devicons
-packadd! vim-dispatch
+" packadd! ultisnips
+" packadd! undotree
+" packadd! vim-devicons
+" packadd! vim-dispatch
 packadd! vim-fugitive
 packadd! vim-gitgutter
-packadd! vim-go
+" packadd! vim-go
 packadd! vim-indent-guides
-packadd! vim-nix
+" packadd! vim-nix
 packadd! vim-repeat
 packadd! vim-sensible
 packadd! vim-sleuth
-packadd! vim-snippets
+" packadd! vim-snippets
 packadd! vim-surround
 packadd! vim-tmux-navigator
 packadd! vim-trailing-whitespace
 packadd! vim-unimpaired
 packadd! vim-vinegar
 packadd! vim-which-key
-packadd! vimspector
+" packadd! vimspector
 
 let s:node_version = system('node --version 2>/dev/null')
 "coc.nvim requires nodejs >=20.19.0
