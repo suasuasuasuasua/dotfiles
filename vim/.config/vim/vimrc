@@ -8,6 +8,7 @@ set backspace=indent,eol,start
 set belloff=all
 set breakindent
 set colorcolumn=80
+set completeopt=menu,preview,menuone,noinsert,noselect
 if has('patch-9.0.0000') | set completeopt+=fuzzy | endif
 set confirm
 set cursorline
@@ -54,10 +55,14 @@ set smartcase
 set smarttab
 set splitbelow
 set splitright
-set switchbuf=uselast
+if has('patch-8.1.2315') | set switchbuf=uselast | endif
 set t_vb=
 set tabstop=4
-set termguicolors
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 set textwidth=80
 set timeoutlen=300
 set undodir=$HOME/.local/state/vim/undo
@@ -141,6 +146,7 @@ augroup vimrc
 augroup END
 
 source $HOME/.config/vim/colors.vim
+source $HOME/.config/vim/builtin.vim
 source $HOME/.config/vim/plugins.vim
 
 "Optional plugins (highly recommended)
