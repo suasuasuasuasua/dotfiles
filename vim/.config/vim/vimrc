@@ -99,7 +99,17 @@ let &t_ZR="\e[23m"
 let mapleader = " "
 let maplocalleader = ","
 
-let s:grep_exclude_dirs = ['.git', 'node_modules', '.cache', 'dist', 'build']
+let s:exclude_dirs = [
+  \ '.git',
+  \ 'node_modules',
+  \ '.cache',
+  \ 'dist',
+  \ 'build',
+  \ '_build',
+  \ '.direnv',
+  \ 'pack',
+  \ 'view',
+  \ ]
 
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case
@@ -109,12 +119,13 @@ elseif executable('git')
   set grepformat=%f:%l:%m
 else
   let &grepprg = 'LC_ALL=C grep -rn '
-    \ . join(map(copy(s:grep_exclude_dirs), '"--exclude-dir=" . v:val'), ' ')
+    \ . join(map(copy(s:exclude_dirs), '"--exclude-dir=" . v:val'), ' ')
     \ . ' $*'
   set grepformat=%f:%l:%m
 endif
 
-set wildignore+=*.o,*.pyc,*/.git/*,*/node_modules/*,*/dist/*,*/*build*/*,*/.direnv/*
+set wildignore+=*.o,*.pyc
+execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val . "/*"'), ',')
 
 inoremap JK <Esc>
 inoremap Jk <Esc>
