@@ -75,9 +75,15 @@ set path=.,,
 set wildmenu
 if has('patch-9.0.0670') | set wildoptions+=fuzzy | endif
 
-" 8. Command-line autocompletion                         *cmdline-autocompletion*
+let s:in_git_repo = executable('git') && (!empty(finddir('.git', '.;')) || !empty(findfile('.git', '.;')))
+
+"show autocompletion help for the command line mode
 if exists('*wildtrigger')
-  autocmd CmdlineChanged [:\/\?] call wildtrigger()
+  augroup wildtrigger
+    autocmd!
+    autocmd CmdlineChanged [:\/\?] call wildtrigger()
+    autocmd CmdlineEnter : let s:filescache = []
+  augroup END
   set wildmode=noselect:lastused,full
   set wildoptions+=pum
 endif
@@ -102,10 +108,27 @@ let s:exclude_dirs = [
   \ 'venv',
   \ ]
 
-if executable('rg')
-  set grepprg=rg\ --vimgrep\ --smart-case
-  set grepformat=%f:%l:%c:%m
-elseif executable('git')
+"better find function
+if exists('+findfunc')
+  let s:filescache = []
+  func! FindFiles(arg, _)
+    if empty(s:filescache)
+      if s:in_git_repo
+        let s:filescache = systemlist('git ls-files 2>/dev/null')
+      endif
+      if empty(s:filescache)
+        let s:prune = join(map(copy(s:exclude_dirs), '"-name " . v:val'), ' -o ')
+        let s:filescache = systemlist('find . -type d \( ' . s:prune . ' \) -prune -o -type f -print 2>/dev/null')
+        call map(s:filescache, 'v:val[2:]')
+      endif
+    endif
+    return empty(a:arg) ? s:filescache : matchfuzzy(s:filescache, a:arg)
+  endfunc
+  set findfunc=FindFiles
+endif
+
+"better grep function
+if s:in_git_repo
   let &grepprg = 'git grep -n $*'
   set grepformat=%f:%l:%m
 else
@@ -116,7 +139,7 @@ else
 endif
 
 set wildignore+=*.o,*.pyc
-execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val . "/*"'), ',')
+execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val'), ',')
 
 inoremap JK <Esc>
 inoremap Jk <Esc>
@@ -133,11 +156,12 @@ nmap <silent> <c-l> :wincmd l<CR>
 
 augroup vimrc
   autocmd!
-  "Return to last edit position when opening files (You want this!)
+  "Return to last edit position when opening files
   autocmd BufReadPost *
                     \ if line("'\"") > 0 && line("'\"") <= line("$") |
                     \   exe "normal! g`\"" |
                     \ endif
+  "Auto-save folds by making sessions
   autocmd FocusGained,BufEnter * if getcmdwintype() == '' | checktime | endif
   autocmd BufWinLeave,BufWritePost,WinLeave *
                     \ if get(b:, 'view_activated') | silent! mkview | endif
@@ -148,7 +172,7 @@ augroup END
 
 source $HOME/.config/vim/colors.vim
 source $HOME/.config/vim/builtin.vim
-source $HOME/.config/vim/plugins.vim
+"source $HOME/.config/vim/plugins.vim
 
 "Optional plugins (highly recommended)
 "These are generally available in package managers.
