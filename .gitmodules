@@ -32,7 +32,7 @@
 	path = vim/.config/vim/pack/plugin/opt/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons
 [submodule "vim/vim-commentary"]
-	path = vim/.config/vim/pack/plugin/start/vim-commentary
+	path = vim/.config/vim/pack/plugin/opt/vim-commentary
 	url = https://github.com/tpope/vim-commentary
 [submodule "vim/vim-dispatch"]
 	path = vim/.config/vim/pack/plugin/start/vim-dispatch

@@ -63,9 +63,11 @@ set wildmenu
 set wildoptions+=fuzzy
 
 " 8. Command-line autocompletion                         *cmdline-autocompletion*
-autocmd CmdlineChanged [:\/\?] call wildtrigger()
-set wildmode=noselect:lastused,full
-set wildoptions=pum
+if exists('*wildtrigger')
+  autocmd CmdlineChanged [:\/\?] call wildtrigger()
+  set wildmode=noselect:lastused,full
+  set wildoptions=pum
+endif
 
 let &t_EI = "\e[2 q"
 let &t_SI = "\e[6 q"
@@ -109,7 +111,7 @@ source $HOME/.config/vim/plugins.vim
 "```
 ":set runtimepath
 "```
-"To disable certain paths, 
+"To disable certain paths,
 "```
 ":set runtimepath-=~/.vim/bundle/vimacs
 "```

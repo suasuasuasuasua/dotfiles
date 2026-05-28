@@ -1,5 +1,9 @@
 "builtin
-" packadd! comment " 9.1.0375
+if has('patch-9.1.0375')
+  packadd! comment
+else
+  packadd! vim-commentary
+endif
 packadd! editorconfig
 packadd! helptoc
 packadd! hlyank
