@@ -77,7 +77,11 @@ if exists('*wildtrigger')
     endif
     let s:wt_timer = timer_start(150, {-> wildtrigger()})
   endfunction
-  autocmd CmdlineChanged [:\/\?] call s:WildtriggerDebounced()
+  augroup wildtrigger_debounce
+    autocmd!
+    autocmd CmdlineChanged [:\/\?] call s:WildtriggerDebounced()
+    autocmd CmdlineLeave * if s:wt_timer != -1 | call timer_stop(s:wt_timer) | let s:wt_timer = -1 | endif
+  augroup END
   set wildmode=noselect:lastused,full
   set wildoptions+=pum
 endif
@@ -121,19 +125,20 @@ nmap <silent> <c-l> :wincmd l<CR>
 
 filetype plugin indent on
 
-"Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-                  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                  \   exe "normal! g`\"" |
-                  \ endif
-
-autocmd FocusGained,BufEnter * if getcmdwintype() == '' | checktime | endif
-
-autocmd BufWinLeave,BufWritePost,WinLeave *
-                  \ if get(b:, 'view_activated') | silent! mkview | endif
-autocmd BufWinEnter *
-                  \ if !get(b:, 'view_activated') && &buftype == '' && &filetype != '' |
-                  \   let b:view_activated = 1 | silent! loadview | endif
+augroup vimrc
+  autocmd!
+  "Return to last edit position when opening files (You want this!)
+  autocmd BufReadPost *
+                    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                    \   exe "normal! g`\"" |
+                    \ endif
+  autocmd FocusGained,BufEnter * if getcmdwintype() == '' | checktime | endif
+  autocmd BufWinLeave,BufWritePost,WinLeave *
+                    \ if get(b:, 'view_activated') | silent! mkview | endif
+  autocmd BufReadPost *
+                    \ if &buftype == '' && !get(b:, 'view_activated') |
+                    \   let b:view_activated = 1 | silent! loadview | endif
+augroup END
 
 source $HOME/.config/vim/colors.vim
 source $HOME/.config/vim/plugins.vim
