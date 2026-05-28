@@ -8,6 +8,7 @@ packadd! editorconfig
 packadd! helptoc
 packadd! hlyank
 packadd! nohlsearch
+packadd! termdebug
 
 "custom
 let s:node_version = system('node --version 2>/dev/null')
