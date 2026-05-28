@@ -1,5 +1,3 @@
-syntax enable
-
 "set autochdir
 set autoindent
 set autoread
@@ -73,6 +71,9 @@ set virtualedit=block
 set wildmenu
 if has('patch-9.0.0670') | set wildoptions+=fuzzy | endif
 
+filetype plugin indent on
+syntax enable
+
 " 8. Command-line autocompletion                         *cmdline-autocompletion*
 if exists('*wildtrigger')
   let s:wt_timer = -1
@@ -113,7 +114,7 @@ else
   set grepformat=%f:%l:%m
 endif
 
-set wildignore+=*.o,*.pyc,*/.git/*,*/node_modules/*,*/dist/*,*/build/*
+set wildignore+=*.o,*.pyc,*/.git/*,*/node_modules/*,*/dist/*,*/*build*/*,*/.direnv/*
 
 inoremap JK <Esc>
 inoremap Jk <Esc>
@@ -127,8 +128,6 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
-
-filetype plugin indent on
 
 augroup vimrc
   autocmd!
