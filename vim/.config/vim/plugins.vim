@@ -28,7 +28,7 @@ packadd! vim-which-key
 " packadd! vimspector
 
 if !has('patch-9.1.0375')
-  packadd! comment
+  packadd! vim-commentary
 endif
 let s:node_version = system('node --version 2>/dev/null')
 "coc.nvim requires nodejs >=20.19.0
