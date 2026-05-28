@@ -12,7 +12,6 @@ if has('patch-8.1.0360') | packadd! termdebug | endif
 
 "pack/plugin/opt/
 packadd! auto-pairs
-packadd! direnv.vim
 packadd! fzf
 packadd! fzf.vim
 packadd! lightline.vim
