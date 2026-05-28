@@ -128,7 +128,7 @@ autocmd BufReadPost *
                   \   exe "normal! g`\"" |
                   \ endif
 
-autocmd FocusGained,BufEnter * checktime
+autocmd FocusGained,BufEnter * if getcmdwintype() == '' | checktime | endif
 
 autocmd BufWinLeave,BufWritePost,WinLeave *
                   \ if get(b:, 'view_activated') | silent! mkview | endif
