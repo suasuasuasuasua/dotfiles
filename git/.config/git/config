@@ -1,18 +1,32 @@
 [core]
-	editor = nvim
+    editor = nvim
 [user]
-	name = Justin Hoang
-	email = justinhoang@sua.dev
-	signingkey = justinhoang@sua.dev
+    name = Justin Hoang
+    email = justinhoang@sua.dev
+    signingkey = justinhoang@sua.dev
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [pull]
-	rebase = false
+    rebase = false
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
 [commit]
-	gpgsign = true
-[difftool "nvim_difftool"]
-  cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
+    gpgsign = true
 [diff]
-  tool = nvim_difftool
+    tool = vimdiff
+    algorithm = patience
+[difftool]
+    prompt = false
+[difftool "vimdiff"]
+    layout = LOCAL,REMOTE
+[difftool "nvim_difftool"]
+    cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
+[merge]
+    tool = vimdiff
+    conflictStyle = zdiff3
+[mergetool]
+    prompt = false
+    keepBackup = false
+[mergetool "vimdiff"]
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    layout = LOCAL,BASE,REMOTE / MERGED
