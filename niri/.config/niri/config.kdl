@@ -75,6 +75,7 @@ binds {
 
     // Terminal
     Alt+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Alt+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Spotlight
