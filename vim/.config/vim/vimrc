@@ -137,6 +137,37 @@ let &grepprg = s:in_git_repo ? 'git grep -n $* -- ' . s:gitexc
   \ : 'LC_ALL=C grep -rn ' . s:grepexc . ' $*'
 set grepformat=%f:%l:%c:%m,%f:%l:%m
 
+"live fuzzy grep picker
+command! -nargs=+ -complete=customlist,<SID>Grep
+  \ Grep call <SID>VisitFile()
+
+func s:Grep(arglead, cmdline, cursorpos)
+  if match(&grepprg, '\$\*') == -1 | let &grepprg ..= ' $*' | endif
+  let cmd = substitute(&grepprg, '\$\*', shellescape(escape(a:arglead, '\')), '')
+  return len(a:arglead) > 1 ? systemlist(cmd) : []
+endfunc
+
+func s:VisitFile()
+  let item = getqflist(#{lines: [s:selected]}).items[0]
+  let pos  = '[0,\ item.lnum,\ item.col,\ 0]'
+  exe $':b +call\ setpos(".",\ {pos}) {item.bufnr}'
+  call setbufvar(item.bufnr, '&buflisted', 1)
+endfunc
+
+"auto-pick first :find / :Grep completion on <CR>
+autocmd CmdlineLeavePre :
+  \ if get(cmdcomplete_info(), 'matches', []) != [] |
+  \   let s:info = cmdcomplete_info() |
+  \   if getcmdline() =~ '^\s*fin\%[d]\s' && s:info.selected == -1 |
+  \     call setcmdline($'find {s:info.matches[0]}') |
+  \   endif |
+  \   if getcmdline() =~ '^\s*Grep\s' |
+  \     let s:selected = s:info.selected != -1
+  \         ? s:info.matches[s:info.selected] : s:info.matches[0] |
+  \     call setcmdline(s:info.cmdline_orig) |
+  \   endif |
+  \ endif
+
 set wildignore+=*.o,*.pyc
 execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val'), ',')
 
