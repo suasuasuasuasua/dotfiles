@@ -107,36 +107,36 @@ let s:exclude_dirs = [
   \ 'venv',
   \ ]
 
+let s:exclude_files = [
+  \ '*.lock',
+  \ ]
+
 "better find function
 if exists('+findfunc')
+  let s:gitexc = join(map(copy(s:exclude_dirs) + copy(s:exclude_files), 'shellescape(":(exclude)" . v:val)'), ' ')
+  let s:findcmd = s:in_git_repo ? 'git ls-files -- . ' . s:gitexc
+    \ : executable('fd') ? 'fd --type f'
+    \ : executable('rg') ? 'rg --files'
+    \ : 'find . -type f'
   let s:filescache = []
   func! FindFiles(arg, _)
-    if empty(s:filescache)
-      if s:in_git_repo
-        let s:filescache = systemlist('git ls-files 2>/dev/null')
-      endif
-      if empty(s:filescache)
-        let s:prune = join(map(copy(s:exclude_dirs), 'shellescape("-name " . v:val)'), ' -o ')
-        let s:filescache = systemlist('find . -type d \( ' . s:prune . ' \) -prune -o -type f -print 2>/dev/null')
-        call map(s:filescache, 'v:val[2:]')
-      endif
-    endif
+    if empty(s:filescache) | let s:filescache = systemlist(s:findcmd) | endif
     return empty(a:arg) ? s:filescache : matchfuzzy(s:filescache, a:arg)
   endfunc
   set findfunc=FindFiles
-  augroup findfunc_cache
-    autocmd!
-    autocmd CmdlineEnter : let s:filescache = []
-  augroup END
+  autocmd CmdlineEnter : let s:filescache = []
 endif
 
 "better grep function
 if s:in_git_repo
-  let &grepprg = 'git grep -n $*'
+  let &grepprg = 'git grep -n $* -- '
+    \ . join(map(copy(s:exclude_dirs) + copy(s:exclude_files), 'shellescape(":(exclude)" . v:val)'), ' ')
   set grepformat=%f:%l:%m
 else
   let &grepprg = 'LC_ALL=C grep -rn '
-    \ . join(map(copy(s:exclude_dirs), '"--exclude-dir=" . v:val'), ' ')
+    \ . join(map(copy(s:exclude_dirs), '"--exclude-dir=" . shellescape(v:val)'), ' ')
+    \ . ' '
+    \ . join(map(copy(s:exclude_files), '"--exclude=" . shellescape(v:val)'), ' ')
     \ . ' $*'
   set grepformat=%f:%l:%m
 endif
