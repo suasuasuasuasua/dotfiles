@@ -68,11 +68,10 @@ if exists('g:did_coc_loaded')
   xmap <leader>f  <Plug>(coc-format-selected)
   nmap <leader>f  <Plug>(coc-format-selected)
 
-  augroup mygroup
+  augroup coc_formatexpr
     autocmd!
-    " Setup formatexpr specified filetype(s)
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  augroup end
+  augroup END
 
   " Applying code actions to the selected code block
   " Example: `<leader>aap` for current paragraph

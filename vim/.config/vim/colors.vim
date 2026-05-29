@@ -7,4 +7,5 @@ packadd! tokyonight.nvim/extras/vim
 " colorscheme everforest
 " colorscheme koehler
 " colorscheme quiet
-colorscheme tokyonight-night
+" colorscheme tokyonight-night
+colorscheme darkblue

@@ -1,3 +1,4 @@
+filetype plugin indent on
 syntax enable
 
 "set autochdir
@@ -8,7 +9,8 @@ set backspace=indent,eol,start
 set belloff=all
 set breakindent
 set colorcolumn=80
-set completeopt+=fuzzy
+set completeopt=menu,preview,menuone,noinsert,noselect
+if has('patch-9.0.0000') | set completeopt+=fuzzy | endif
 set confirm
 set cursorline
 set display=lastline
@@ -17,12 +19,14 @@ set expandtab
 set foldcolumn=1
 set foldenable
 set foldlevel=99
-set foldlevelstart=-1
+set foldlevelstart=99
 set foldmethod=indent
+set formatoptions=rqnl1j
 set history=10000
 set hlsearch
 set ignorecase
 set incsearch
+set infercase
 set laststatus=2
 set linebreak
 set list
@@ -40,8 +44,10 @@ set nowrap
 set nowritebackup
 set number
 set omnifunc=syntaxcomplete#Complete
-set ruler
-set scrolloff=5
+set pumheight=10
+set noruler
+set scrolloff=10
+set shiftround
 set shiftwidth=4
 set showcmd
 set showmatch
@@ -50,22 +56,36 @@ set smartcase
 set smarttab
 set splitbelow
 set splitright
-set switchbuf=uselast
+if has('patch-8.1.2315') | set switchbuf=uselast | endif
 set t_vb=
 set tabstop=4
-set termguicolors
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 set textwidth=80
-set timeoutlen=500
+set timeoutlen=300
 set undodir=$HOME/.local/state/vim/undo
 set undofile
-set updatetime=300
+set viewdir=$HOME/.local/state/vim/view
+set updatetime=250
+set virtualedit=block
+set path=.,,
 set wildmenu
-set wildoptions+=fuzzy
+if has('patch-9.0.0670') | set wildoptions+=fuzzy | endif
 
-" 8. Command-line autocompletion                         *cmdline-autocompletion*
-autocmd CmdlineChanged [:\/\?] call wildtrigger()
-set wildmode=noselect:lastused,full
-set wildoptions=pum
+let s:in_git_repo = executable('git') && (!empty(finddir('.git', '.;')) || !empty(findfile('.git', '.;')))
+
+"show autocompletion help for the command line mode
+if exists('*wildtrigger')
+  augroup wildtrigger
+    autocmd!
+    autocmd CmdlineChanged [:\/\?] call wildtrigger()
+  augroup END
+  set wildmode=noselect:lastused,full
+  set wildoptions+=pum
+endif
 
 let &t_EI = "\e[2 q"
 let &t_SI = "\e[6 q"
@@ -74,11 +94,62 @@ let &t_ZR="\e[23m"
 let mapleader = " "
 let maplocalleader = ","
 
+let s:exclude_dirs = [
+  \ '.git',
+  \ 'node_modules',
+  \ '.cache',
+  \ 'dist',
+  \ 'build',
+  \ '_build',
+  \ '.direnv',
+  \ 'pack',
+  \ 'view',
+  \ 'venv',
+  \ ]
+
+"better find function
+if exists('+findfunc')
+  let s:filescache = []
+  func! FindFiles(arg, _)
+    if empty(s:filescache)
+      if s:in_git_repo
+        let s:filescache = systemlist('git ls-files 2>/dev/null')
+      endif
+      if empty(s:filescache)
+        let s:prune = join(map(copy(s:exclude_dirs), 'shellescape("-name " . v:val)'), ' -o ')
+        let s:filescache = systemlist('find . -type d \( ' . s:prune . ' \) -prune -o -type f -print 2>/dev/null')
+        call map(s:filescache, 'v:val[2:]')
+      endif
+    endif
+    return empty(a:arg) ? s:filescache : matchfuzzy(s:filescache, a:arg)
+  endfunc
+  set findfunc=FindFiles
+  augroup findfunc_cache
+    autocmd!
+    autocmd CmdlineEnter : let s:filescache = []
+  augroup END
+endif
+
+"better grep function
+if s:in_git_repo
+  let &grepprg = 'git grep -n $*'
+  set grepformat=%f:%l:%m
+else
+  let &grepprg = 'LC_ALL=C grep -rn '
+    \ . join(map(copy(s:exclude_dirs), '"--exclude-dir=" . v:val'), ' ')
+    \ . ' $*'
+  set grepformat=%f:%l:%m
+endif
+
+set wildignore+=*.o,*.pyc
+execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val'), ',')
+
 inoremap JK <Esc>
 inoremap Jk <Esc>
 inoremap jK <Esc>
 inoremap jk <Esc>
 nnoremap <silent> <Leader>l :nohl<CR>
+nnoremap <Leader>mm :make<CR>
 nnoremap <Leader>so :source $HOME/.config/vim/vimrc<CR>
 
 nmap <silent> <c-k> :wincmd k<CR>
@@ -86,16 +157,25 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-filetype plugin indent on
-
-"Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-                  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                  \   exe "normal! g`\"" |
-                  \ endif
+augroup vimrc
+  autocmd!
+  "Return to last edit position when opening files
+  autocmd BufReadPost *
+                    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                    \   exe "normal! g`\"" |
+                    \ endif
+  "Auto-save folds by making sessions
+  autocmd FocusGained,BufEnter * if getcmdwintype() == '' | checktime | endif
+  autocmd BufWinLeave,BufWritePost,WinLeave *
+                    \ if get(b:, 'view_activated') | silent! mkview | endif
+  autocmd BufReadPost *
+                    \ if &buftype == '' && !get(b:, 'view_activated') |
+                    \   let b:view_activated = 1 | silent! loadview | endif
+augroup END
 
 source $HOME/.config/vim/colors.vim
-source $HOME/.config/vim/plugins.vim
+source $HOME/.config/vim/builtin.vim
+"source $HOME/.config/vim/plugins.vim
 
 "Optional plugins (highly recommended)
 "These are generally available in package managers.
@@ -109,7 +189,7 @@ source $HOME/.config/vim/plugins.vim
 "```
 ":set runtimepath
 "```
-"To disable certain paths, 
+"To disable certain paths,
 "```
 ":set runtimepath-=~/.vim/bundle/vimacs
 "```
