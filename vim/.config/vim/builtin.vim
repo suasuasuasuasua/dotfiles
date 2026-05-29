@@ -1,4 +1,4 @@
-if has('patch-9.1.0375') | packadd! comment | endif
+if has('patch-9.1.0375') | packadd! comment | else | silent! packadd! vim-commentary | endif
 if has('patch-9.0.1799') | packadd! editorconfig | endif
 silent! packadd! cfilter
 silent! packadd! helptoc

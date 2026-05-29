@@ -82,7 +82,6 @@ if exists('*wildtrigger')
   augroup wildtrigger
     autocmd!
     autocmd CmdlineChanged [:\/\?] call wildtrigger()
-    autocmd CmdlineEnter : let s:filescache = []
   augroup END
   set wildmode=noselect:lastused,full
   set wildoptions+=pum
@@ -117,7 +116,7 @@ if exists('+findfunc')
         let s:filescache = systemlist('git ls-files 2>/dev/null')
       endif
       if empty(s:filescache)
-        let s:prune = join(map(copy(s:exclude_dirs), '"-name " . v:val'), ' -o ')
+        let s:prune = join(map(copy(s:exclude_dirs), 'shellescape("-name " . v:val)'), ' -o ')
         let s:filescache = systemlist('find . -type d \( ' . s:prune . ' \) -prune -o -type f -print 2>/dev/null')
         call map(s:filescache, 'v:val[2:]')
       endif
@@ -125,6 +124,10 @@ if exists('+findfunc')
     return empty(a:arg) ? s:filescache : matchfuzzy(s:filescache, a:arg)
   endfunc
   set findfunc=FindFiles
+  augroup findfunc_cache
+    autocmd!
+    autocmd CmdlineEnter : let s:filescache = []
+  augroup END
 endif
 
 "better grep function
