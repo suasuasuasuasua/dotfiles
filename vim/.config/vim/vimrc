@@ -18,6 +18,7 @@ set cursorline
 set display=lastline
 set encoding=utf-8
 set expandtab
+set exrc
 set foldcolumn=1
 set foldenable
 set foldlevel=99
@@ -49,6 +50,7 @@ set omnifunc=syntaxcomplete#Complete
 set pumheight=10
 set noruler
 set scrolloff=10
+set secure
 set shiftround
 set shiftwidth=4
 set showcmd
