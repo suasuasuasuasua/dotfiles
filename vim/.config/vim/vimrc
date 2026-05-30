@@ -122,13 +122,16 @@ let s:grepexc = join(map(copy(s:exclude_dirs), '"--exclude-dir=" . shellescape(v
 
 "better find function
 if exists('+findfunc')
-  let s:findcmd = s:in_git_repo ? 'git ls-files -- . ' . s:gitexc
+  let s:findcmd = s:in_git_repo ? 'git ls-files -co --deduplicate --exclude-standard -- . ' . s:gitexc
     \ : executable('fd') ? 'fd --type f'
     \ : executable('rg') ? 'rg --files'
     \ : 'find . -type f'
   let s:filescache = []
   func! FindFiles(arg, _)
-    if empty(s:filescache) | let s:filescache = systemlist(s:findcmd) | endif
+    if empty(s:filescache)
+      let s:filescache = systemlist(s:findcmd)
+      if s:in_git_repo | call filter(s:filescache, 'filereadable(v:val)') | endif
+    endif
     return empty(a:arg) ? s:filescache : matchfuzzy(s:filescache, a:arg)
   endfunc
   set findfunc=FindFiles
@@ -136,7 +139,7 @@ if exists('+findfunc')
 endif
 
 "better grep function
-let &grepprg = s:in_git_repo ? 'git grep -n $* -- ' . s:gitexc
+let &grepprg = s:in_git_repo ? 'git grep --untracked -n $* -- ' . s:gitexc
   \ : executable('rg') ? 'rg --vimgrep ' . s:rgexc . ' $*'
   \ : 'LC_ALL=C grep -rn ' . s:grepexc . ' $*'
 set grepformat=%f:%l:%c:%m,%f:%l:%m
