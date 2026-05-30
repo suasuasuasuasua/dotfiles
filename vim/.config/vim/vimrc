@@ -181,19 +181,29 @@ execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val'), ','
 
  "cscope and ctags
  if has("cscope")
-     set csprg=/usr/local/bin/cscope
+     " Define if not in normal location
+     " set csprg=/usr/local/bin/cscope
      set csto=0
      set cst
      set nocsverb
      set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
      " add any database in current directory
      if filereadable("cscope.out")
-         cs add cscope.out
+         silent! cs add cscope.out
      " else add database pointed to by environment
      elseif $CSCOPE_DB != ""
-         cs add $CSCOPE_DB
+         silent! cs add $CSCOPE_DB
      endif
      set csverb
+
+     nnoremap <C-\>s :cs find s <C-r>=expand("<cword>")<CR><CR>
+     nnoremap <C-\>g :cs find g <C-r>=expand("<cword>")<CR><CR>
+     nnoremap <C-\>c :cs find c <C-r>=expand("<cword>")<CR><CR>
+     nnoremap <C-\>t :cs find t <C-r>=expand("<cword>")<CR><CR>
+     nnoremap <C-\>e :cs find e <C-r>=expand("<cword>")<CR><CR>
+     nnoremap <C-\>f :cs find f <C-r>=expand("<cfile>")<CR><CR>
+     nnoremap <C-\>i :cs find i ^<C-r>=expand("<cfile>")<CR>$<CR>
+     nnoremap <C-\>d :cs find d <C-r>=expand("<cword>")<CR><CR>
  endif
 
 inoremap JK <Esc>
