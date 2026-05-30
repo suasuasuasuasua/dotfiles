@@ -179,6 +179,23 @@ endif
 set wildignore+=*.o,*.pyc
 execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val'), ',')
 
+ "cscope and ctags
+ if has("cscope")
+     set csprg=/usr/local/bin/cscope
+     set csto=0
+     set cst
+     set nocsverb
+     set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+     " add any database in current directory
+     if filereadable("cscope.out")
+         cs add cscope.out
+     " else add database pointed to by environment
+     elseif $CSCOPE_DB != ""
+         cs add $CSCOPE_DB
+     endif
+     set csverb
+ endif
+
 inoremap JK <Esc>
 inoremap Jk <Esc>
 inoremap jK <Esc>
