@@ -6,7 +6,7 @@ vim.o.breakindent     = true
 vim.o.breakindentopt  = 'list:-1'
 vim.o.colorcolumn     = "80"
 vim.o.complete        = '.,w,b,kspell'
-vim.o.completeopt     = 'menuone,noselect,fuzzy,nosort'
+vim.o.completeopt     = 'menuone,popup,noinsert,noselect,fuzzy'
 vim.o.completetimeout = 100
 vim.o.confirm         = true
 vim.o.cursorline      = true
@@ -60,7 +60,6 @@ vim.o.updatetime      = 250
 vim.o.virtualedit     = 'block'
 vim.o.winborder       = 'single'
 vim.o.wrap            = false
-vim.opt.completeopt   = { "menuone", "popup", "noinsert" }
 vim.opt.listchars     = { tab = '> ', trail = '-', nbsp = '+' }
 
 -- Enable all filetype plugins and syntax (if not enabled, for better startup)
