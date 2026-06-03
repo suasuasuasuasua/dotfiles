@@ -18,3 +18,6 @@ require 'plugins.overseer'
 require 'plugins.render-markdown'
 require 'plugins.todo-comments'
 require 'plugins.tokyonight-night'
+
+-- optional
+--require 'plugins.neorg'
