@@ -88,9 +88,14 @@ end
 --
 -- Make `:Pick files` accept `cwd`
 pick.registry.files = function(local_opts)
-  local opts = { source = { cwd = local_opts.cwd } }
-  local_opts.cwd = nil
-  return pick.builtin.files(local_opts, opts)
+  local_opts = local_opts or {}
+  local cwd = local_opts.cwd or vim.fn.getcwd()
+  if vim.fn.executable('rg') == 1 then
+    local command = { 'rg', '--files', '--hidden', '--glob', '!.git' }
+    return pick.builtin.cli({ command = command }, { source = { name = 'Files', cwd = cwd }
+    })
+  end
+  return pick.builtin.files(local_opts, { source = { cwd = cwd } })
 end
 
 local builtin = pick.registry
