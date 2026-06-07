@@ -122,6 +122,14 @@ export EDITOR=nvim
 # misc
 if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
+
+  if command -v rg &>/dev/null; then
+    export FZF_DEFAULT_COMMAND="rg --files --hidden"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  fi
+  if command -v fd &>/dev/null; then
+    export FZF_ALT_C_COMMAND="fd -t d"
+  fi
 fi
 if command -v direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
