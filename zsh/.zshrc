@@ -118,6 +118,7 @@ export PATH
 
 # other env variables
 export EDITOR=nvim
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 
 # misc
 if command -v fzf &>/dev/null; then
