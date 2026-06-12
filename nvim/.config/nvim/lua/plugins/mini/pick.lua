@@ -1,5 +1,6 @@
 local pick = require 'mini.pick'
 require('mini.extra').setup()
+require('mini.visits').setup()
 pick.setup()
 
 -- Adding custom picker to pick `register` entries
@@ -33,7 +34,8 @@ vim.keymap.set('n', '<leader>ss', builtin.registry, { desc = '[S]earch [S]elect 
 vim.keymap.set('n', '<leader>sg', builtin.grep_live, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', builtin.diagnostic, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader>s.', function() MiniExtra.pickers.visit_paths() end,
+  { desc = '[S]earch Recent Files (by visit frequency)' })
 vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>sn', function() builtin.files { cwd = vim.fn.stdpath 'config' } end,
