@@ -1,24 +1,16 @@
 {
   "plugins": {
-    "canola.nvim": {
-      "rev": "88af183e96724cca98a4602511061662cd5e88f3",
-      "src": "https://github.com/barrettruth/canola.nvim"
-    },
     "conform.nvim": {
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "diffview.nvim": {
-      "rev": "276d8a79bd90aece4960cf8bcf292cc7a35a4f57",
+      "rev": "1551fc496c29e14ebd4cf04543549a59dfe5d0dc",
       "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
-    },
-    "gitsigns.nvim": {
-      "rev": "25050e4ed39e628282831d4cbecb1850454ce915",
-      "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "grug-far.nvim": {
       "rev": "c995bbacf8229dc096ec1c3d60f8531059c86c1b",
@@ -28,12 +20,8 @@
       "rev": "84a4987ff36798c2fc1169cbaff67960aed9776f",
       "src": "https://github.com/NMAC427/guess-indent.nvim"
     },
-    "lua-utils.nvim": {
-      "rev": "e565749421f4bbb5d2e85e37c3cef9d56553d8bd",
-      "src": "https://github.com/nvim-neorg/lua-utils.nvim"
-    },
     "mason-lspconfig.nvim": {
-      "rev": "0a695750d747db1e7e70bcf0267ef8951c95fc83",
+      "rev": "21c5b3ebeaa0412e28096bb0701434c51c1fbf76",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-nvim-dap.nvim": {
@@ -45,24 +33,16 @@
       "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
     },
     "mason.nvim": {
-      "rev": "16ba83bfc8a25f52bb545134f5bee082b195c460",
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "ff8b3580935818ef2f21bdd651f057a2ae071eab",
+      "rev": "a59a9b7fb0a42cbcf022938ee5f0724320b66f63",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neogen": {
       "rev": "23e7e9f883d01289ebd90e98025acc860ea26366",
       "src": "https://github.com/danymat/neogen"
-    },
-    "neogit": {
-      "rev": "99326a1310fb2d616b455d2fd16d01bf00682f06",
-      "src": "https://github.com/NeogitOrg/neogit"
-    },
-    "neorg": {
-      "rev": "1f14d72aad7165eac307a2a2f6be0fb97a04b3c2",
-      "src": "https://github.com/nvim-neorg/neorg"
     },
     "nvim-bqf": {
       "rev": "c282a62bec6c0621a1ef5132aa3f4c9fc4dcc2c7",
@@ -107,10 +87,6 @@
     "overseer.nvim": {
       "rev": "a93d9f6d6defdac4bcd6d2c8ba988650e42e0a0e",
       "src": "https://github.com/stevearc/overseer.nvim"
-    },
-    "pathlib.nvim": {
-      "rev": "57e5598af6fe253761c1b48e0b59b7cd6699e2c1",
-      "src": "https://github.com/pysan3/pathlib.nvim"
     },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
