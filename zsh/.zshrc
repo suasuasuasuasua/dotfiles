@@ -119,6 +119,7 @@ export PATH
 # other env variables
 export EDITOR=nvim
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
+export XDG_CONFIG_HOME="$HOME/.config" # https://github.com/jesseduffield/lazygit/issues/1669
 
 # misc
 if command -v fzf &>/dev/null; then
