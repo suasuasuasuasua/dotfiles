@@ -14,7 +14,6 @@ require 'plugins.nvim-ufo'
 -- require 'plugins.oil'
 require 'plugins.overseer'
 require 'plugins.render-markdown'
-require 'plugins.todo-comments'
 require 'plugins.tokyonight-night'
 
 -- optional

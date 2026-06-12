@@ -4,6 +4,7 @@ vim.pack.add {
 }
 
 require('mini.ai').setup()
+require('mini.bracketed').setup()
 local miniclue = require 'mini.clue'
 miniclue.setup {
   triggers = {
@@ -162,6 +163,16 @@ indentscope.setup {
   draw = {
     delay = 10,
     animation = indentscope.gen_animation.none(),
+  },
+}
+local hipatterns = require 'mini.hipatterns'
+hipatterns.setup {
+  highlighters = {
+    fixme     = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
+    hack      = { pattern = 'HACK', group = 'MiniHipatternsHack' },
+    todo      = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
+    note      = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
+    hex_color = hipatterns.gen_highlighter.hex_color(),
   },
 }
 require('mini.icons').setup()
