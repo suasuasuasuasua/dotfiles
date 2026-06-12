@@ -25,3 +25,7 @@ hipatterns.setup {
 }
 
 require('mini.statusline').setup()
+
+require('mini.cursorword').setup {
+  delay = 10,
+}

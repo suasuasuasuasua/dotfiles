@@ -1,7 +1,7 @@
 require('mini.ai').setup()
 require('mini.bracketed').setup()
 require('mini.jump').setup {
-  delay = { highlight = 50 }
+  delay = { highlight = 10 }
 }
 require('mini.move').setup()
 require('mini.pairs').setup {
