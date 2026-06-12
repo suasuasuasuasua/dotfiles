@@ -179,6 +179,9 @@ require('mini.icons').setup()
 MiniIcons.mock_nvim_web_devicons()
 MiniIcons.tweak_lsp_kind()
 require('mini.input').setup()
+require('mini.misc').setup()
+MiniMisc.setup_auto_root()
+require('mini.move').setup()
 require('mini.notify').setup()
 require('mini.pairs').setup {
   modes = { command = true }
