@@ -81,7 +81,7 @@ do
       GIT_PS1_SHOWDIRTYSTATE="true" # * indicates dirty
       GIT_PS1_SHOWUNTRACKEDFILES="true" # % indicates untracked
       GIT_PS1_SHOWUPSTREAM="verbose" # <, >, <>, = for upstream state
-      RPROMPT=$'$(__git_ps1 "%s")'
+      RPROMPT=''
 
       found=true
       break
@@ -91,6 +91,36 @@ do
   if $found then break fi
 done
 unset base found stem
+
+# async RPROMPT: render __git_ps1 in a background subshell, then signal
+# ourselves with USR1 to swap it in. Prompt returns instantly; the git
+# indicators appear ~200ms later.
+if typeset -f __git_ps1 >/dev/null; then
+  _async_rprompt_file="${TMPDIR:-/tmp}/zsh-async-rprompt-$$"
+
+  _async_rprompt_worker() {
+    local tmp="${_async_rprompt_file}.$RANDOM"
+    __git_ps1 "%s" > "$tmp" 2>/dev/null
+    mv -f "$tmp" "$_async_rprompt_file" 2>/dev/null
+    kill -USR1 $$ 2>/dev/null
+  }
+
+  TRAPUSR1() {
+    [[ -r "$_async_rprompt_file" ]] || return
+    RPROMPT="$(<"$_async_rprompt_file")"
+    zle && zle reset-prompt
+  }
+
+  _async_rprompt_precmd() {
+    RPROMPT=''
+    _async_rprompt_worker &!
+  }
+
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _async_rprompt_precmd
+
+  trap 'rm -f "$_async_rprompt_file" "$_async_rprompt_file".*' EXIT
+fi
 
 # add venv PS1 tag
 show_virtual_env() {
