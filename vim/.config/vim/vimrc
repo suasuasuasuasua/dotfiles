@@ -73,6 +73,7 @@ set timeoutlen=300
 set undodir=$HOME/.local/state/vim/undo
 set undofile
 set viewdir=$HOME/.local/state/vim/view
+set viminfofile=$HOME/.local/state/vim/viminfo
 set updatetime=250
 set virtualedit=block
 set path=.,,
@@ -199,13 +200,7 @@ augroup vimrc
                     \ if line("'\"") > 0 && line("'\"") <= line("$") |
                     \   exe "normal! g`\"" |
                     \ endif
-  "Auto-save folds by making sessions
   autocmd FocusGained,BufEnter * if getcmdwintype() == '' | checktime | endif
-  autocmd BufWinLeave,BufWritePost,WinLeave *
-                    \ if get(b:, 'view_activated') | silent! mkview | endif
-  autocmd BufReadPost *
-                    \ if &buftype == '' && !get(b:, 'view_activated') |
-                    \   let b:view_activated = 1 | silent! loadview | endif
 augroup END
 
 source $HOME/.config/vim/colors.vim
