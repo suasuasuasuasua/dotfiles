@@ -10,3 +10,5 @@ require 'plugins.mini.completion'
 require 'plugins.mini.git'
 require 'plugins.mini.files'
 require 'plugins.mini.pick'
+
+require('mini.basics').setup()
