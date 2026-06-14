@@ -7,13 +7,63 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "MLX (local)",
       "options": {
-        "baseURL": "http://127.0.0.1:8080/v1",
+        "baseURL": "http://127.0.0.1:8080/v1"
       },
       "models": {
+        // "default_model": {
+        //   "name": "Qwen3 8B (local)",
+        //   "id": "mlx-community/Qwen3-8B-4bit",
+        //   "limit": {
+        //     "context": 32768,
+        //     "output": 4096
+        //   }
+        // }
+        // "default_model": {
+        //   "name": "Qwen3 14B (local)",
+        //   "id": "mlx-community/Qwen3-14B-4bit",
+        //   "limit": {
+        //     "context": 32768,
+        //     "output": 4096
+        //   }
+        // }
+        // "default_model": {
+        //   "name": "Qwen3 30B A3B (local)",
+        //   "id": "mlx-community/Qwen3-30B-A3B-4bit",
+        //   "limit": {
+        //     "context": 32768,
+        //     "output": 4096
+        //   }
+        // }
         "default_model": {
-          "name": "Default MLX Model"
+          "name": "Qwen3.6 27B OptiQ (local)",
+          "id": "mlx-community/Qwen3.6-27B-OptiQ-4bit",
+          "limit": {
+            "context": 16384,
+            "output": 4096
+          }
         }
+        // "default_model": {
+        //   "name": "Qwen3.6 35B A3B OptiQ (local)",
+        //   "id": "mlx-community/Qwen3.6-35B-A3B-OptiQ-4bit",
+        //   "limit": {
+        //     "context": 32768,
+        //     "output": 4096
+        //   }
+        // }
       }
     }
+  },
+  "mcp": {
+    "git": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@cyanheads/git-mcp-server@latest"
+      ]
+    }
+  },
+  "compaction": {
+    "auto": true
   }
 }
