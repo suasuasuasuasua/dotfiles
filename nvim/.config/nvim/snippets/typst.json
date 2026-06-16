@@ -1,0 +1,18 @@
+{
+  "Horizontal line": {
+    "prefix": "hline",
+    "body": "#line(length: 100%)$0"
+  },
+  "Notes Header": {
+    "prefix": "header",
+    "body": [
+      "#import \"@preview/physica:0.9.8\": *",
+      "",
+      "#set page(paper: \"a4\", margin: 1.5cm)",
+      "#set text(font: \"Libertinus Serif\", lang: \"en\")",
+      "#set heading(numbering: \"1.1.\")",
+      "",
+      "$0"
+    ]
+  }
+}
