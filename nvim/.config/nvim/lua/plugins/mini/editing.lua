@@ -1,11 +1,11 @@
 require('mini.ai').setup()
 require('mini.bracketed').setup()
 require('mini.jump').setup {
-  delay = { highlight = 10 }
+  delay = { highlight = 10 },
 }
 require('mini.move').setup()
 require('mini.pairs').setup {
-  modes = { command = true }
+  modes = { command = true },
 }
 require('mini.splitjoin').setup()
 require('mini.trailspace').setup()
@@ -16,12 +16,12 @@ MiniMisc.setup_auto_root()
 require('mini.surround').setup {
   -- https://nvim-mini.org/mini.nvim/doc/mini-surround.html#minisurround.config-setupsimilartotpopevim-surround
   mappings = {
-    add = 'ys',       -- Add surrounding in Normal and Visual modes
-    delete = 'ds',    -- Delete surrounding
-    find = '',        -- Find surrounding (to the right)
-    find_left = '',   -- Find surrounding (to the left)
-    highlight = '',   -- Highlight surrounding
-    replace = 'cs',   -- Replace surrounding
+    add = 'ys', -- Add surrounding in Normal and Visual modes
+    delete = 'ds', -- Delete surrounding
+    find = '', -- Find surrounding (to the right)
+    find_left = '', -- Find surrounding (to the left)
+    highlight = '', -- Highlight surrounding
+    replace = 'cs', -- Replace surrounding
 
     suffix_last = '', -- Suffix to search with "prev" method
     suffix_next = '', -- Suffix to search with "next" method

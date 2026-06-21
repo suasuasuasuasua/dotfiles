@@ -3,7 +3,8 @@ vim.lsp.enable {
   'gopls',
   'lua_ls',
   'nil_ls',
-  'pylsp',
+  'ty',
+  'tinymist',
 }
 
 vim.diagnostic.config {
@@ -13,6 +14,6 @@ vim.diagnostic.config {
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
   -- Can switch between these as you prefer
-  virtual_text = true,   -- Text shows up at the end of the line
+  virtual_text = true, -- Text shows up at the end of the line
   virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 }

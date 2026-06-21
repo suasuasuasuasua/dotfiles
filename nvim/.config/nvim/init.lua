@@ -1,3 +1,10 @@
+-- When running under nixCats, plugins are on the runtimepath via nix.
+-- Make vim.pack.add a no-op so plugin files don't try to fetch from GitHub.
+if pcall(require, 'nixCats') then
+  vim.g.is_nix = true
+  vim.pack.add = function() end
+end
+
 vim.g.have_nerd_font = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '

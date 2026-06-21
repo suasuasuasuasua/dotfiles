@@ -6,8 +6,8 @@ local function parse_output(proc)
   local result = proc:wait()
   local ret = {}
   if result.code == 0 then
-    for line in vim.gsplit(result.stdout, "\n", { plain = true, trimempty = true }) do
-      line = line:gsub("/$", "")
+    for line in vim.gsplit(result.stdout, '\n', { plain = true, trimempty = true }) do
+      line = line:gsub('/$', '')
       ret[line] = true
     end
   end
@@ -17,14 +17,11 @@ end
 local function new_git_status()
   return setmetatable({}, {
     __index = function(self, key)
-      local ignore_proc = vim.system(
-        { "git", "ls-files", "--ignored", "--exclude-standard", "--others", "--directory" },
-        {
-          cwd = key,
-          text = true,
-        }
-      )
-      local tracked_proc = vim.system({ "git", "ls-tree", "HEAD", "--name-only" }, {
+      local ignore_proc = vim.system({ 'git', 'ls-files', '--ignored', '--exclude-standard', '--others', '--directory' }, {
+        cwd = key,
+        text = true,
+      })
+      local tracked_proc = vim.system({ 'git', 'ls-tree', 'HEAD', '--name-only' }, {
         cwd = key,
         text = true,
       })
@@ -40,7 +37,7 @@ local function new_git_status()
 end
 local git_status = new_git_status()
 
-local refresh = require("oil.actions").refresh
+local refresh = require('oil.actions').refresh
 local orig_refresh = refresh.callback
 refresh.callback = function(...)
   git_status = new_git_status()
@@ -49,12 +46,12 @@ end
 
 local function oil_run_on_selection(opts)
   opts = opts or {}
-  local oil = require("oil")
+  local oil = require 'oil'
   local bufnr = vim.api.nvim_get_current_buf()
 
   -- find the visual range bounds
-  local start_line = vim.fn.line("v")
-  local end_line = vim.fn.line(".")
+  local start_line = vim.fn.line 'v'
+  local end_line = vim.fn.line '.'
   if start_line > end_line then
     start_line, end_line = end_line, start_line
   end
@@ -64,9 +61,7 @@ local function oil_run_on_selection(opts)
   local paths = {}
   for lnum = start_line, end_line do
     local entry = oil.get_entry_on_line(bufnr, lnum)
-    if entry then
-      table.insert(paths, vim.fn.fnameescape(dir .. entry.name))
-    end
+    if entry then table.insert(paths, vim.fn.fnameescape(dir .. entry.name)) end
   end
   if #paths == 0 then return end -- short circuit on empty range
 
@@ -84,17 +79,15 @@ local function oil_run_on_selection(opts)
   --   :chmod +x
   -- explicitly defines where the placeholder file belongs
   --   :mv {} /tmp/
-  local prefix = opts.prefix or ""
-  vim.ui.input({ prompt = opts.prompt or "Cmd ({} = file): " }, function(cmd)
-    if not cmd or cmd == "" then return end
+  local prefix = opts.prefix or ''
+  vim.ui.input({ prompt = opts.prompt or 'Cmd ({} = file): ' }, function(cmd)
+    if not cmd or cmd == '' then return end
     cmd = prefix .. cmd
     for _, path in ipairs(paths) do
-      local expanded = cmd:find("{}", 1, true)
-          and cmd:gsub("{}", path)
-          or (cmd .. " " .. path)
+      local expanded = cmd:find('{}', 1, true) and cmd:gsub('{}', path) or (cmd .. ' ' .. path)
       vim.cmd(expanded)
 
-      require("oil.actions").refresh.callback()
+      require('oil.actions').refresh.callback()
     end
   end)
 end
@@ -103,11 +96,9 @@ local detail = false
 require('oil').setup {
   view_options = {
     is_hidden_file = function(name, bufnr)
-      local dir = require("oil").get_current_dir(bufnr)
-      local is_dotfile = vim.startswith(name, ".") and name ~= ".."
-      if not dir then
-        return is_dotfile
-      end
+      local dir = require('oil').get_current_dir(bufnr)
+      local is_dotfile = vim.startswith(name, '.') and name ~= '..'
+      if not dir then return is_dotfile end
       if is_dotfile then
         return not git_status[dir].tracked[name]
       else
@@ -125,36 +116,36 @@ require('oil').setup {
     ['y.'] = { 'actions.copy_entry_path' },
     ['<C-f>'] = { 'actions.preview_scroll_down' },
     ['<C-b>'] = { 'actions.preview_scroll_up' },
-    ["gd"] = {
-      desc = "Toggle file detail view",
+    ['gd'] = {
+      desc = 'Toggle file detail view',
       callback = function()
         detail = not detail
         if detail then
-          require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+          require('oil').set_columns { 'icon', 'permissions', 'size', 'mtime' }
         else
-          require("oil").set_columns({ "icon" })
+          require('oil').set_columns { 'icon' }
         end
       end,
     },
-    ["<leader>sf"] = {
+    ['<leader>sf'] = {
       function()
-        require("mini.pick").builtin.files {
-          cwd = require("oil").get_current_dir()
+        require('mini.pick').builtin.files {
+          cwd = require('oil').get_current_dir(),
         }
       end,
-      mode = "n",
+      mode = 'n',
       nowait = true,
-      desc = "Find files in the current directory"
+      desc = 'Find files in the current directory',
     },
-    ["<leader>:"] = {
-      callback = function() oil_run_on_selection({ prefix = "!", prompt = "Shell cmd ({} = file): " }) end,
-      mode = { "n", "v" },
-      desc = "Run shell command on selected files",
+    ['<leader>:'] = {
+      callback = function() oil_run_on_selection { prefix = '!', prompt = 'Shell cmd ({} = file): ' } end,
+      mode = { 'n', 'v' },
+      desc = 'Run shell command on selected files',
     },
-    ["<leader><leader>:"] = {
-      callback = function() oil_run_on_selection({ prompt = "Ex cmd ({} = file): " }) end,
-      mode = { "n", "v" },
-      desc = "Run Ex command on selected files",
+    ['<leader><leader>:'] = {
+      callback = function() oil_run_on_selection { prompt = 'Ex cmd ({} = file): ' } end,
+      mode = { 'n', 'v' },
+      desc = 'Run Ex command on selected files',
     },
   },
 }
