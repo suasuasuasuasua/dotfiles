@@ -5,19 +5,14 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
 
-    # fork of sindrets/diffview.nvim; not in nixpkgs
     "plugins-diffview-plus" = {
       url = "github:dlyongemallo/diffview-plus.nvim";
       flake = false;
     };
-
-    # alexghergh's neovim-native tmux navigation; not in nixpkgs
     "plugins-nvim-tmux-navigation" = {
       url = "github:alexghergh/nvim-tmux-navigation";
       flake = false;
     };
-
-    # nixpkgs 26.05 snapshot predates mini.input; track upstream directly
     "plugins-mini-nvim" = {
       url = "github:echasnovski/mini.nvim";
       flake = false;
@@ -51,12 +46,12 @@
           ...
         }:
         {
-          # Tools placed on $PATH inside the nvim wrapper (replaces mason)
+          # Tools placed on $PATH inside the nvim wrapper
           lspsAndRuntimeDeps = {
             general = [
               pkgs.ast-grep
               pkgs.fd
-              (pkgs.python314.withPackages (ps: [ ps.pynvim ]))
+              (pkgs.python3.withPackages (ps: [ ps.pynvim ]))
               pkgs.ripgrep
               pkgs.stylua
             ];
@@ -117,7 +112,6 @@
               pkgs.vimPlugins.nvim-dap-ui
               pkgs.vimPlugins.nvim-nio
             ];
-
             # opt-in per packageDefinitions
             neorg = [ pkgs.vimPlugins.neorg ];
             oil = [ pkgs.vimPlugins.oil-nvim ];
