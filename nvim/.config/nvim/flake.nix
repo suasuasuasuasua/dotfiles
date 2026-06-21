@@ -90,19 +90,7 @@
               pkgs.vimPlugins.nvim-bqf
               pkgs.vimPlugins.nvim-lspconfig
               pkgs.neovimPlugins.nvim-tmux-navigation
-              (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
-                p.bash
-                p.c
-                p.diff
-                p.html
-                p.lua
-                p.luadoc
-                p.markdown
-                p.markdown-inline
-                p.query
-                p.vim
-                p.vimdoc
-              ]))
+              pkgs.vimPlugins.nvim-treesitter.withAllGrammars
               pkgs.vimPlugins.nvim-ufo
               pkgs.vimPlugins.overseer-nvim
               pkgs.vimPlugins.promise-async
