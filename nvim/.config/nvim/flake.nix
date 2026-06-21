@@ -49,13 +49,15 @@
           extra,
           name,
           ...
-        }@packageDef:
+        }:
         {
           # Tools placed on $PATH inside the nvim wrapper (replaces mason)
           lspsAndRuntimeDeps = {
             general = [
               pkgs.ast-grep
               pkgs.fd
+              pkgs.nodejs-slim_24
+              (pkgs.python314.withPackages (ps: [ ps.pynvim ]))
               pkgs.ripgrep
               pkgs.stylua
             ];
@@ -63,9 +65,9 @@
             nix = [ pkgs.nil ];
             c = [ pkgs.clang-tools ];
             go = [
+              pkgs.go-tools
               pkgs.gopls
               pkgs.gotools
-              pkgs.go-tools
             ];
             python = [ pkgs.python3Packages.python-lsp-server ];
             typst = [ pkgs.tinymist ];
@@ -78,10 +80,17 @@
 
           startupPlugins = {
             general = [
-              pkgs.neovimPlugins.mini-nvim
-              pkgs.vimPlugins.nvim-lspconfig
-              pkgs.vimPlugins.friendly-snippets
               pkgs.vimPlugins.conform-nvim
+              pkgs.neovimPlugins.diffview-plus
+              pkgs.vimPlugins.friendly-snippets
+              pkgs.vimPlugins.grug-far-nvim
+              pkgs.vimPlugins.guess-indent-nvim
+              pkgs.vimPlugins.lazygit-nvim
+              pkgs.neovimPlugins.mini-nvim
+              pkgs.vimPlugins.neogen
+              pkgs.vimPlugins.nvim-bqf
+              pkgs.vimPlugins.nvim-lspconfig
+              pkgs.neovimPlugins.nvim-tmux-navigation
               (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
                 p.bash
                 p.c
@@ -95,26 +104,19 @@
                 p.vim
                 p.vimdoc
               ]))
-              pkgs.vimPlugins.grug-far-nvim
-              pkgs.vimPlugins.guess-indent-nvim
-              pkgs.vimPlugins.lazygit-nvim
-              pkgs.vimPlugins.neogen
-              pkgs.vimPlugins.nvim-bqf
-              pkgs.neovimPlugins.nvim-tmux-navigation
               pkgs.vimPlugins.nvim-ufo
-              pkgs.vimPlugins.promise-async
               pkgs.vimPlugins.overseer-nvim
+              pkgs.vimPlugins.promise-async
               pkgs.vimPlugins.render-markdown-nvim
               pkgs.vimPlugins.tokyonight-nvim
-              pkgs.neovimPlugins.diffview-plus
             ];
 
             dap = [
               pkgs.vimPlugins.nvim-dap
-              pkgs.vimPlugins.nvim-dap-ui
-              pkgs.vimPlugins.nvim-nio
               pkgs.vimPlugins.nvim-dap-go
               pkgs.vimPlugins.nvim-dap-python
+              pkgs.vimPlugins.nvim-dap-ui
+              pkgs.vimPlugins.nvim-nio
             ];
 
             # opt-in per packageDefinitions
@@ -168,9 +170,9 @@
         formatter = pkgs.writeShellApplication {
           name = "treefmt";
           runtimeInputs = [
-            pkgs.treefmt
             pkgs.nixfmt-rfc-style
             pkgs.stylua
+            pkgs.treefmt
           ];
           text = "exec treefmt \"$@\"";
         };
