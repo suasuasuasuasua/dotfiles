@@ -54,8 +54,9 @@
           # Tools placed on $PATH inside the nvim wrapper (replaces mason)
           lspsAndRuntimeDeps = {
             general = with pkgs; [
-              ripgrep
+              ast-grep
               fd
+              ripgrep
               stylua
             ];
             lua = with pkgs; [ lua-language-server ];
@@ -165,6 +166,15 @@
       {
         packages = utils.mkAllWithDefault defaultPackage;
         devShells.default = pkgs.mkShell { packages = [ defaultPackage ]; };
+        formatter = pkgs.writeShellApplication {
+          name = "treefmt";
+          runtimeInputs = with pkgs; [
+            treefmt
+            nixfmt-rfc-style
+            stylua
+          ];
+          text = "exec treefmt \"$@\"";
+        };
       }
     );
 }
