@@ -3,7 +3,7 @@ vim.pack.add {
   -- user interface
   'https://github.com/rcarriga/nvim-dap-ui',
   'https://github.com/nvim-neotest/nvim-nio',
-  -- debug adapters
+  -- debug adapters (native only; nix provides adapters via lspsAndRuntimeDeps)
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
   -- debuggers
@@ -24,15 +24,17 @@ vim.keymap.set('n', '<F7>', function() require('dapui').toggle() end, { desc = '
 local dap = require 'dap'
 local dapui = require 'dapui'
 
-require('mason-nvim-dap').setup {
-  automatic_installation = true,
-  handlers = {},
-  ensure_installed = {
-    'cpptools',
-    'delve',
-    'debugpy',
-  },
-}
+if not vim.g.is_nix then
+  require('mason-nvim-dap').setup {
+    automatic_installation = true,
+    handlers = {},
+    ensure_installed = {
+      'cpptools',
+      'delve',
+      'debugpy',
+    },
+  }
+end
 
 dapui.setup {
   icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
@@ -77,14 +79,16 @@ require('dap-go').setup {
 
 require("dap-python").setup()
 
-dap.adapters.codelldb = {
-  type = 'server',
-  port = '${port}',
-  executable = {
-    command = vim.fn.expand('~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb'),
-    args = { '--port', '${port}' },
-  },
-}
+if not vim.g.is_nix then
+  dap.adapters.codelldb = {
+    type = 'server',
+    port = '${port}',
+    executable = {
+      command = vim.fn.expand('~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb'),
+      args = { '--port', '${port}' },
+    },
+  }
+end
 
 dap.configurations = {
   python = {

@@ -12,7 +12,10 @@ vim.api.nvim_create_autocmd('PackChanged', {
 vim.pack.add { 'https://github.com/nvim-treesitter/nvim-treesitter' }
 
 local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
-require('nvim-treesitter').install(parsers)
+-- In nix mode parsers are pre-compiled via nvim-treesitter.withPlugins in flake.nix
+if not vim.g.is_nix then
+  require('nvim-treesitter').install(parsers)
+end
 vim.api.nvim_create_autocmd('FileType', {
   callback = function(args)
     local buf, filetype = args.buf, args.match
