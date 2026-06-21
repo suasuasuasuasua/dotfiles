@@ -76,9 +76,19 @@ require('dap-go').setup {
   },
 }
 
-require('dap-python').setup()
+if vim.g.is_nix then
+  require('dap-python').setup(require('nixCats').extra.python3 .. '/bin/python3')
+else
+  require('dap-python').setup()
+end
 
-if not vim.g.is_nix then
+if vim.g.is_nix then
+  -- pkgs.lldb provides lldb-dap, the built-in LLDB DAP adapter
+  dap.adapters.codelldb = {
+    type = 'executable',
+    command = 'lldb-dap',
+  }
+else
   dap.adapters.codelldb = {
     type = 'server',
     port = '${port}',

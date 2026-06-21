@@ -3,7 +3,7 @@ vim.lsp.enable {
   'gopls',
   'lua_ls',
   'nil_ls',
-  'pylsp',
+  'ty',
   'tinymist',
 }
 

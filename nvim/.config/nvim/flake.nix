@@ -30,6 +30,12 @@
       inherit (nixCats) utils;
       luaPath = ./.;
       forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
+      mkPython =
+        pkgs:
+        pkgs.python3.withPackages (ps: [
+          ps.debugpy
+          ps.pynvim
+        ]);
 
       dependencyOverlays = [
         # makes pkgs.neovimPlugins.<name> available for non-nixpkgs inputs
@@ -51,7 +57,7 @@
             general = [
               pkgs.ast-grep
               pkgs.fd
-              (pkgs.python3.withPackages (ps: [ ps.pynvim ]))
+              (mkPython pkgs)
               pkgs.ripgrep
               pkgs.stylua
             ];
@@ -63,12 +69,11 @@
               pkgs.gopls
               pkgs.gotools
             ];
-            python = [ pkgs.python3Packages.python-lsp-server ];
+            python = [ pkgs.ty ];
             typst = [ pkgs.tinymist ];
             dap = [
               pkgs.delve
               pkgs.lldb
-              pkgs.python3Packages.debugpy
             ];
           };
 
@@ -121,6 +126,9 @@
       packageDefinitions = {
         nvim =
           { pkgs, name, ... }:
+          let
+            python3 = mkPython pkgs;
+          in
           {
             settings = {
               wrapRc = true;
@@ -138,6 +146,9 @@
               # opt-in
               neorg = false;
               oil = false;
+            };
+            extra = {
+              python3 = "${python3}";
             };
           };
       };
