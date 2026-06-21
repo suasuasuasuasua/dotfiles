@@ -79,6 +79,7 @@
           startupPlugins = {
             general = [
               pkgs.neovimPlugins.mini-nvim
+              pkgs.vimPlugins.nvim-lspconfig
               pkgs.vimPlugins.friendly-snippets
               pkgs.vimPlugins.conform-nvim
               (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
