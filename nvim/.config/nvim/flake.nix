@@ -53,74 +53,72 @@
         {
           # Tools placed on $PATH inside the nvim wrapper (replaces mason)
           lspsAndRuntimeDeps = {
-            general = with pkgs; [
-              ast-grep
-              fd
-              ripgrep
-              stylua
+            general = [
+              pkgs.ast-grep
+              pkgs.fd
+              pkgs.ripgrep
+              pkgs.stylua
             ];
-            lua = with pkgs; [ lua-language-server ];
-            nix = with pkgs; [ nil ];
-            c = with pkgs; [ clang-tools ];
-            go = with pkgs; [
-              gopls
-              gotools
-              go-tools
+            lua = [ pkgs.lua-language-server ];
+            nix = [ pkgs.nil ];
+            c = [ pkgs.clang-tools ];
+            go = [
+              pkgs.gopls
+              pkgs.gotools
+              pkgs.go-tools
             ];
-            python = with pkgs; [ python3Packages.python-lsp-server ];
-            typst = with pkgs; [ tinymist ];
-            dap = with pkgs; [
-              delve
-              lldb
-              python3Packages.debugpy
+            python = [ pkgs.python3Packages.python-lsp-server ];
+            typst = [ pkgs.tinymist ];
+            dap = [
+              pkgs.delve
+              pkgs.lldb
+              pkgs.python3Packages.debugpy
             ];
           };
 
           startupPlugins = {
-            general = with pkgs.vimPlugins; [
+            general = [
               pkgs.neovimPlugins.mini-nvim
-              friendly-snippets
-              conform-nvim
-              (nvim-treesitter.withPlugins (
-                p: with p; [
-                  bash
-                  c
-                  diff
-                  html
-                  lua
-                  luadoc
-                  markdown
-                  markdown-inline
-                  query
-                  vim
-                  vimdoc
-                ]
-              ))
-              grug-far-nvim
-              guess-indent-nvim
-              lazygit-nvim
-              neogen
-              nvim-bqf
+              pkgs.vimPlugins.friendly-snippets
+              pkgs.vimPlugins.conform-nvim
+              (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [
+                p.bash
+                p.c
+                p.diff
+                p.html
+                p.lua
+                p.luadoc
+                p.markdown
+                p.markdown-inline
+                p.query
+                p.vim
+                p.vimdoc
+              ]))
+              pkgs.vimPlugins.grug-far-nvim
+              pkgs.vimPlugins.guess-indent-nvim
+              pkgs.vimPlugins.lazygit-nvim
+              pkgs.vimPlugins.neogen
+              pkgs.vimPlugins.nvim-bqf
               pkgs.neovimPlugins.nvim-tmux-navigation
-              nvim-ufo
-              promise-async
-              overseer-nvim
-              render-markdown-nvim
-              tokyonight-nvim
+              pkgs.vimPlugins.nvim-ufo
+              pkgs.vimPlugins.promise-async
+              pkgs.vimPlugins.overseer-nvim
+              pkgs.vimPlugins.render-markdown-nvim
+              pkgs.vimPlugins.tokyonight-nvim
               pkgs.neovimPlugins.diffview-plus
             ];
 
-            dap = with pkgs.vimPlugins; [
-              nvim-dap
-              nvim-dap-ui
-              nvim-nio
-              nvim-dap-go
-              nvim-dap-python
+            dap = [
+              pkgs.vimPlugins.nvim-dap
+              pkgs.vimPlugins.nvim-dap-ui
+              pkgs.vimPlugins.nvim-nio
+              pkgs.vimPlugins.nvim-dap-go
+              pkgs.vimPlugins.nvim-dap-python
             ];
 
             # opt-in per packageDefinitions
-            neorg = with pkgs.vimPlugins; [ neorg ];
-            oil = with pkgs.vimPlugins; [ oil-nvim ];
+            neorg = [ pkgs.vimPlugins.neorg ];
+            oil = [ pkgs.vimPlugins.oil-nvim ];
           };
         };
 
@@ -168,10 +166,10 @@
         devShells.default = pkgs.mkShell { packages = [ defaultPackage ]; };
         formatter = pkgs.writeShellApplication {
           name = "treefmt";
-          runtimeInputs = with pkgs; [
-            treefmt
-            nixfmt-rfc-style
-            stylua
+          runtimeInputs = [
+            pkgs.treefmt
+            pkgs.nixfmt-rfc-style
+            pkgs.stylua
           ];
           text = "exec treefmt \"$@\"";
         };
