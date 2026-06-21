@@ -56,7 +56,6 @@
             general = [
               pkgs.ast-grep
               pkgs.fd
-              pkgs.nodejs-slim_24
               (pkgs.python314.withPackages (ps: [ ps.pynvim ]))
               pkgs.ripgrep
               pkgs.stylua
