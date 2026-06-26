@@ -20,6 +20,16 @@ local align_blame = function(au_data)
 
   -- Bind both windows so that they scroll together
   vim.wo[win_src].scrollbind, vim.wo.scrollbind = true, true
+
+  -- Reset scrollbind on the source window once the blame window closes
+  local win_blame = vim.api.nvim_get_current_win()
+  vim.api.nvim_create_autocmd('WinClosed', {
+    pattern = tostring(win_blame),
+    once = true,
+    callback = function()
+      if vim.api.nvim_win_is_valid(win_src) then vim.wo[win_src].scrollbind = false end
+    end,
+  })
 end
 
 local au_opts = { pattern = 'MiniGitCommandSplit', callback = align_blame }
