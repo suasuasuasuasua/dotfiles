@@ -13,6 +13,7 @@
       url = "github:alexghergh/nvim-tmux-navigation";
       flake = false;
     };
+    # TODO: wait for https://github.com/nvim-mini/mini.nvim/releases/tag/v0.18.0
     "plugins-mini-nvim" = {
       url = "github:echasnovski/mini.nvim";
       flake = false;
