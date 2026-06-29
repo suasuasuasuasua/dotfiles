@@ -58,7 +58,11 @@ vim.api.nvim_create_autocmd('User', {
   callback = function() git_status = new_git_status() end,
 })
 
+local minifiles_toggle = function(...)
+  if not MiniFiles.close() then MiniFiles.open(...) end
+end
+
 vim.keymap.set('n', '-', function()
   local path = vim.api.nvim_buf_get_name(0)
-  MiniFiles.open(path ~= '' and path or vim.fn.getcwd())
+  minifiles_toggle(path ~= '' and path or vim.fn.getcwd())
 end, { desc = 'Open parent directory' })
