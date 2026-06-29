@@ -1,3 +1,4 @@
+-- Toggle dotfiles (show git tracked)
 local function parse_git_output(proc)
   local result = proc:wait()
   local ret = {}
@@ -26,8 +27,6 @@ local function new_git_status()
 end
 local git_status = new_git_status()
 
-local show_all = false
-local filter_show = function(_) return true end
 local filter_git = function(fs_entry)
   local dir = vim.fs.dirname(fs_entry.path)
   local is_dotfile = vim.startswith(fs_entry.name, '.') and fs_entry.name ~= '..'
@@ -44,20 +43,69 @@ require('mini.files').setup {
   content = { filter = filter_git },
 }
 
-local toggle_dotfiles = function()
-  show_all = not show_all
-  local new_filter = show_all and filter_show or filter_git
-  MiniFiles.refresh { content = { filter = new_filter } }
+-- Create mappings to modify target window via split ~
+local map_split = function(buf_id, lhs, direction)
+  local rhs = function()
+    -- Make new window and set it as target
+    local cur_target = MiniFiles.get_explorer_state().target_window
+    local new_target = vim.api.nvim_win_call(cur_target, function()
+      vim.cmd(direction .. ' split')
+      return vim.api.nvim_get_current_win()
+    end)
+
+    MiniFiles.set_target_window(new_target)
+
+    -- This intentionally doesn't act on file under cursor in favor of
+    -- explicit "go in" action (`l` / `L`). To immediately open file,
+    -- add appropriate `MiniFiles.go_in()` call instead of this comment.
+  end
+
+  -- Adding `desc` will result into `show_help` entries
+  local desc = 'Split ' .. direction
+  vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
 end
+
 vim.api.nvim_create_autocmd('User', {
   pattern = 'MiniFilesBufferCreate',
-  callback = function(args) vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = args.data.buf_id }) end,
-})
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MiniFilesExplorerOpen',
-  callback = function() git_status = new_git_status() end,
+  callback = function(args)
+    local buf_id = args.data.buf_id
+    -- Tweak keys to your liking
+    map_split(buf_id, '<C-s>', 'belowright horizontal')
+    map_split(buf_id, '<C-v>', 'belowright vertical')
+    map_split(buf_id, '<C-t>', 'tab')
+  end,
 })
 
+-- Create mappings which use data from entry under cursor ~
+--
+-- Set focused directory as current working directory
+local set_cwd = function()
+  local path = (MiniFiles.get_fs_entry() or {}).path
+  if path == nil then return vim.notify 'Cursor is not on valid entry' end
+  vim.fn.chdir(vim.fs.dirname(path))
+end
+
+-- Yank in register full path of entry under cursor
+local yank_path = function()
+  local path = (MiniFiles.get_fs_entry() or {}).path
+  if path == nil then return vim.notify 'Cursor is not on valid entry' end
+  vim.fn.setreg(vim.v.register, path)
+end
+
+-- Open path with system default handler (useful for non-text files)
+local ui_open = function() vim.ui.open(MiniFiles.get_fs_entry().path) end
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesBufferCreate',
+  callback = function(args)
+    local b = args.data.buf_id
+    vim.keymap.set('n', 'g~', set_cwd, { buffer = b, desc = 'Set cwd' })
+    vim.keymap.set('n', 'gX', ui_open, { buffer = b, desc = 'OS open' })
+    vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
+  end,
+})
+
+-- Toggle explorer
 local minifiles_toggle = function(...)
   if not MiniFiles.close() then MiniFiles.open(...) end
 end
