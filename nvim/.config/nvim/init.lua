@@ -74,6 +74,10 @@ vim.opt.listchars = { tab = '> ', trail = '-', nbsp = '+' }
 vim.cmd 'filetype plugin indent on'
 if vim.fn.exists 'syntax_on' ~= 1 then vim.cmd 'syntax enable' end
 
+-- disable netrw for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 require 'autocmd'
 require 'keymaps'
 require 'lsp'

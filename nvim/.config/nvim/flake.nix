@@ -89,6 +89,7 @@
               pkgs.neovimPlugins.mini-nvim
               pkgs.vimPlugins.neogen
               pkgs.vimPlugins.nvim-bqf
+              pkgs.vimPlugins.nvim-tree-lua
               pkgs.vimPlugins.nvim-lspconfig
               pkgs.neovimPlugins.nvim-tmux-navigation
               pkgs.vimPlugins.nvim-treesitter.withAllGrammars
