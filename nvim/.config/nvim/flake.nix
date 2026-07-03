@@ -121,7 +121,6 @@
           {
             settings = {
               wrapRc = true;
-              aliases = [ "vim" ];
             };
             categories = {
               general = true;
