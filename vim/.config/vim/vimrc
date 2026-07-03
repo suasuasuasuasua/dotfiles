@@ -12,7 +12,7 @@ set colorcolumn=80
 if exists('+autocomplete') | set autocomplete | endif
 try | set complete=.^5,w^5,b^5,u^5 | catch | set complete=.,w,b,u | endtry
 set completeopt=menu,preview,menuone,noinsert,noselect
-if has('patch-9.0.0000') | set completeopt+=popup,fuzzy | endif
+try | set completeopt+=popup,fuzzy | catch | endtry
 set confirm
 set cursorline
 set display=lastline
@@ -60,7 +60,7 @@ set smartcase
 set smarttab
 set splitbelow
 set splitright
-if has('patch-8.1.2315') | set switchbuf=uselast | endif
+try | set switchbuf=uselast | catch | endtry
 set t_vb=
 set tabstop=4
 if exists('+termguicolors')
@@ -78,7 +78,7 @@ set updatetime=250
 set virtualedit=block
 set path=.,,
 set wildmenu
-if has('patch-9.0.0670') | set wildoptions+=fuzzy | endif
+try | set wildoptions+=fuzzy | catch | endtry
 
 let s:in_git_repo = executable('git') && (!empty(finddir('.git', '.;')) || !empty(findfile('.git', '.;')))
 
