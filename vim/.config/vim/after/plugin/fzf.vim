@@ -5,9 +5,12 @@ if exists('g:loaded_fzf_vim')
   nnoremap <silent> <Leader>s: :History:<CR>
   nnoremap <silent> <Leader>s/ :History/<CR>
   nnoremap <silent> <Leader>sc :Commands<CR>
-  nnoremap <silent> <Leader>sf :Files<CR>
-  nnoremap <silent> <Leader>sg :Rg<CR>
-  nnoremap <silent> <Leader>sG :GGrep<CR>
+  " prefer git
+  " nnoremap <silent> <Leader>sf :Files<CR>
+  nnoremap <silent> <Leader>sf :GFiles<CR>
+  " prefer git
+  " nnoremap <silent> <Leader>sg :Rg<CR>
+  nnoremap <silent> <Leader>sg :GGrep<CR>
   nnoremap <silent> <Leader>sh :Helptags<CR>
   nnoremap <silent> <Leader>sk :Maps<CR>
   nnoremap <silent> <Leader>sn :Files $HOME/.config/vim/<CR>
@@ -28,10 +31,16 @@ if exists('g:loaded_fzf_vim')
 
   let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-  " git grep wrapper
+  " git ls-files wrapper that includes untracked files
+  command! -bang -nargs=* GFiles
+    \ call fzf#vim#gitfiles(
+    \   '-co --deduplicate --exclude-standard'.fzf#shellescape(<q-args>),
+    \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+  " git grep wrapper that includes untracked files
   command! -bang -nargs=* GGrep
     \ call fzf#vim#grep(
-    \   'git grep --line-number -- '.fzf#shellescape(<q-args>),
+    \   'git grep --line-number --untracked -- '.fzf#shellescape(<q-args>),
     \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
   " Insert mode completion
