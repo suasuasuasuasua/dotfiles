@@ -7,7 +7,7 @@ end
 
 vim.g.have_nerd_font = true
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = ','
 vim.o.autoindent = true
 vim.o.breakindent = true
 vim.o.breakindentopt = 'list:-1'
