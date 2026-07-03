@@ -16,12 +16,6 @@
 [submodule "vim/gv.vim"]
 	path = .config/vim/pack/plugin/start/gv.vim
 	url = https://github.com/junegunn/gv.vim
-[submodule "vim/undotree"]
-	path = vim/.config/vim/pack/plugin/opt/undotree
-	url = https://github.com/mbbill/undotree
-[submodule "vim/nerdtree"]
-	path = vim/.config/vim/pack/plugin/opt/nerdtree
-	url = https://github.com/preservim/nerdtree
 [submodule "vim/vim-indent-guides"]
 	path = vim/.config/vim/pack/plugin/opt/vim-indent-guides
 	url = https://github.com/preservim/vim-indent-guides
@@ -55,15 +49,6 @@
 [submodule "vim/tokyonight.nvim"]
 	path = vim/.config/vim/pack/colors/opt/tokyonight.nvim
 	url = https://github.com/folke/tokyonight.nvim
-[submodule "vim/coc.nvim"]
-	path = vim/.config/vim/pack/plugin/opt/coc.nvim
-	url = https://github.com/neoclide/coc.nvim
-[submodule "vim/ultisnips"]
-	path = vim/.config/vim/pack/plugin/opt/ultisnips
-	url = https://github.com/SirVer/ultisnips
-[submodule "vim/vim-snippets"]
-	path = vim/.config/vim/pack/plugin/opt/vim-snippets
-	url = https://github.com/honza/vim-snippets
 [submodule "vim/vim-which-key"]
 	path = vim/.config/vim/pack/plugin/opt/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key
@@ -73,15 +58,6 @@
 [submodule "vim/auto-pairs"]
 	path = vim/.config/vim/pack/plugin/opt/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
-[submodule "vim/markdown-preview.nvim"]
-	path = vim/.config/vim/pack/plugin/opt/markdown-preview.nvim
-	url = https://github.com/iamcco/markdown-preview.nvim
-[submodule "vim/rainbow_parentheses.vim"]
-	path = vim/.config/vim/pack/plugin/opt/rainbow_parentheses.vim
-	url = https://github.com/kien/rainbow_parentheses.vim
-[submodule "vim/lightline.vim"]
-	path = vim/.config/vim/pack/plugin/opt/lightline.vim
-	url = https://github.com/itchyny/lightline.vim
 [submodule "vim/vim-trailing-whitespace"]
 	path = vim/.config/vim/pack/plugin/opt/vim-trailing-whitespace
 	url = https://github.com/bronson/vim-trailing-whitespace
@@ -124,6 +100,3 @@
 [submodule "tmux/tmux-sensible"]
 	path = tmux/.config/tmux/plugins/tmux-sensible
 	url = https://github.com/tmux-plugins/tmux-sensible
-[submodule "vim/.config/vim/pack/plugin/opt/vimspector"]
-	path = vim/.config/vim/pack/plugin/opt/vimspector
-	url = https://github.com/puremourning/vimspector
