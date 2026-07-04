@@ -181,33 +181,8 @@ endif
 set wildignore+=*.o,*.pyc
 execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val'), ',')
 
-inoremap JK <Esc>
-inoremap Jk <Esc>
-inoremap jK <Esc>
-inoremap jk <Esc>
-nnoremap - :Ex<CR>
-nnoremap <Leader><Leader> :b<space>
-nnoremap <Leader>sf :find<space>
-nnoremap <Leader>sg :Grep<space>
-nnoremap <silent> <Leader>l :nohl<CR>
-nnoremap <Leader>mm :make<CR>
-nnoremap <Leader>so :source $HOME/.config/vim/vimrc<CR>
-
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
-
-augroup vimrc
-  autocmd!
-  "Return to last edit position when opening files
-  autocmd BufReadPost *
-                    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                    \   exe "normal! g`\"" |
-                    \ endif
-  autocmd FocusGained,BufEnter * if getcmdwintype() == '' | checktime | endif
-augroup END
-
+source $HOME/.config/vim/autocmd.vim
+source $HOME/.config/vim/keymaps.vim
 source $HOME/.config/vim/colors.vim
 source $HOME/.config/vim/builtin.vim
 source $HOME/.config/vim/plugins.vim
