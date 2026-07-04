@@ -117,15 +117,15 @@ let s:exclude_files = [
   \ ]
 
 let s:gitexc = join(map(copy(s:exclude_dirs) + copy(s:exclude_files), 'shellescape(":(exclude)" . v:val)'), ' ')
-let s:rgexc = join(map(copy(s:exclude_dirs) + copy(s:exclude_files), '"-g " . shellescape("!" . v:val)'), ' ')
 let s:grepexc = join(map(copy(s:exclude_dirs), '"--exclude-dir=" . shellescape(v:val)'), ' ')
   \ . ' ' . join(map(copy(s:exclude_files), '"--exclude=" . shellescape(v:val)'), ' ')
 
 "better find function
 if exists('+findfunc')
+    " NOTE: if has ripgrep or fd_find, then use
+    " \ : executable('fd') ? 'fd --type f'
+    " \ : executable('rg') ? 'rg --files'
   let s:findcmd = s:in_git_repo ? 'git ls-files -co --deduplicate --exclude-standard -- . ' . s:gitexc
-    \ : executable('fd') ? 'fd --type f'
-    \ : executable('rg') ? 'rg --files'
     \ : 'find . -type f'
   let s:filescache = []
   func! FindFiles(arg, _)
@@ -140,8 +140,9 @@ if exists('+findfunc')
 endif
 
 "better grep function
+" NOTE: if has ripgrep
+" \ : executable('rg') ? 'rg --vimgrep ' . ' $*'
 let &grepprg = s:in_git_repo ? 'git grep --untracked -n $* -- ' . s:gitexc
-  \ : executable('rg') ? 'rg --vimgrep ' . s:rgexc . ' $*'
   \ : 'LC_ALL=C grep -rn ' . s:grepexc . ' $*'
 set grepformat=%f:%l:%c:%m,%f:%l:%m
 
@@ -206,7 +207,7 @@ augroup END
 
 source $HOME/.config/vim/colors.vim
 source $HOME/.config/vim/builtin.vim
-"source $HOME/.config/vim/plugins.vim
+source $HOME/.config/vim/plugins.vim
 
 "Optional plugins (highly recommended)
 "These are generally available in package managers.
