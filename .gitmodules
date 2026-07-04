@@ -100,9 +100,3 @@
 [submodule "tmux/tmux-sensible"]
 	path = tmux/.config/tmux/plugins/tmux-sensible
 	url = https://github.com/tmux-plugins/tmux-sensible
-[submodule "vim/.config/vim/pack/syntax/opt/vim-markdown"]
-	path = vim/.config/vim/pack/syntax/opt/vim-markdown
-	url = https://github.com/preservim/vim-markdown
-[submodule "vim/.config/vim/pack/syntax/opt/typst.vim"]
-	path = vim/.config/vim/pack/syntax/opt/typst.vim
-	url = https://github.com/kaarmu/typst.vim

@@ -22,5 +22,3 @@ try | packadd! comment | catch | silent! packadd! vim-commentary | endtry
 "languages
 "packadd! vim-go
 "packadd! vim-nix
-packadd! typst.vim
-packadd! vim-markdown
