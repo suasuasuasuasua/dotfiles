@@ -21,9 +21,18 @@ dnf install python3-devel
 
 ## Plugins
 
+### Dependencies
+
+In terms of dependencies, there are few. Ideally, `vim` should be at least
+version 9.0 to take advantage of features like the wildcard and built-in
+commentary.
+
+- `fzf` (for sane fuzzy finding)
+- `git` (for `git grep` and `git ls-files`)
+
 ### LSP
 
-`coc.nvim` is a decent completion engine for `vim`. 
+`coc.nvim` is a decent completion engine for `vim`.
 
 It requires `nodejs` and a manual step of `npm ci` inside of the `coc.nvim`
 directory.
