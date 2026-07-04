@@ -1,7 +1,6 @@
 "default
 packadd! auto-pairs
-packadd! fzf
-packadd! fzf.vim
+if executable('fzf') | packadd! fzf | packadd! fzf.vim | endif
 packadd! targets.vim
 packadd! vim-devicons
 packadd! vim-dispatch
