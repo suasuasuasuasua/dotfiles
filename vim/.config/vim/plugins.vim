@@ -1,6 +1,7 @@
 "default
 packadd! auto-pairs
 if executable('fzf') | packadd! fzf | packadd! fzf.vim | endif
+if executable('ctags') | packadd! vim-gutentags | endif
 packadd! targets.vim
 packadd! vim-devicons
 packadd! vim-dispatch
