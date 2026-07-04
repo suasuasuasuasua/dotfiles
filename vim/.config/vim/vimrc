@@ -1,12 +1,3 @@
-let g:markdown_folding = 1
-let g:rust_fold = 1
-let g:rustfmt_emit_files = 1
-let g:sh_fold_enabled = 7
-let g:typst_folding = 1
-
-filetype plugin indent on
-syntax enable
-
 "set autochdir
 set autoindent
 set autoread
@@ -197,9 +188,10 @@ set wildignore+=*.o,*.pyc
 execute 'set wildignore+=' . join(map(copy(s:exclude_dirs), '"*/" . v:val'), ',')
 
 source $HOME/.config/vim/autocmd.vim
-source $HOME/.config/vim/keymaps.vim
-source $HOME/.config/vim/colors.vim
 source $HOME/.config/vim/builtin.vim
+source $HOME/.config/vim/colors.vim
+source $HOME/.config/vim/filetypes.vim
+source $HOME/.config/vim/keymaps.vim
 source $HOME/.config/vim/plugins.vim
 
 "Optional plugins (highly recommended)
