@@ -123,6 +123,7 @@ let s:exclude_files = [
 
 if executable('ctags')
   let g:gutentags_ctags_exclude = s:exclude_dirs + s:exclude_files
+  let g:gutentags_ctags_extra_args = ['--links=no']
   let g:gutentags_generate_on_new = 1
   let g:gutentags_generate_on_missing = 1
   let g:gutentags_generate_on_write = 1
