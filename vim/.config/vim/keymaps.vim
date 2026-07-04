@@ -14,6 +14,15 @@ nnoremap <Leader>sf :find<space>
 nnoremap <Leader>sg :Grep<space>
 nnoremap grd <C-]>
 nnoremap grr :Grep <C-r><C-w>
+xnoremap grr :<C-u>call <SID>GrepVisual()<CR>
+
+func! s:GrepVisual()
+  let l:save = @"
+  normal! gvy
+  let l:sel = @"
+  let @" = l:save
+  call feedkeys(':Grep ' . l:sel, 'n')
+endfunc
 nnoremap <leader>st :tselect /
 nnoremap gO :tselect /
 
