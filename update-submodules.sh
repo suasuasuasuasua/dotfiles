@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 git submodule sync
-git submodule update --init --remote
+git submodule update --init --remote -j8
