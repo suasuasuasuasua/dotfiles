@@ -15,6 +15,7 @@ if exists('g:loaded_fzf_vim')
   nnoremap <silent> <Leader>sk :Maps<CR>
   nnoremap <silent> <Leader>sn :Files $HOME/.config/vim/<CR>
   nnoremap <silent> <Leader>st :Tags<CR>
+  nnoremap <silent> gO :BTags<CR>
 
   " An action can be a reference to a function that processes selected lines
   function! s:build_quickfix_list(lines)

@@ -100,3 +100,6 @@
 [submodule "tmux/tmux-sensible"]
 	path = tmux/.config/tmux/plugins/tmux-sensible
 	url = https://github.com/tmux-plugins/tmux-sensible
+[submodule "vim/.config/vim/pack/plugin/opt/vim-gutentags"]
+	path = vim/.config/vim/pack/plugin/opt/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags

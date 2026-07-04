@@ -81,6 +81,7 @@ set viminfofile=$HOME/.local/state/vim/viminfo
 set updatetime=250
 set virtualedit=block
 set path=.,,
+set tags=./tags,tags;
 set wildmenu
 try | set wildoptions+=fuzzy | catch | endtry
 
@@ -119,6 +120,13 @@ let s:exclude_dirs = [
 let s:exclude_files = [
   \ '*.lock',
   \ ]
+
+if executable('ctags')
+  let g:gutentags_ctags_exclude = s:exclude_dirs + s:exclude_files
+  let g:gutentags_generate_on_new = 1
+  let g:gutentags_generate_on_missing = 1
+  let g:gutentags_generate_on_write = 1
+endif
 
 let s:gitexc = join(map(copy(s:exclude_dirs) + copy(s:exclude_files), 'shellescape(":(exclude)" . v:val)'), ' ')
 let s:grepexc = join(map(copy(s:exclude_dirs), '"--exclude-dir=" . shellescape(v:val)'), ' ')
