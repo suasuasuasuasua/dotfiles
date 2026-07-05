@@ -1,18 +1,33 @@
 [core]
     editor = nvim
+    autocrlf = input
 [user]
     name = Justin Hoang
     email = justinhoang@sua.dev
     signingkey = justinhoang@sua.dev
 [init]
     defaultBranch = main
+[fetch]
+    prune = true
+    pruneTags = true
 [pull]
-    rebase = false
+    rebase = true
+    ff = only
 [push]
     autoSetupRemote = true
+[rebase]
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
+[rerere]
+    enabled = true # remember conflict resolutions
 [commit]
     gpgsign = true
+    verbose = true
 [diff]
+    colorMoved = zebra
+    mnemonicPrefix = true
+    renames = copies
     tool = vimdiff
     algorithm = patience
 [difftool]
