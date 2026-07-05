@@ -6,3 +6,6 @@ silent! packadd! hlyank
 silent! packadd! matchit
 silent! packadd! nohlsearch
 silent! packadd! termdebug
+
+"show long listing for netrw
+let g:netrw_liststyle = 1
