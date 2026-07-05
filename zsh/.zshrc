@@ -51,6 +51,11 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 
+# Edit command via EDITOR
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 # add autosuggestions if found
 for base in "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" \
   "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
