@@ -5,4 +5,4 @@ vim.pack.add {
 
 require('neogit').setup {}
 
-vim.keymap.set('n', '<leader>lg', '<Cmd>Neogit<Cr>', { desc = 'Toggle Neogit' })
+vim.keymap.set('n', '<leader>gg', '<Cmd>Neogit<Cr>', { desc = 'Toggle Neogit' })
