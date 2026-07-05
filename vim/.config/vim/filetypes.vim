@@ -1,7 +1,12 @@
 let g:markdown_folding = 1
 let g:rust_fold = 1
+let g:rust_conceal = 1
 let g:rustfmt_emit_files = 1
 let g:sh_fold_enabled = 7
+let g:is_bash = 1
+let c_gnu = 1
+let c_space_errors = 1
+let g:typst_conceal = 1
 let g:typst_folding = 1
 let g:typst_embedded_languages = ['python', 'cpp', 'sh']
 
