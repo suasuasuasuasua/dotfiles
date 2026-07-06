@@ -24,6 +24,9 @@
 [commit]
     gpgsign = true
     verbose = true
+[alias]
+    # "retry commit" with last message
+    rc = !git commit -eF \"$(git rev-parse --git-path COMMIT_EDITMSG)\"
 [diff]
     colorMoved = zebra
     mnemonicPrefix = true
