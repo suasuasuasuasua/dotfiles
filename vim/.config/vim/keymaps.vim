@@ -6,6 +6,7 @@ inoremap jk <Esc>
 nnoremap - :Ex<CR>
 nnoremap <silent> <Leader>l :nohl<CR>
 nnoremap <Leader>mm :make<CR>
+nnoremap <Leader>co :copen<CR>
 nnoremap <Leader>so :source $HOME/.config/vim/vimrc<CR>
 
 " ctags — fzf overrides when available
