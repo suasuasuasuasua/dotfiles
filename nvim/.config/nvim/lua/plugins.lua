@@ -11,12 +11,12 @@ require 'plugins.neogit'
 require 'plugins.nvim-bqf'
 require 'plugins.nvim-tmux-navigation'
 require 'plugins.nvim-treesitter'
+require 'plugins.orgmode'
 require 'plugins.render-markdown'
 require 'plugins.tokyonight-night'
 
 -- optional
 -- require 'plugins.lazygit'
--- require 'plugins.neorg'
 -- require 'plugins.nvim-ufo'
 -- require 'plugins.oil'
 -- require 'plugins.overseer'

@@ -3,7 +3,6 @@ inoremap Jk <Esc>
 inoremap jK <Esc>
 inoremap jk <Esc>
 
-nnoremap - :Ex<CR>
 nnoremap <silent> <Leader>l :nohl<CR>
 nnoremap <Leader>mm :make<CR>
 nnoremap <Leader>co :copen<CR>

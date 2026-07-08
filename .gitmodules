@@ -103,3 +103,9 @@
 [submodule "vim/.config/vim/pack/plugin/opt/vim-gutentags"]
 	path = vim/.config/vim/pack/plugin/opt/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags
+[submodule "vim/.config/vim/pack/plugin/opt/vim-orgmode"]
+	path = vim/.config/vim/pack/plugin/opt/vim-orgmode
+	url = https://github.com/jceb/vim-orgmode
+[submodule "vim/.config/vim/pack/plugin/opt/vim-speeddating"]
+	path = vim/.config/vim/pack/plugin/opt/vim-speeddating
+	url = https://github.com/tpope/vim-speeddating

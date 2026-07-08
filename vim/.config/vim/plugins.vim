@@ -8,9 +8,11 @@ packadd! vim-dispatch
 packadd! vim-fugitive
 packadd! vim-gitgutter
 packadd! vim-indent-guides
+packadd! vim-orgmode
 packadd! vim-repeat
 packadd! vim-sensible
 packadd! vim-sleuth
+packadd! vim-speeddating
 packadd! vim-surround
 packadd! vim-tmux-navigator
 packadd! vim-trailing-whitespace
