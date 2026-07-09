@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     vim.wo.foldmethod = 'expr'
 
-    -- enables treesitter based indentation
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    -- enables treesitter based indentation (org has its own better indentexpr)
+    if filetype ~= 'org' then vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" end
   end,
 })
