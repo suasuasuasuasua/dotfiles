@@ -7,6 +7,14 @@ require('orgmode').setup {
   org_startup_folded = 'showeverything',
   org_hide_emphasis_markers = true,
   org_hide_leading_stars = true,
+  org_todo_keywords = { 'TODO(t)', 'INPROGRESS(p)', 'WAITING(w)', '|', 'DONE(d)', 'CANCELLED(c)' },
+  org_todo_keyword_faces = {
+    TODO = ':foreground #ff8f8f :weight bold',
+    INPROGRESS = ':foreground #ffcc66 :weight bold',
+    WAITING = ':foreground #cba6f7 :weight bold',
+    DONE = ':foreground #a6e3a1 :weight bold',
+    CANCELLED = ':foreground #6c7086 :weight bold :slant italic',
+  },
   org_capture_templates = {
     t = {
       description = 'Task',
