@@ -13,7 +13,11 @@ require('orgmode').setup {
     d = {
       description = 'Daily dashboard',
       types = {
-        { type = 'agenda', org_agenda_span = 'day' },
+        {
+          type = 'agenda',
+          org_agenda_span = 'day',
+          org_agenda_sorting_strategy = { 'todo-state-up', 'time-up', 'priority-down' },
+        },
         {
           type = 'tags_todo',
           match = 'TODO="INPROGRESS"',
