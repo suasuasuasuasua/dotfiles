@@ -7,6 +7,8 @@ require('orgmode').setup {
   org_startup_folded = 'showeverything',
   org_hide_emphasis_markers = true,
   org_hide_leading_stars = true,
+  org_log_into_drawer = 'LOGBOOK',
+  win_split_mode = function(name) vim.cmd('tabnew ' .. name) end,
   org_todo_keywords = { 'TODO(t)', 'INPROGRESS(p)', 'WAITING(w)', '|', 'DONE(d)', 'CANCELLED(c)' },
   org_todo_keyword_faces = {
     TODO = ':foreground #ff8f8f :weight bold',
