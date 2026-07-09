@@ -40,8 +40,8 @@ require('orgmode').setup {
         },
         {
           type = 'tags',
-          match = 'TODO="DONE"',
-          org_agenda_overriding_header = 'Completed Tasks',
+          match = 'TODO="DONE"+CLOSED>="<-7d>"',
+          org_agenda_overriding_header = 'Completed (last 7 days)',
           org_agenda_sorting_strategy = { 'priority-down' },
         },
       },
