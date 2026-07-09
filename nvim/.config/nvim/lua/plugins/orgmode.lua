@@ -12,11 +12,13 @@ require('orgmode').setup {
       description = 'Task',
       template = '* TODO %?\n  SCHEDULED: %t',
       target = '~/orgfiles/inbox.org',
+      headline = 'Tasks',
     },
     n = {
       description = 'Note',
       template = '* %?\n  %<[%Y-%m-%d %a %H:%M:%S]>',
       target = '~/orgfiles/inbox.org',
+      headline = 'Notes',
     },
     j = {
       description = 'Journal',
