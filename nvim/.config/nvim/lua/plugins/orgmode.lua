@@ -22,6 +22,12 @@ require('orgmode').setup {
       target = '~/orgfiles/inbox.org',
       headline = 'Tasks',
     },
+    T = {
+      description = 'Task (pick date)',
+      template = '* TODO %?\n  SCHEDULED: %^t',
+      target = '~/orgfiles/inbox.org',
+      headline = 'Tasks',
+    },
     n = {
       description = 'Note',
       template = '* %?\n  %<[%Y-%m-%d %a %H:%M:%S]>',
