@@ -49,11 +49,11 @@ require('orgmode').setup {
   },
   org_todo_keywords = { 'TODO(t)', 'INPROGRESS(p)', 'WAITING(w)', '|', 'DONE(d)', 'CANCELLED(c)' },
   org_todo_keyword_faces = {
-    TODO = ':foreground #ff8f8f :weight bold',
-    INPROGRESS = ':foreground #ffcc66 :weight bold',
-    WAITING = ':foreground #cba6f7 :weight bold',
-    DONE = ':foreground #a6e3a1 :weight bold',
-    CANCELLED = ':foreground #6c7086 :weight bold :slant italic',
+    TODO = ':weight bold',
+    INPROGRESS = ':weight bold',
+    WAITING = ':weight bold',
+    DONE = ':weight bold',
+    CANCELLED = ':weight bold :slant italic',
   },
   org_capture_templates = {
     t = {
@@ -100,3 +100,26 @@ require('orgmode').setup {
 }
 
 vim.lsp.enable 'org'
+
+local function link_org_highlights()
+  local links = {
+    -- TODO keyword faces
+    ['@org.keyword.face.TODO'] = 'DiagnosticError',
+    ['@org.keyword.face.INPROGRESS'] = 'DiagnosticWarn',
+    ['@org.keyword.face.WAITING'] = 'DiagnosticInfo',
+    ['@org.keyword.face.DONE'] = 'DiagnosticOk',
+    ['@org.keyword.face.CANCELLED'] = 'Comment',
+    -- Agenda state colors (override the plugin's parsed colors that go dim in some themes)
+    ['@org.agenda.deadline'] = 'DiagnosticError',
+    ['@org.agenda.deadline.upcoming'] = 'DiagnosticWarn',
+    ['@org.agenda.scheduled'] = 'DiagnosticOk',
+    ['@org.agenda.scheduled_past'] = 'DiagnosticWarn',
+    ['@org.agenda.time_grid'] = 'DiagnosticInfo',
+  }
+  for group, target in pairs(links) do
+    vim.api.nvim_set_hl(0, group, { link = target })
+  end
+end
+
+vim.api.nvim_create_autocmd('ColorScheme', { callback = link_org_highlights })
+link_org_highlights()
