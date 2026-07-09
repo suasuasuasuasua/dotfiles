@@ -9,6 +9,29 @@ require('orgmode').setup {
   org_hide_leading_stars = true,
   org_log_into_drawer = 'LOGBOOK',
   win_split_mode = function(name) vim.cmd('tabnew ' .. name) end,
+  org_agenda_custom_commands = {
+    d = {
+      description = 'Daily dashboard',
+      types = {
+        { type = 'agenda', org_agenda_span = 'day' },
+        {
+          type = 'tags_todo',
+          match = 'TODO="INPROGRESS"',
+          org_agenda_overriding_header = 'In progress',
+        },
+        {
+          type = 'tags_todo',
+          match = 'TODO="WAITING"',
+          org_agenda_overriding_header = 'Blocked / waiting',
+        },
+        {
+          type = 'tags_todo',
+          match = '+inbox',
+          org_agenda_overriding_header = 'Inbox to process',
+        },
+      },
+    },
+  },
   org_todo_keywords = { 'TODO(t)', 'INPROGRESS(p)', 'WAITING(w)', '|', 'DONE(d)', 'CANCELLED(c)' },
   org_todo_keyword_faces = {
     TODO = ':foreground #ff8f8f :weight bold',
