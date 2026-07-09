@@ -18,13 +18,13 @@ require('orgmode').setup {
           type = 'tags_todo',
           match = 'TODO="INPROGRESS"',
           org_agenda_overriding_header = 'In-Progress',
-          org_agenda_sorting_strategy = { 'todo-state-up', 'priority-down' },
+          org_agenda_sorting_strategy = { 'priority-down' },
         },
         {
           type = 'tags_todo',
           match = 'TODO="WAITING"',
           org_agenda_overriding_header = 'Blocked/Waiting',
-          org_agenda_sorting_strategy = { 'todo-state-up', 'priority-down' },
+          org_agenda_sorting_strategy = { 'priority-down' },
         },
         {
           type = 'tags_todo',
@@ -42,6 +42,7 @@ require('orgmode').setup {
           type = 'tags',
           match = 'TODO="DONE"',
           org_agenda_overriding_header = 'Completed Tasks',
+          org_agenda_sorting_strategy = { 'priority-down' },
         },
       },
     },
