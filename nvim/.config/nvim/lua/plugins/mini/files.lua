@@ -38,6 +38,7 @@ local map_split = function(buf_id, lhs, direction)
     -- This intentionally doesn't act on file under cursor in favor of
     -- explicit "go in" action (`l` / `L`). To immediately open file,
     -- add appropriate `MiniFiles.go_in()` call instead of this comment.
+    MiniFiles.go_in()
   end
 
   -- Adding `desc` will result into `show_help` entries
