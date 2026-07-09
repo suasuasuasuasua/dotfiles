@@ -92,6 +92,11 @@ require('orgmode').setup {
       org_global_cycle = 'zA',
     },
   },
+  ui = {
+    input = {
+      use_vim_ui = true,
+    },
+  },
 }
 
 vim.lsp.enable 'org'
