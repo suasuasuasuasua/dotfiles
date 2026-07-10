@@ -8,7 +8,6 @@ require('orgmode').setup {
   org_hide_emphasis_markers = true,
   org_hide_leading_stars = true,
   org_log_into_drawer = 'LOGBOOK',
-  win_split_mode = function(name) vim.cmd('tabnew ' .. name) end,
   org_agenda_custom_commands = {
     d = {
       description = 'Daily dashboard',
