@@ -89,15 +89,7 @@ require('orgmode').setup {
       target = '~/orgfiles/projects.org',
     },
   },
-  mappings = {
-    org = {
-      org_cycle = 'za',
-      org_global_cycle = 'zA',
-    },
-  },
 }
-
-vim.lsp.enable 'org'
 
 local function link_org_highlights()
   local links = {

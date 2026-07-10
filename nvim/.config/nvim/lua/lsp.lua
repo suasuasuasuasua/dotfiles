@@ -3,8 +3,9 @@ vim.lsp.enable {
   'gopls',
   'lua_ls',
   'nil_ls',
-  'ty',
+  'org',
   'tinymist',
+  'ty',
 }
 
 vim.diagnostic.config {
