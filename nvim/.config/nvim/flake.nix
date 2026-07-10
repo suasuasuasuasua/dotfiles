@@ -112,7 +112,6 @@
               pkgs.vimPlugins.nvim-nio
             ];
             # opt-in per packageDefinitions
-            neorg = [ pkgs.vimPlugins.neorg ];
             oil = [ pkgs.vimPlugins.oil-nvim ];
           };
         };
@@ -137,7 +136,6 @@
               typst = true;
               dap = true;
               # opt-in
-              neorg = false;
               oil = false;
             };
             extra = {
