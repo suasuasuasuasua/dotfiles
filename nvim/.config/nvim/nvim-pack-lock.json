@@ -88,6 +88,10 @@
       "rev": "7caec274fd19c12b55902a5b795100d21531391f",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
+    "org-roam.nvim": {
+      "rev": "0240378c92eb0c9d6bc4ccbc8a6046e3c3d02ece",
+      "src": "https://github.com/chipsenkbeil/org-roam.nvim"
+    },
     "orgmode": {
       "rev": "f32a06d4b5399dad8bf0478c772bf6c513f02dcf",
       "src": "https://github.com/nvim-orgmode/orgmode"

@@ -13,6 +13,7 @@ require 'plugins.nvim-bqf'
 require 'plugins.nvim-tmux-navigation'
 require 'plugins.nvim-treesitter'
 require 'plugins.orgmode'
+require 'plugins.org-roam'
 require 'plugins.render-markdown'
 require 'plugins.tokyonight-night'
 
