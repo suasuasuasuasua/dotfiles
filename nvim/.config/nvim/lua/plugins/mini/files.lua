@@ -21,6 +21,12 @@ require('mini.files').setup {
   -- prevents bug with git difftool -d with nvim.difftool
   options = { use_as_default_explorer = false },
   -- content = { filter = filter_git },
+  mappings = {
+    go_in = 'L',
+    go_in_plus = '',
+    go_out = 'H',
+    go_out_plus = '',
+  }
 }
 
 -- Create mappings to modify target window via split ~
