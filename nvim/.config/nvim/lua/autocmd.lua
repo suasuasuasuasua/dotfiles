@@ -4,6 +4,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank() end,
 })
 
+-- Trim trailing whitespace on save
+vim.api.nvim_create_autocmd('BufWritePre', {
+  desc = 'Trim trailing whitespace on save',
+  callback = function()
+    local ok, ts = pcall(require, 'mini.trailspace')
+    if not ok then return end
+    ts.trim()
+    ts.trim_last_lines()
+  end,
+})
+
 vim.api.nvim_create_user_command('UpdatePlugins', function() vim.pack.update() end, { desc = 'Update all plugins' })
 
 vim.api.nvim_create_user_command('UpdatePluginsOffline', function() vim.pack.update(nil, { offline = true }) end, { desc = 'Update all plugins' })
