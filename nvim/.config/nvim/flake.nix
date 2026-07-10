@@ -80,6 +80,7 @@
 
           startupPlugins = {
             general = [
+              pkgs.vimPlugins.auto-dark-mode-nvim
               pkgs.vimPlugins.conform-nvim
               pkgs.neovimPlugins.diffview-plus
               pkgs.vimPlugins.friendly-snippets
@@ -88,12 +89,16 @@
               pkgs.vimPlugins.lazygit-nvim
               pkgs.neovimPlugins.mini-nvim
               pkgs.vimPlugins.neogen
+              pkgs.vimPlugins.neogit
               pkgs.vimPlugins.nvim-bqf
               pkgs.vimPlugins.nvim-lspconfig
               pkgs.neovimPlugins.nvim-tmux-navigation
               pkgs.vimPlugins.nvim-treesitter.withAllGrammars
               pkgs.vimPlugins.nvim-ufo
+              pkgs.vimPlugins.orgmode
+              pkgs.vimPlugins.org-roam-nvim
               pkgs.vimPlugins.overseer-nvim
+              pkgs.vimPlugins.plenary-nvim
               pkgs.vimPlugins.promise-async
               pkgs.vimPlugins.render-markdown-nvim
               pkgs.vimPlugins.tokyonight-nvim
