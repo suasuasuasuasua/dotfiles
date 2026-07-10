@@ -1,3 +1,4 @@
+require 'plugins.auto-dark-mode'
 require 'plugins.builtin'
 require 'plugins.conform'
 require 'plugins.dap'
