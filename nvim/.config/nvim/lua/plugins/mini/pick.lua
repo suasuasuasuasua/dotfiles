@@ -20,6 +20,13 @@ pick.registry.files = function(local_opts)
   return MiniPick.builtin.files(local_opts, opts)
 end
 
+-- Make `:Pick grep_live` accept `cwd`
+pick.registry.grep_live = function(local_opts)
+  local opts = { source = { cwd = local_opts.cwd } }
+  local_opts.cwd = nil
+  return MiniPick.builtin.grep_live(local_opts, opts)
+end
+
 local builtin = pick.registry
 vim.keymap.set('n', '<leader>sh', builtin.help, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -32,6 +39,9 @@ vim.keymap.set('n', '<leader>s.', builtin.registry, { desc = '[S]earch [S]elect 
 vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>sn', function() builtin.files { cwd = vim.fn.resolve(vim.fn.stdpath 'config') } end, { desc = '[S]earch [N]eovim config files' })
+vim.keymap.set('n', '<leader>so', function() builtin.files { cwd = vim.fn.expand '~/orgfiles' } end, { desc = '[S]earch [O]rg files' })
+vim.keymap.set('n', '<leader>sO', function() builtin.grep_live { cwd = vim.fn.expand '~/orgfiles' } end, { desc = '[S]earch [O]rg files content (grep)' })
+vim.keymap.set('n', '<leader>sN', function() builtin.grep_live { cwd = vim.fn.resolve(vim.fn.stdpath 'config') } end, { desc = '[S]earch [N]eovim config content (grep)' })
 vim.keymap.set('n', '<leader>s:', function() builtin.history { scope = ':' } end, { desc = '[S]earch [N]eovim commands' })
 vim.keymap.set('n', '<leader>s/', function() builtin.history { scope = '/' } end, { desc = '[S]earch [N]eovim search' })
 
