@@ -50,7 +50,7 @@ require('orgmode').setup {
       },
     },
   },
-  org_todo_keywords = { 'TODO(t)', 'INPROGRESS(p)', 'WAITING(w)', '|', 'DONE(d)', 'CANCELLED(c)' },
+  org_todo_keywords = { 'TODO(t)', 'INPROGRESS(i)', 'WAITING(w)', '|', 'DONE(d)', 'CANCELLED(c)' },
   org_todo_keyword_faces = {
     TODO = ':weight bold',
     INPROGRESS = ':weight bold',
