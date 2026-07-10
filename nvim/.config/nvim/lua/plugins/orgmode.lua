@@ -4,7 +4,7 @@ require('orgmode').setup {
   org_agenda_files = { '~/orgfiles/*.org' },
   org_default_notes_file = '~/orgfiles/inbox.org',
   org_archive_location = '~/orgfiles/archive/%s_archive::',
-  org_startup_folded = 'showeverything',
+  org_startup_folded = 'content',
   org_hide_emphasis_markers = true,
   org_hide_leading_stars = true,
   org_log_into_drawer = 'LOGBOOK',
