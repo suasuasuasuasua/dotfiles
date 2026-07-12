@@ -15,6 +15,7 @@ end
 
 -- Make `:Pick files` accept `cwd`
 pick.registry.files = function(local_opts)
+  local_opts = local_opts or {}
   local opts = { source = { cwd = local_opts.cwd } }
   local_opts.cwd = nil
   return MiniPick.builtin.files(local_opts, opts)
@@ -22,6 +23,7 @@ end
 
 -- Make `:Pick grep_live` accept `cwd`
 pick.registry.grep_live = function(local_opts)
+  local_opts = local_opts or {}
   local opts = { source = { cwd = local_opts.cwd } }
   local_opts.cwd = nil
   return MiniPick.builtin.grep_live(local_opts, opts)
