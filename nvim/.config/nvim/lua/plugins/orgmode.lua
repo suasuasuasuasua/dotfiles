@@ -50,6 +50,11 @@ require('orgmode').setup {
       },
     },
   },
+  mappings = {
+    org = {
+      org_meta_return = '<LocalLeader><CR>',
+    },
+  },
   org_todo_keywords = { 'TODO(t)', 'INPROGRESS(i)', 'WAITING(w)', '|', 'DONE(d)', 'CANCELLED(c)' },
   org_todo_keyword_faces = {
     TODO = ':weight bold',
