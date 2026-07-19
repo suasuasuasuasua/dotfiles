@@ -1,0 +1,74 @@
+name: Bump Neovim vim.pack deps
+
+on:
+  schedule:
+    - cron: '0 0 * * 6'  # Every Saturday at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update nvim-pack-lock.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Read and update each plugin's rev to the latest commit on its default branch
+          python3 - <<'EOF'
+          import json, os, urllib.request, urllib.error
+
+          GIT_SHA_LENGTH = 40
+
+          lock_file = "nvim/.config/nvim/nvim-pack-lock.json"
+          token = os.environ["GITHUB_TOKEN"]
+
+          with open(lock_file) as f:
+              lock = json.load(f)
+
+          for name, info in lock["plugins"].items():
+              src = info["src"]
+              # Convert https://github.com/owner/repo to API URL
+              repo_path = src.removeprefix("https://github.com/")
+              api_url = f"https://api.github.com/repos/{repo_path}/commits/HEAD"
+              req = urllib.request.Request(
+                  api_url,
+                  headers={
+                      "Accept": "application/vnd.github.sha",
+                      "Authorization": f"Bearer {token}",
+                  },
+              )
+              try:
+                  with urllib.request.urlopen(req) as resp:
+                      sha = resp.read().decode().strip()
+                  if sha and len(sha) == GIT_SHA_LENGTH:
+                      info["rev"] = sha
+                      print(f"Updated {name}: {sha}")
+                  else:
+                      print(f"Skipped {name}: unexpected response")
+              except urllib.error.HTTPError as e:
+                  print(f"Skipped {name}: HTTP {e.code}")
+
+          with open(lock_file, "w") as f:
+              json.dump(lock, f, indent=2, sort_keys=True)
+              f.write("\n")
+          EOF
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore(nvim): bump vim.pack deps'
+          branch: bump/nvim-pack-deps
+          delete-branch: true
+          title: 'chore(nvim): bump vim.pack deps'
+          body: |
+            Automated weekly bump of Neovim `vim.pack` plugin revisions.
+
+            Updated `nvim-pack-lock.json` to the latest commit on each plugin's default branch.
+          labels: dependencies
